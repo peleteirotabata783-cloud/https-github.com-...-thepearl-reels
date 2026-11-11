@@ -279,6 +279,9 @@ footer a:hover{color:var(--ink)}
 [data-anim="photo"] figcaption{transform:translateX(calc((1 - var(--e))*60px))}
 .chapter{overflow-x:clip}
 
+/* Sabrina's section slides in under the last dive phrase */
+#sabrina{margin-top:-50vh;margin-top:-50svh;padding-top:24px}
+
 /* compact about */
 .about .bio h2{font-size:clamp(2.3rem,4.4vw,4rem)}
 .creds{list-style:none;margin:8px 0 0;padding:20px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px;
@@ -352,6 +355,7 @@ footer a:hover{color:var(--ink)}
   .dive-stage{position:relative;height:100svh}
   .phrase,.veil{display:none}
   .synapse{height:auto}
+  #sabrina{margin-top:0;padding-top:var(--breath)}
   [data-anim],.syn-copy{--e:1 !important}
   .marquee .track{transform:none !important}
   .syn-stage{position:relative;height:auto;padding-block:120px}
@@ -610,10 +614,13 @@ footer a:hover{color:var(--ink)}
     hero.style.opacity=h; hero.style.transform='translateY('+(-p*160)+'px) scale('+(1-p*.25)+')';
     hero.style.visibility=h<.01?'hidden':'visible'; heroTop.style.opacity=h;
     hint.style.opacity=1-ss(0,.06,p);
-    phrases.forEach(function(el){
+    phrases.forEach(function(el,i){
       var a=+el.dataset.from,b=+el.dataset.to,m=(a+b)/2;
       var o=ss(a,a+.05,p)*(1-ss(b-.05,b,p));
-      el.style.opacity=o; el.style.transform='translateY(calc(-50% + '+((m-p)*140)+'px)) scale('+(1+(p-m)*.35)+')';
+      // the last phrase rises to the top so Sabrina's section can follow right below it
+      var lift=i===phrases.length-1 ? ss(.88,1,p)*Math.max(0, innerHeight*.5-(innerHeight*.1+el.offsetHeight/2+70)) : 0;
+      var sc=i===phrases.length-1 ? 1 : 1+(p-m)*.35;
+      el.style.opacity=o; el.style.transform='translateY(calc(-50% + '+((m-p)*140-lift)+'px)) scale('+sc+')';
     });
     veil.style.opacity=ss(.8,.86,p)*(1-ss(.86,.93,p))*.4;
   }
