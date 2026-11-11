@@ -88,7 +88,7 @@ main,header,footer{position:relative;z-index:2}
 .btn svg{width:18px;height:18px;flex:none}
 
 /* ---------- dive (hero) ---------- */
-.dive{position:relative;height:300vh}
+.dive{position:relative;height:250vh}
 .dive-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
   display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
   padding-bottom:calc(118px + env(safe-area-inset-bottom,0px));padding-left:var(--gut-l);padding-right:var(--gut-r)}
@@ -116,7 +116,7 @@ main,header,footer{position:relative;z-index:2}
 .hero-top{position:absolute;left:0;right:0;top:calc(108px + env(safe-area-inset-top,0px));text-align:center;padding-left:var(--gut-l);padding-right:var(--gut-r)}
 
 /* ---------- synapse interludes ---------- */
-.synapse{position:relative;height:160vh;z-index:2}
+.synapse{position:relative;height:140vh;z-index:2}
 .syn-stage{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center;
   padding-left:var(--gut-l);padding-right:var(--gut-r);pointer-events:none}
 .syn-copy{max-width:920px;display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center;will-change:transform,opacity}
@@ -267,13 +267,13 @@ footer a:hover{color:var(--ink)}
 
 /* ---------- scroll-driven motion (--e: 0 entering → 1 settled) ---------- */
 [data-anim]{--e:1}
-[data-anim="up"]{opacity:calc(.08 + var(--e)*.92);transform:translateY(calc((1 - var(--e))*56px))}
-[data-anim="left"]{opacity:calc(.05 + var(--e)*.95);transform:translateX(calc((1 - var(--e))*-110px))}
-[data-anim="right"]{opacity:calc(.05 + var(--e)*.95);transform:translateX(calc((1 - var(--e))*110px))}
+[data-anim="up"]{opacity:calc(.25 + var(--e)*.75);transform:translateY(calc((1 - var(--e))*56px))}
+[data-anim="left"]{opacity:calc(.25 + var(--e)*.75);transform:translateX(calc((1 - var(--e))*-110px))}
+[data-anim="right"]{opacity:calc(.25 + var(--e)*.75);transform:translateX(calc((1 - var(--e))*110px))}
 .wi{display:inline-block;--w:clamp(0, calc(var(--e,1)*1.8 - var(--t,0)*.8), 1);
   opacity:var(--w);transform:translateY(calc((1 - var(--w))*.75em)) rotate(calc((1 - var(--w))*7deg));
   transform-origin:0 100%;filter:blur(calc((1 - var(--w))*8px))}
-[data-anim="photo"] .frame{clip-path:inset(calc((1 - var(--e))*45%) 0 0 0 round 240px 240px 24px 24px)}
+[data-anim="photo"] .frame{clip-path:inset(calc((1 - var(--e))*30%) 0 0 0 round 240px 240px 24px 24px)}
 [data-anim="photo"] .frame img{transform:scale(calc(1.3 - var(--e)*.3))}
 [data-anim="photo"]::after,[data-anim="photo"] figcaption{opacity:var(--e)}
 [data-anim="photo"] figcaption{transform:translateX(calc((1 - var(--e))*60px))}
@@ -303,7 +303,7 @@ footer a:hover{color:var(--ink)}
 .faq-head{display:flex;flex-direction:column;gap:0;margin-bottom:32px;max-width:760px}
 .faq-list{display:flex;flex-direction:column}
 .faq-list details{border-bottom:1px solid var(--line);
-  opacity:var(--e);transform:translateX(calc((1 - var(--e))*75vw)) rotate(calc((1 - var(--e))*-3deg));transform-origin:100% 50%}
+  opacity:calc(.2 + var(--e)*.8);transform:translateX(calc((1 - var(--e))*75vw)) rotate(calc((1 - var(--e))*-3deg));transform-origin:100% 50%}
 .faq-list details:first-child{border-top:1px solid var(--line)}
 .faq-list summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:56px minmax(0,1fr) 24px;align-items:center;gap:16px;padding:30px 0;transition:padding .35s ease}
 .faq-list summary::-webkit-details-marker{display:none}
@@ -328,10 +328,12 @@ footer a:hover{color:var(--ink)}
   .pillars{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:680px){
+  .portrait{max-width:270px}
+  .about{gap:40px}
   .hero h1{font-size:2.7rem}
   .hero .actions .btn-ghost{display:none}
   :root{--breath:clamp(56px,9vh,88px)}
-  .synapse{height:150vh}
+  .synapse{height:130vh}
   .faq-list summary{grid-template-columns:32px minmax(0,1fr) 20px;gap:10px;padding:24px 0}
   .faq-list details p{padding-left:42px}
   .helps{margin-top:48px}
@@ -343,7 +345,7 @@ footer a:hover{color:var(--ink)}
   .yt{grid-template-columns:minmax(0,1fr)}
   .gauge .g-txt{min-width:0}
   .gauge canvas{width:56px}
-  .dive{height:260vh}
+  .dive{height:230vh}
 }
 @media (prefers-reduced-motion:reduce){
   .dive{height:auto}
@@ -392,10 +394,10 @@ footer a:hover{color:var(--ink)}
           <a class="btn btn-solid" href="#planos">Começar agora</a>
         </div>
       </div>
-      <p class="phrase" data-from=".24" data-to=".44">Respire.<br><em>Vamos entrar.</em></p>
-      <p class="phrase" data-from=".45" data-to=".65">Aqui moram seus padrões,<br>suas crenças e memórias.</p>
-      <p class="phrase" data-from=".66" data-to=".84">E é aqui que eles podem<br><em>ganhar novo sentido.</em></p>
-      <p class="phrase" data-from=".86" data-to="1.1">Eu sou a Sabrina.<br><em>Vou guiar você daqui.</em></p>
+      <p class="phrase" data-from=".12" data-to=".38">Respire.<br><em>Vamos entrar.</em></p>
+      <p class="phrase" data-from=".38" data-to=".62">Aqui moram seus padrões,<br>suas crenças e memórias.</p>
+      <p class="phrase" data-from=".62" data-to=".84">E é aqui que eles podem<br><em>ganhar novo sentido.</em></p>
+      <p class="phrase" data-from=".84" data-to="1.15">Eu sou a Sabrina.<br><em>Vou guiar você daqui.</em></p>
       <div class="scroll-hint" id="hint"><span>Deslize para entrar</span><i></i></div>
     </div>
   </section>
@@ -596,21 +598,21 @@ footer a:hover{color:var(--ink)}
       c.style.setProperty('--e', ss(vh*.95,vh*.3,top).toFixed(3));
     });
     SF.track=tr;
-    scrim.style.opacity=(Math.max(ss(.17,.27,SF.p)*.7, ss(.88,1,SF.p))*(1-foc*.55)).toFixed(3);
+    scrim.style.opacity=(Math.max(ss(.06,.14,SF.p)*.7, ss(.88,1,SF.p))*(1-foc*.55)).toFixed(3);
     if(reduce) return;
     var vh=innerHeight;
     for(var i=0;i<anims.length;i++){ var el=anims[i], r=el.getBoundingClientRect();
       if(r.bottom<-200||r.top>vh+200) continue;
-      var e=clamp((vh-r.top)/(vh*(el.dataset.anim==='faq'?.42:.62)));
+      var e=clamp((vh-r.top)/(vh*(el.dataset.anim==='faq'?.24:.3)));
       el.style.setProperty('--e', e.toFixed(3)); }
     var p=SF.p;
-    var h=1-ss(.02,.2,p);
+    var h=1-ss(.03,.14,p);
     hero.style.opacity=h; hero.style.transform='translateY('+(-p*160)+'px) scale('+(1-p*.25)+')';
     hero.style.visibility=h<.01?'hidden':'visible'; heroTop.style.opacity=h;
     hint.style.opacity=1-ss(0,.06,p);
     phrases.forEach(function(el){
       var a=+el.dataset.from,b=+el.dataset.to,m=(a+b)/2;
-      var o=ss(a,a+.07,p)*(1-ss(b-.07,b,p));
+      var o=ss(a,a+.05,p)*(1-ss(b-.05,b,p));
       el.style.opacity=o; el.style.transform='translateY(calc(-50% + '+((m-p)*140)+'px)) scale('+(1+(p-m)*.35)+')';
     });
     veil.style.opacity=ss(.8,.86,p)*(1-ss(.86,.93,p))*.4;
@@ -967,7 +969,7 @@ function frame(now){
 
   uniforms.uTime.value = reduce ? 2 : t;
   uniforms.uDive.value = sp;
-  uniforms.uDim.value = 1 - .38*ssf(sp, .16, .28) - .2*ssf(sp, .8, 1);
+  uniforms.uDim.value = 1 - .38*ssf(sp, .06, .14) - .2*ssf(sp, .8, 1);
   uniforms.uTrack.value = st;
   uniforms.uReveal.value = ssf(sp, .8, 1);
   brainU.uFade.value = 1 - .9*ssf(st, .02, .55);
