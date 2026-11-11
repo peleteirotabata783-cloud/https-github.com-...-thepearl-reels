@@ -1,12 +1,12 @@
 # v2: versão feita para alcance
-**Arquivo:** `antes-da-arte-pronta-v2.mp4` · 25,4 s · 1080×1920 · voz + trilha + efeitos sonoros
+**Arquivo:** `antes-da-arte-pronta-v2.mp4` · ~25,8 s · voz: Will (ElevenLabs) · 1080×1920 · voz + trilha + efeitos sonoros
 
 ## O que mudou do v1 para o v2
 
 | Ponto | v1 | v2 |
 |---|---|---|
-| **Gancho (0–4 s)** | “Essa arte parece simples.” | “Se você abre o arquivo antes de responder essas 3 perguntas, você **tá começando errado**.” Aparece o carimbo **✕ ERRADO** com a tela tremendo. |
-| **Primeiro quadro** | Arte + título | Pergunta direta: *“Você abre o arquivo antes de pensar?”* Funciona como capa e segura o scroll. |
+| **Gancho (0–1,5 s)** | “Essa arte parece simples.” | **“Para de abrir o arquivo primeiro!”** É uma ordem direta que chega ao ponto em 1,5 s, com o carimbo **✕ AINDA NÃO** e a tela tremendo. Logo depois: “Antes, responde essas três perguntas.” |
+| **Primeiro quadro** | Arte + título | *“Para de abrir o arquivo primeiro.”* A frase já aparece escrita no quadro 0, então quem assiste sem som também é fisgado. |
 | **Duração** | 31 s | **25 s**, com narração 6% mais rápida. Vídeos mais curtos são revistos mais vezes. |
 | **Prova visual** | Só a arte final | **Antes e depois**: um pôster “sem briefing” (tudo grita) que se transforma no pôster “com briefing”. É o formato mais compartilhado em conteúdo de design. |
 | **Som** | Só a voz | Trilha lo-fi house que abaixa sozinha quando a voz fala, mais efeitos: clique, carimbo, whoosh nos cortes, digitação e “ding” no destaque. |
@@ -14,7 +14,7 @@
 
 ## Legenda do post
 
-> Você abre o arquivo antes de pensar? 👀
+> Para de abrir o arquivo primeiro. ✋
 >
 > Antes de qualquer design, eu respondo 3 perguntas:
 > 1️⃣ O que precisa ser comunicado?
@@ -48,7 +48,7 @@ A pergunta “comenta o número” é de propósito: responder custa um clique, 
 
 ## Arquivos
 - `video.html`: animação (cada cena sincronizada pelos tempos das palavras em `words.js`)
-- `voz.wav` / `voz-orig.mp3`: narração (Elvis, ElevenLabs), acelerada 1,06×
+- `voz.wav`: narração final (Will, ElevenLabs), montada com `gancho-will.mp3` + `voz-will-orig.mp3`, com pausas encurtadas por `apertar_pausas.py` e fala 1,07× mais rápida
 - `musica.mp3`: trilha gerada no ElevenLabs Music, sem vocais
 - `sfx.py`: gera os efeitos sonoros por síntese, sem samples de terceiros
 - `render.js`: `node render.js` gera o MP4 final

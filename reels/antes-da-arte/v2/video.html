@@ -37,8 +37,8 @@
   #app .tile b{font:600 22px 'Inter Tight'} #app .tile i{font:500 17px 'JetBrains Mono';color:var(--muted);font-style:normal}
   #btn{position:absolute;right:44px;bottom:44px;padding:24px 42px;border-radius:16px;background:var(--accent);color:#120F10;font:800 32px 'Inter Tight'}
   #mouse{left:0;top:0;width:60px;height:76px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.5))}
-  #stamp{left:190px;top:760px;padding:22px 46px;border:10px solid var(--bad);border-radius:22px;color:var(--bad);
-         font:900 132px/1 'Inter Tight';letter-spacing:-.02em;background:rgba(15,14,18,.55);transform-origin:50% 50%}
+  #stamp{left:120px;top:770px;padding:22px 40px;border:10px solid var(--bad);border-radius:22px;color:var(--bad);white-space:nowrap;
+         font:900 112px/1 'Inter Tight';letter-spacing:-.02em;background:rgba(15,14,18,.55);transform-origin:50% 50%}
 
   /* cards */
   #qh{left:90px;top:200px}
@@ -104,7 +104,7 @@
 
   <!-- HOOK -->
   <div id="hook" class="abs"><div class="k mono">Erro nº 1 de quem cria</div>
-    <h1>Você abre o arquivo<br><em>antes de pensar?</em></h1></div>
+    <h1>Para de abrir<br><em>o arquivo primeiro.</em></h1></div>
   <div id="app" class="abs">
     <div class="bar"><s></s><s></s><s></s><span class="mono">novo-arquivo</span></div>
     <h3>Novo arquivo</h3>
@@ -116,7 +116,7 @@
     <div id="btn">Criar arquivo</div>
   </div>
   <svg id="mouse" class="abs" viewBox="0 0 30 38"><path d="M2 2v30l8-7 5 11 5-2-5-11h10z" fill="#fff" stroke="#111" stroke-width="2" stroke-linejoin="round"/></svg>
-  <div id="stamp" class="abs">✕ ERRADO</div>
+  <div id="stamp" class="abs">✕ AINDA NÃO</div>
 
   <!-- CARDS -->
   <div id="qh" class="abs"><div class="k mono">Antes, responda</div><div class="t">3 perguntas que mudam tudo:</div></div>
@@ -202,7 +202,7 @@ const gridLines=[...grid.children];
 
 /* captions */
 const groups=[];{let g=[];W.forEach((w,i)=>{g.push(i);if(/[.,?:!]$/.test(w.w)||g.length>=4){groups.push(g);g=[]}});if(g.length)groups.push(g)}
-const CAP_ON=[[0,T(15)-0.12],[T(32)-0.05,T(54)-0.12]];
+const CAP_ON=[[0,T(11)-0.12],[T(28)-0.05,T(50)-0.12]];
 const cap=$('#cap');let lastG=-1;
 function captions(t){const on=CAP_ON.some(([a,b])=>t>=a&&t<b);let gi=-1;for(let k=0;k<groups.length;k++){if(W[groups[k][0]].s-0.05<=t)gi=k}
   if(!on||gi<0){cap.style.opacity=0;return}
@@ -217,38 +217,38 @@ function render(t){
   $('#glow').style.transform=`translate(${Math.sin(t*.4)*120}px,${Math.cos(t*.3)*160}px)`;
 
   // tremor de câmera: carimbo "errado" e "grita"
-  let sh=0; const st=T(14)-0.05; sh+=Math.max(0,1-(t-st)/0.35)*(t>=st?1:0)*22;
-  const gr=T(37); if(t>=gr&&t<gr+0.5) sh+=10*(1-(t-gr)/0.5);
+  let sh=0; const st=T(5)-0.05; sh+=Math.max(0,1-(t-st)/0.35)*(t>=st?1:0)*22;
+  const gr=T(33); if(t>=gr&&t<gr+0.5) sh+=10*(1-(t-gr)/0.5);
   $('#world').style.transform=sh>0.1?`translate(${(rnd(f)-.5)*sh}px,${(rnd(f+9)-.5)*sh}px)`:'none';
   // flash nos cortes
-  const cuts=[T(15)-0.1,T(32)-0.08,T(54)-0.1,T(63)-0.06];
+  const cuts=[T(11)-0.1,T(28)-0.08,T(50)-0.1,T(59)-0.06];
   $('#flash').style.opacity=Math.max(...cuts.map(c=>t>=c?Math.max(0,0.18*(1-(t-c)/0.18)):0));
 
   /* ---- HOOK (0 → T15) ---- */
-  const hOut=[T(15)-0.15,T(15)+0.15];
+  const hOut=[T(11)-0.15,T(11)+0.15];
   { const r=eio(p(t,hOut[0],hOut[1])); show($('#hook'),1-r,0,-r*40,1,r*8);
     const app=$('#app'); const ain=1;
-    const crush=eio(p(t,T(14),T(14)+0.25));
+    const crush=eio(p(t,T(5),T(5)+0.25));
     show(app,(0.2+0.8*ain)*(1-r),0,(1-ain)*40-r*40,lerp(0.96,1,ain)*(1-0.03*crush),r*8);
     app.style.filter=`grayscale(${crush}) brightness(${1-0.35*crush})` + (r>0.05?` blur(${r*8}px)`:'');
     // mouse: (900,1500) -> botão (~820,1130)
-    const mq=eio(p(t,0.25,T(12)));
+    const mq=eio(p(t,0.05,T(4)-0.05));
     const mx=lerp(980,800,mq)+Math.sin(t*3)*6*(1-mq), my=lerp(1560,1135,mq)+Math.cos(t*2.6)*6*(1-mq);
-    const click=T(13); const press=(t>=click&&t<click+0.16)?0.85:1;
+    const click=T(4); const press=(t>=click&&t<click+0.16)?0.85:1;
     show($('#mouse'),(1-r),mx,my,press);
     $('#btn').style.transform=`scale(${(t>=click&&t<click+0.16)?0.94:1})`;
     $('#btn').style.background = t>=click? '#ff7a5c':'#FF5A36';
     // carimbo
-    const sa=T(14)-0.06, sq=eo(p(t,sa,sa+0.22));
+    const sa=T(5)-0.06, sq=eo(p(t,sa,sa+0.22));
     show($('#stamp'),(t>=sa?1:0)*(1-r),0,0,lerp(1.9,1,sq),0,-9);
   }
 
   /* ---- CARDS (T15 → T32) ---- */
-  { const out=[T(32)-0.2,T(32)+0.1];
-    pop($('#qh'),t,T(15)-0.12,.4,30,out);
-    const cs=[['#c1',T(15)-0.05,'→ a abertura da nova turma',T(18),E(20)],
-              ['#c2',T(21)-0.05,'→ quem nunca mexeu com argila',T(22),E(23)+0.1],
-              ['#c3',T(24)-0.05,'→ o nome da oficina e a data',T(28),E(31)-0.05]];
+  { const out=[T(28)-0.2,T(28)+0.1];
+    pop($('#qh'),t,T(11)-0.12,.4,30,out);
+    const cs=[['#c1',T(11)-0.05,'→ a abertura da nova turma',T(14),E(16)],
+              ['#c2',T(17)-0.05,'→ quem nunca mexeu com argila',T(18),E(19)+0.1],
+              ['#c3',T(20)-0.05,'→ o nome da oficina e a data',T(24),E(27)-0.05]];
     cs.forEach(([id,a,ans,ta,tb],k)=>{const el=$(id);const q=eb(clamp(p(t,a,a+0.45)));const r=eio(p(t,out[0]+k*0.04,out[1]+k*0.04));
       let o=clamp(p(t,a,a+0.2))*(1-r); const next=k<2?cs[k+1][1]:99; if(t>=next)o*=0.55;
       show(el,o,(1-clamp(q))*-0,(1-q)*70-r*40,lerp(.93,1,clamp(q)),r*8);
@@ -259,61 +259,61 @@ function render(t){
 
   /* ---- BAD POSTER (T32 → T44) ---- */
   const bad=$('#bad'); const badKids=[...bad.children];
-  { const a=T(32)-0.05, q=eb(clamp(p(t,a,a+0.5)));
+  { const a=T(28)-0.05, q=eb(clamp(p(t,a,a+0.5)));
     let o=clamp(p(t,a,a+0.2)), sc=lerp(.85,1,clamp(q)), ty=(1-clamp(q))*80, rot=0;
     // fim: sai na troca (defino)
-    const d=T(44)-0.05;
-    if(t<T(63)-0.1){
+    const d=T(40)-0.05;
+    if(t<T(59)-0.1){
       badKids.forEach((k,i)=>{ if(i===0)return; const q2=eio(p(t,d+i*0.03,d+0.3+i*0.03));
-        const jit=(t>=T(37)-0.05&&t<T(39))?1:0;
+        const jit=(t>=T(33)-0.05&&t<T(35))?1:0;
         k.style.opacity=1-q2; k.style.transform=`translate(${jit*(rnd(f*3+i)-.5)*18 + (rnd(i)-.5)*q2*600}px,${jit*(rnd(f*5+i)-.5)*14 + q2*(300+rnd(i+3)*400)}px) rotate(${q2*(rnd(i+7)-.5)*90 + (i===9?14:0)}deg)`;});
       badKids[0].style.opacity=1-eio(p(t,d+0.2,d+0.6));
       o*=1-eio(p(t,d+0.3,d+0.6));
       // "nada comunica": dim
-      const dim=eio(p(t,T(38),T(39)))*(1-eio(p(t,d,d+0.2)));
+      const dim=eio(p(t,T(34),T(35)))*(1-eio(p(t,d,d+0.2)));
       bad.style.filter=`saturate(${1-0.6*dim}) brightness(${1-0.3*dim})`;
       show(bad,o,0,ty,sc,0,rot); bad.style.filter+=``;
     }
   }
-  const tb=$('#tagBad'); { const a=T(32)+0.1, q=eb(clamp(p(t,a,a+0.4))); const r=eio(p(t,T(44)-0.1,T(44)+0.15));
-    show(tb,clamp(p(t,a,a+0.15))*(1-r)*(t<T(54)?1:0),0,(1-clamp(q))*-30,lerp(.6,1,clamp(q))*(1-0.4*r)); tb.style.transformOrigin='0 50%'; }
-  const to=$('#tagOk'); { const a=T(44)+0.1, q=eb(clamp(p(t,a,a+0.4))); const r=eio(p(t,T(54)-0.25,T(54)));
+  const tb=$('#tagBad'); { const a=T(28)+0.1, q=eb(clamp(p(t,a,a+0.4))); const r=eio(p(t,T(40)-0.1,T(40)+0.15));
+    show(tb,clamp(p(t,a,a+0.15))*(1-r)*(t<T(50)?1:0),0,(1-clamp(q))*-30,lerp(.6,1,clamp(q))*(1-0.4*r)); tb.style.transformOrigin='0 50%'; }
+  const to=$('#tagOk'); { const a=T(40)+0.1, q=eb(clamp(p(t,a,a+0.4))); const r=eio(p(t,T(50)-0.25,T(50)));
     show(to,clamp(p(t,a,a+0.15))*(1-r),0,0,lerp(.6,1,clamp(q))); to.style.transformOrigin='0 50%'; }
 
   /* ---- GOOD POSTER build (T44 → T54) + END ---- */
   const poster=$('#poster'); const pk=[...poster.children];
   const partOp=[0,0,0,0,0,0,0,0], partY=[0,0,0,0,0,0,0,0], partBl=[0,0,0,0,0,0,0,0], partSc=[1,1,1,1,1,1,1,1];
   let pOp=0,pSc=1,pX=0,pY=0,gray=0;
-  if(t>=T(44)-0.1 && t<T(54)+0.2){
-    pOp=1-eio(p(t,T(54)-0.25,T(54)));
-    const b0=T(44)+0.15;
+  if(t>=T(40)-0.1 && t<T(50)+0.2){
+    pOp=1-eio(p(t,T(50)-0.25,T(50)));
+    const b0=T(40)+0.15;
     partOp[0]=eo(p(t,b0,b0+0.3));
     [1,2,3,4,5,7].forEach((idx,k)=>{const a=b0+0.12+k*0.11;const q=eo(p(t,a,a+0.35));partOp[idx]=q;partY[idx]=(1-q)*40;partBl[idx]=(1-q)*8});
-    gray=1-eio(p(t,T(51)-0.05,T(51)+0.4));
-    const dq=p(t,T(53),T(53)+0.6);
-    partSc[7]=1+0.18*Math.sin(Math.PI*clamp(dq*1.4)); partOp[6]=t>=T(53)?Math.min(1,dq*3):0; partSc[6]=1+0.1*(1-eo(dq));
+    gray=1-eio(p(t,T(47)-0.05,T(47)+0.4));
+    const dq=p(t,T(49),T(49)+0.6);
+    partSc[7]=1+0.18*Math.sin(Math.PI*clamp(dq*1.4)); partOp[6]=t>=T(49)?Math.min(1,dq*3):0; partSc[6]=1+0.1*(1-eo(dq));
   }
   // END: lado a lado
-  const eA=T(63)-0.08;
+  const eA=T(59)-0.08;
   if(t>=eA){
     const q=eo(p(t,eA,eA+0.55));
     partOp.fill(1); partOp[6]=0; pOp=q; pSc=lerp(0.7,0.56,q); pX=lerp(0,236,q); pY=lerp(60,40,q);
     badKids.forEach((k,i)=>{k.style.opacity=1;k.style.transform=i===9?'rotate(14deg)':'none'});
     bad.style.filter='none';
     show(bad,q,lerp(0,-236,q),lerp(60,40,q),lerp(0.7,0.56,q));
-  } else if(t>=T(44)+0.6){ bad.style.visibility='hidden'; }
+  } else if(t>=T(40)+0.6){ bad.style.visibility='hidden'; }
   show(poster,pOp,pX,pY,pSc);
   poster.style.filter=gray>0.01?`grayscale(${gray}) contrast(${1-gray*.25}) brightness(${1-gray*.15})`:'none';
   poster.style.boxShadow=`0 40px 120px rgba(0,0,0,${.55*pOp})`;
   $('#bad').style.boxShadow=`0 40px 120px rgba(0,0,0,.55)`;
   pk.forEach((el,i)=>{el.style.opacity=partOp[i];el.style.transform=`translateY(${partY[i]}px) scale(${partSc[i]})`;el.style.filter=partBl[i]>0.05?`blur(${partBl[i]}px)`:'none'});
   // grid
-  const gOn=T(47), gOff=T(53)+0.3;
+  const gOn=T(43), gOff=T(49)+0.3;
   gridLines.forEach((ln,k)=>{const q=eio(p(t,gOn+k*0.04,gOn+k*0.04+0.4));const o=1-eio(p(t,gOff,gOff+0.35));
-    ln.style.opacity=q*o*(t>T(44)&&t<T(54)?1:0);ln.style.transform=ln.tagName==='I'?`scaleY(${q})`:`scaleX(${q})`});
+    ln.style.opacity=q*o*(t>T(40)&&t<T(50)?1:0);ln.style.transform=ln.tagName==='I'?`scaleY(${q})`:`scaleX(${q})`});
   // chips
-  { const o=vis(t,T(47)-0.1,T(54),.3,.25); show($('#chips'),o,0,(1-o)*30,1);
-    const hl=[T(50)-0.05,T(51)-0.05,T(53)-0.05];
+  { const o=vis(t,T(43)-0.1,T(50),.3,.25); show($('#chips'),o,0,(1-o)*30,1);
+    const hl=[T(46)-0.05,T(47)-0.05,T(49)-0.05];
     ['#ch1','#ch2','#ch3'].forEach((id,k)=>{const el=$(id),a=hl[k],q=eo(p(t,a,a+0.25));const cur=t>=a&&(k===2||t<hl[k+1]);
       el.style.background=cur?`rgba(255,90,54,${q})`:(t>=a?'rgba(243,237,227,.08)':'transparent');
       el.style.borderColor=cur?'#FF5A36':(t>=a?'rgba(243,237,227,.35)':'rgba(243,237,227,.18)');
@@ -321,14 +321,14 @@ function render(t){
       el.style.transform=`scale(${cur?1+0.07*Math.sin(Math.PI*clamp(p(t,a,a+0.35))):1})`})}
 
   /* ---- STATEMENT (T54 → T63) ---- */
-  { const out=[T(63)-0.25,T(63)+0.05];
-    pop($('#s7a'),t,T(54)-0.1,.4,50,out); pop($('#s7b'),t,T(56)-0.08,.4,40,out);
-    const sa=E(59)-0.08, sq=eio(p(t,sa,sa+0.3)), r=eio(p(t,out[0],out[1]));
+  { const out=[T(59)-0.25,T(59)+0.05];
+    pop($('#s7a'),t,T(50)-0.1,.4,50,out); pop($('#s7b'),t,T(52)-0.08,.4,40,out);
+    const sa=E(55)-0.08, sq=eio(p(t,sa,sa+0.3)), r=eio(p(t,out[0],out[1]));
     const st=$('#s7strike'); st.style.width=$('#s7b').offsetWidth+12+'px';
     show(st,(sq>0?1:0)*(1-r),0,-r*30,1); st.style.transform+=` scaleX(${sq})`;
     $('#s7b').style.color=sq>0.5?'#5E5965':'#8C8792';
-    pop($('#s7c'),t,T(60)-0.08,.4,40,out);
-    const m=$('#s7d'),ma=T(62)-0.1,mq=eb(clamp(p(t,ma,ma+0.5)));
+    pop($('#s7c'),t,T(56)-0.08,.4,40,out);
+    const m=$('#s7d'),ma=T(58)-0.1,mq=eb(clamp(p(t,ma,ma+0.5)));
     show(m,clamp(p(t,ma,ma+0.2))*(1-r),0,(1-mq)*60-r*30,lerp(.85,1,clamp(mq)),r*8);
     const uq=eio(p(t,ma+0.25,ma+0.7)),up=$('#s7up');up.style.strokeDasharray=780;up.style.strokeDashoffset=780*(1-uq);
     show($('#s7u'),(1-r)*(uq>0?1:0),0,-r*30,1);
@@ -342,7 +342,7 @@ function render(t){
     mb.style.left='200px'; mb.style.top='520px'; mo.style.left='676px'; mo.style.top='520px';
     show(mb,clamp(p(t,eA+0.35,eA+0.5)),0,0,lerp(.5,1,clamp(mt)),0,-4);
     show(mo,clamp(p(t,eA+0.45,eA+0.6)),0,0,lerp(.5,1,clamp(eb(clamp(p(t,eA+0.45,eA+0.85))))),0,3);
-    const c=$('#cta'),ca=T(67)-0.1,cq=eb(clamp(p(t,ca,ca+0.5)));
+    const c=$('#cta'),ca=T(63)-0.1,cq=eb(clamp(p(t,ca,ca+0.5)));
     c.style.opacity=clamp(p(t,ca,ca+0.2));c.style.visibility=t>=ca?'visible':'hidden';
     const pulse=t>ca+0.8?1+0.03*Math.sin((t-ca-0.8)*6):1;
     c.style.transform=`translateX(-50%) translateY(${(1-cq)*60}px) scale(${lerp(.8,1,clamp(cq))*pulse})`;
@@ -352,13 +352,13 @@ function render(t){
 window.render=render;window.DUR=DUR;
 // eventos de som (lidos pelo render.js)
 window.SFX=[
-  ['whoosh',0.0],['click',T(13)],['stamp',T(14)-0.06],
-  ['whoosh',T(15)-0.15],['pop',T(15)-0.05],['pop',T(21)-0.05],['pop',T(24)-0.05],
-  ['type',T(18),E(20)],['type',T(22),E(23)+0.1],['type',T(28),E(31)-0.05],
-  ['whoosh',T(32)-0.12],['boing',T(32)],['glitch',T(37)-0.05],
-  ['whoosh',T(44)-0.05],['pop',T(50)-0.05],['pop',T(51)-0.05],['ding',T(53)-0.05],
-  ['whoosh',T(54)-0.12],['swipe',E(59)-0.08],['pop',T(62)-0.1],
-  ['whoosh',T(63)-0.1],['pop',T(67)-0.1]
+  ['whoosh',0.0],['click',T(4)],['stamp',T(5)-0.06],
+  ['whoosh',T(11)-0.15],['pop',T(11)-0.05],['pop',T(17)-0.05],['pop',T(20)-0.05],
+  ['type',T(14),E(16)],['type',T(18),E(19)+0.1],['type',T(24),E(27)-0.05],
+  ['whoosh',T(28)-0.12],['boing',T(28)],['glitch',T(33)-0.05],
+  ['whoosh',T(40)-0.05],['pop',T(46)-0.05],['pop',T(47)-0.05],['ding',T(49)-0.05],
+  ['whoosh',T(50)-0.12],['swipe',E(55)-0.08],['pop',T(58)-0.1],
+  ['whoosh',T(59)-0.1],['pop',T(63)-0.1]
 ];
 document.fonts.ready.then(()=>{window.__ready=true;render(0)});
 </script>
