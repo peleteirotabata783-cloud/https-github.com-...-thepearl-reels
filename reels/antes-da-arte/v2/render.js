@@ -12,7 +12,7 @@ const FPS=30, R=f=>path.resolve(__dirname,f);
   const ff=spawn('ffmpeg',['-y','-loglevel','error','-f','image2pipe','-framerate',String(FPS),'-c:v','mjpeg','-i','-',
     '-i',R('voz.wav'),'-i',R('musica.mp3'),'-i',R('sfx.wav'),
     '-filter_complex',
-     '[1:a]adelay=150|150,aresample=48000,loudnorm=I=-15:TP=-2:LRA=9,asplit=2[v][vk];'+
+     '[1:a]adelay=150|150,aresample=48000,loudnorm=I=-15:TP=-2:LRA=9,aresample=48000,asplit=2[v][vk];'+
      `[2:a]aresample=48000,volume=0.28,afade=t=out:st=${DUR-1.2}:d=1.2[m];`+
      '[m][vk]sidechaincompress=threshold=0.04:ratio=6:attack=15:release=300[md];'+
      '[3:a]aresample=48000,volume=0.45[s];'+
