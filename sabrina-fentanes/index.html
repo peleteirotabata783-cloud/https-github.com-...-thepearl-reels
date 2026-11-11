@@ -282,6 +282,34 @@ footer a:hover{color:var(--ink)}
 /* Sabrina's section slides in under the last dive phrase */
 #sabrina{margin-top:-50vh;margin-top:-50svh;padding-top:24px}
 
+/* ---------- reference look: iridescent type, glass panels, 3D entrances ---------- */
+:root{--iri:linear-gradient(100deg,#9DB4FF 0%,#C7A6FF 28%,#FFB3D1 52%,#8FE6FF 76%,#9DB4FF 100%)}
+@keyframes iri{to{background-position:300% 0}}
+.hero h1 em,h2 em,.syn-t em,.phrase em{color:#C7A6FF;filter:drop-shadow(0 2px 14px rgba(5,15,46,.9))}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .hero h1 em,.phrase em,h2 em .wi,.syn-t em .wi,.marquee em{
+    background:var(--iri);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;
+    color:transparent;-webkit-text-fill-color:transparent;text-shadow:none !important;animation:iri 9s linear infinite}
+}
+.wi{text-shadow:calc((1 - var(--w))*8px) 0 0 rgba(255,90,170,.75),calc((1 - var(--w))*-8px) 0 0 rgba(90,220,255,.75),0 0 3px rgba(5,15,46,.9),0 2px 22px rgba(5,15,46,.95)}
+.glass{position:relative;background:linear-gradient(140deg,rgba(255,255,255,.1),rgba(255,255,255,.02) 45%,rgba(199,166,255,.06));
+  -webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.14)}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+  background:var(--iri);background-size:300% 100%;animation:iri 12s linear infinite;opacity:.75;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.pillar.glass{border-top:0;border-radius:22px}
+.gauge.glass{position:fixed}
+.plan.glass{border:0}
+.plan.feat{box-shadow:0 30px 90px -25px rgba(199,166,255,.55)}
+[data-anim="up"]{transform:perspective(1100px) translateY(calc((1 - var(--e))*56px)) rotateX(calc((1 - var(--e))*-14deg))}
+[data-anim="left"]{transform:perspective(1100px) translateX(calc((1 - var(--e))*-110px)) rotateY(calc((1 - var(--e))*30deg))}
+[data-anim="right"]{transform:perspective(1100px) translateX(calc((1 - var(--e))*110px)) rotateY(calc((1 - var(--e))*-30deg))}
+.scramble{font-variant-numeric:tabular-nums}
+.portrait .frame{transform:perspective(900px) rotateX(var(--ry,0deg)) rotateY(var(--rx,0deg));transition:transform .25s ease-out}
+.portrait::after{border:0;padding:1px;background:var(--iri);background-size:300% 100%;animation:iri 12s linear infinite;opacity:.6;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+
 /* compact about */
 .about .bio h2{font-size:clamp(2.3rem,4.4vw,4rem)}
 .creds{list-style:none;margin:8px 0 0;padding:20px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px;
@@ -305,10 +333,10 @@ footer a:hover{color:var(--ink)}
 /* FAQ: questions fly in from the right */
 .faq-head{display:flex;flex-direction:column;gap:0;margin-bottom:32px;max-width:760px}
 .faq-list{display:flex;flex-direction:column}
-.faq-list details{border-bottom:1px solid var(--line);
-  opacity:calc(.2 + var(--e)*.8);transform:translateX(calc((1 - var(--e))*75vw)) rotate(calc((1 - var(--e))*-3deg));transform-origin:100% 50%}
-.faq-list details:first-child{border-top:1px solid var(--line)}
-.faq-list summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:56px minmax(0,1fr) 24px;align-items:center;gap:16px;padding:30px 0;transition:padding .35s ease}
+.faq-list{gap:12px}
+.faq-list details{border-radius:20px;padding:0 24px;
+  opacity:calc(.2 + var(--e)*.8);transform:perspective(1200px) translateX(calc((1 - var(--e))*70vw)) rotateY(calc((1 - var(--e))*-50deg));transform-origin:100% 50%}
+.faq-list summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:56px minmax(0,1fr) 24px;align-items:center;gap:16px;padding:24px 0;transition:padding .35s ease}
 .faq-list summary::-webkit-details-marker{display:none}
 .faq-list summary:hover{padding-left:12px}
 .faq-list .qn{font:500 .75rem/1 var(--f-mono);letter-spacing:.12em;color:var(--petal)}
@@ -339,6 +367,7 @@ footer a:hover{color:var(--ink)}
   .synapse{height:130vh}
   .faq-list summary{grid-template-columns:32px minmax(0,1fr) 20px;gap:10px;padding:24px 0}
   .faq-list details p{padding-left:42px}
+  .faq-list details{padding:0 16px}
   .helps{margin-top:48px}
   .hero-top{top:calc(84px + env(safe-area-inset-top,0px))}
   .brand small{display:none}
@@ -444,9 +473,9 @@ footer a:hover{color:var(--ink)}
       <p class="lead" data-anim="up">Sabe quando você se concentra tanto num filme que quase esquece o que está ao redor? É parecido. Nesse estado de foco, fica mais fácil acessar e dar novo sentido aos seus padrões emocionais.</p>
     </div>
     <div class="wrap pillars">
-      <div class="pillar" data-anim="left"><h3>Você no controle</h3><p>Consciente e lúcido durante toda a sessão.</p></div>
-      <div class="pillar" data-anim="up"><h3>Online, em português</h3><p>De 1h a 1h30, de onde você estiver.</p></div>
-      <div class="pillar" data-anim="right"><h3>No seu ritmo</h3><p>Respeitando sua história e seus limites.</p></div>
+      <div class="pillar glass" data-anim="left"><h3>Você no controle</h3><p>Consciente e lúcido durante toda a sessão.</p></div>
+      <div class="pillar glass" data-anim="up"><h3>Online, em português</h3><p>De 1h a 1h30, de onde você estiver.</p></div>
+      <div class="pillar glass" data-anim="right"><h3>No seu ritmo</h3><p>Respeitando sua história e seus limites.</p></div>
     </div>
     <div class="helps">
       <div class="label center-label" data-anim="up">Pode ajudar com</div>
@@ -475,12 +504,12 @@ footer a:hover{color:var(--ink)}
         <h2 data-anim="words">As perguntas que <em>todo mundo</em> faz.</h2>
       </div>
       <div class="faq-list">
-        <details data-anim="faq"><summary><span class="qn">01</span><span class="qt">Hipnose é segura?</span><span class="plus"></span></summary><p>Sim. É um processo natural e seguro, conduzido de forma ética e profissional.</p></details>
-        <details data-anim="faq"><summary><span class="qn">02</span><span class="qt">Vou perder a consciência?</span><span class="plus"></span></summary><p>Não. Você fica consciente, lúcido e lembra do que acontece. É um estado de atenção focada.</p></details>
-        <details data-anim="faq"><summary><span class="qn">03</span><span class="qt">Posso fazer algo contra a minha vontade?</span><span class="plus"></span></summary><p>Não. A hipnose não faz ninguém agir contra seus valores. Você está no controle o tempo todo.</p></details>
-        <details data-anim="faq"><summary><span class="qn">04</span><span class="qt">Funciona mesmo online?</span><span class="plus"></span></summary><p>Sim. A sessão é guiada por conversa e orientação de foco. Basta um lugar tranquilo e uma boa conexão.</p></details>
-        <details data-anim="faq"><summary><span class="qn">05</span><span class="qt">Em quanto tempo percebo resultado?</span><span class="plus"></span></summary><p>Os resultados costumam aparecer de forma progressiva, à medida que você integra as mudanças no dia a dia.</p></details>
-        <details data-anim="faq"><summary><span class="qn">06</span><span class="qt">Para quem é o atendimento?</span><span class="plus"></span></summary><p>Para brasileiros que vivem fora do Brasil e também para quem vive no Brasil e quer transformar padrões emocionais.</p></details>
+        <details class="glass" data-anim="faq"><summary><span class="qn">01</span><span class="qt">Hipnose é segura?</span><span class="plus"></span></summary><p>Sim. É um processo natural e seguro, conduzido de forma ética e profissional.</p></details>
+        <details class="glass" data-anim="faq"><summary><span class="qn">02</span><span class="qt">Vou perder a consciência?</span><span class="plus"></span></summary><p>Não. Você fica consciente, lúcido e lembra do que acontece. É um estado de atenção focada.</p></details>
+        <details class="glass" data-anim="faq"><summary><span class="qn">03</span><span class="qt">Posso fazer algo contra a minha vontade?</span><span class="plus"></span></summary><p>Não. A hipnose não faz ninguém agir contra seus valores. Você está no controle o tempo todo.</p></details>
+        <details class="glass" data-anim="faq"><summary><span class="qn">04</span><span class="qt">Funciona mesmo online?</span><span class="plus"></span></summary><p>Sim. A sessão é guiada por conversa e orientação de foco. Basta um lugar tranquilo e uma boa conexão.</p></details>
+        <details class="glass" data-anim="faq"><summary><span class="qn">05</span><span class="qt">Em quanto tempo percebo resultado?</span><span class="plus"></span></summary><p>Os resultados costumam aparecer de forma progressiva, à medida que você integra as mudanças no dia a dia.</p></details>
+        <details class="glass" data-anim="faq"><summary><span class="qn">06</span><span class="qt">Para quem é o atendimento?</span><span class="plus"></span></summary><p>Para brasileiros que vivem fora do Brasil e também para quem vive no Brasil e quer transformar padrões emocionais.</p></details>
       </div>
     </div>
   </section>
@@ -500,7 +529,7 @@ footer a:hover{color:var(--ink)}
       <h2 data-anim="words">Escolha como quer <em>começar</em>.</h2>
     </div>
     <div class="plans">
-      <article class="plan" data-anim="left">
+      <article class="plan glass" data-anim="left">
         <div class="num">01<small>sessão</small></div>
         <p>Para conhecer o processo e sentir como ele funciona para você.</p>
         <a class="btn btn-solid" href="https://wa.me/34695864531?text=Ol%C3%A1%2C%20quero%20fazer%201%20sess%C3%A3o." target="_blank" rel="noopener">Agendar sessão</a>
@@ -545,7 +574,7 @@ footer a:hover{color:var(--ink)}
   </div>
 </footer>
 
-<aside class="gauge" id="gauge" aria-label="Profundidade do estado mental">
+<aside class="gauge glass" id="gauge" aria-label="Profundidade do estado mental">
   <canvas id="wave" width="168" height="52"></canvas>
   <div class="g-txt"><span class="g-hz" id="gHz">β · 18 Hz</span><span class="g-st" id="gSt">Vigília</span></div>
 </aside>
@@ -583,6 +612,32 @@ footer a:hover{color:var(--ink)}
   }
   [].slice.call(document.querySelectorAll('[data-anim="words"], .syn-t')).forEach(splitWords);
   var anims=[].slice.call(document.querySelectorAll('[data-anim]'));
+  // labels decode like a signal: characters scramble, then settle
+  var GLY='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#_<>';
+  function scramble(el){
+    if(reduce||el._busy) return; el._busy=true;
+    var nodes=[]; (function w(n){[].slice.call(n.childNodes).forEach(function(c){ if(c.nodeType===3&&c.textContent.trim()) nodes.push([c,c._orig||(c._orig=c.textContent)]); else if(c.nodeType===1) w(c); });})(el);
+    var t0=performance.now(), dur=750;
+    (function step(now){ var k=Math.min(1,(now-t0)/dur);
+      nodes.forEach(function(pr){ var o=pr[1], n=Math.floor(o.length*k), out=o.slice(0,n);
+        for(var i=n;i<o.length;i++) out+= o[i]===' ' ? ' ' : GLY[(Math.random()*GLY.length)|0];
+        pr[0].textContent=out; });
+      if(k<1) requestAnimationFrame(step); else { el._busy=false; }
+    })(t0);
+  }
+  var scr=[].slice.call(document.querySelectorAll('.label, .syn-k, .eyebrow, .badge'));
+  if('IntersectionObserver' in window){
+    var sio=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting) scramble(e.target); })},{threshold:1});
+    scr.forEach(function(el){ el.classList.add('scramble'); sio.observe(el); });
+  }
+  // portrait follows the pointer in 3D
+  var por=document.querySelector('.portrait');
+  if(por && !reduce){
+    por.addEventListener('pointermove',function(ev){ var r=por.getBoundingClientRect();
+      por.style.setProperty('--rx',(((ev.clientX-r.left)/r.width-.5)*14).toFixed(2)+'deg');
+      por.style.setProperty('--ry',((.5-(ev.clientY-r.top)/r.height)*14).toFixed(2)+'deg'); });
+    por.addEventListener('pointerleave',function(){ por.style.setProperty('--rx','0deg'); por.style.setProperty('--ry','0deg'); });
+  }
   var diveLen=1, maxS=1, syns=[].slice.call(document.querySelectorAll('.synapse')), synTop=[], synLen=[];
   function clamp(v){return v<0?0:v>1?1:v}
   function ss(a,b,x){x=clamp((x-a)/(b-a));return x*x*(3-2*x)}
@@ -666,8 +721,12 @@ footer a:hover{color:var(--ink)}
 </script>
 
 <!-- 3D brain -->
+<script type="importmap">{"imports":{"three":"./assets/three.module.min.js"}}</script>
 <script type="module">
-import * as THREE from './assets/three.module.min.js';
+import * as THREE from 'three';
+import { EffectComposer } from './assets/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from './assets/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from './assets/jsm/postprocessing/UnrealBloomPass.js';
 
 const SF = window.SF || {p:0,g:0,mx:0,my:0,track:0};
 const canvas = document.getElementById('scene');
@@ -677,7 +736,8 @@ try{
   renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, powerPreference:'high-performance'});
 }catch(e){ document.documentElement.classList.add('no-webgl'); throw e; }
 renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
-renderer.setClearColor(0x000000, 0);
+renderer.setClearColor(0x050F2E, 1);
+renderer.outputColorSpace = THREE.LinearSRGBColorSpace; // shaders already speak screen colors; no second conversion
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(small ? 52 : 38, innerWidth/innerHeight, 0.01, 80);
@@ -777,6 +837,8 @@ const pointMat = new THREE.ShaderMaterial({
       vec3 pearl = vec3(0.92,0.95,1.0), syn = vec3(0.58,0.69,1.0), petal = vec3(1.0,0.79,0.73);
       vC = mix(pearl, syn, smoothstep(0.35,0.95,aRand));
       vC = mix(vC, petal, big);
+      vec3 iri = 0.5 + 0.5*cos(6.2831*(vec3(0.0,0.33,0.67) + position.y*0.35 + position.z*0.3 + uTime*0.035));
+      vC = mix(vC, iri*vec3(0.8,0.7,1.0) + vec3(0.12,0.1,0.18), 0.38);
       vC += spark * vec3(0.55,0.65,1.0) * 1.6;
       vA = (aKind>2.5 ? 0.35 : 0.85) * tw * smoothstep(0.04, 0.5, d);
     }`,
@@ -900,6 +962,8 @@ const neuronPts = new THREE.Points(ngeo, new THREE.ShaderMaterial({
       gl_Position = projectionMatrix*mv;
       vec3 pearl=vec3(0.92,0.95,1.0), syn=vec3(0.58,0.69,1.0), petal=vec3(1.0,0.79,0.73);
       vC = mix(syn, pearl, aType<0.5 ? 0.8 : aRand*0.5);
+      vec3 iri = 0.5 + 0.5*cos(6.2831*(vec3(0.0,0.33,0.67) + position.z*0.08 + aS*0.4 + uTime*0.04));
+      vC = mix(vC, iri*vec3(0.8,0.7,1.0) + vec3(0.12,0.1,0.18), 0.3);
       vC = mix(vC, petal, clamp(sig*1.2,0.0,1.0) + (aType<0.5 ? arrive*0.25 : 0.0));
       vA = b*(0.28+0.72*uFocus)*uReveal*smoothstep(0.05,0.6,d)*(1.0-smoothstep(10.0,18.0,d));
     }`,
@@ -947,6 +1011,88 @@ dustMat.uniforms = {...uniforms, uFade:{value:.8}};
 const dust = new THREE.Points(dgeo, dustMat);
 scene.add(dust);
 
+/* ---------- background: brand navy with faint violet and cyan light ---------- */
+const bg = new THREE.Mesh(new THREE.PlaneGeometry(2,2), new THREE.ShaderMaterial({
+  depthTest:false, depthWrite:false, uniforms:{uTime:uniforms.uTime},
+  vertexShader:`varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.9999,1.0); }`,
+  fragmentShader:`varying vec2 vUv; uniform float uTime;
+    void main(){
+      vec2 p = vUv - vec2(0.5,0.58); float r = length(p*vec2(1.0,1.25));
+      vec3 c = mix(vec3(0.045,0.13,0.36), vec3(0.016,0.05,0.16), smoothstep(0.0,0.8,r));
+      c += vec3(0.42,0.2,0.62)*0.16*smoothstep(0.7,0.0,length(vUv-vec2(0.12+0.05*sin(uTime*0.1),0.86)));
+      c += vec3(0.1,0.45,0.6)*0.12*smoothstep(0.7,0.0,length(vUv-vec2(0.9,0.18+0.05*cos(uTime*0.12))));
+      gl_FragColor = vec4(c,1.0);
+    }`
+}));
+bg.frustumCulled = false; bg.renderOrder = -10; scene.add(bg);
+
+/* ---------- floating glass panels orbiting the brain ---------- */
+const ring = new THREE.Group(); scene.add(ring);
+const cards = [];
+const WORDS = ['Ansiedade','Autoestima','Medos','Saudade','Confiança','Padrões','Leveza'];
+const cardMat = (tex, seed) => new THREE.ShaderMaterial({
+  transparent:true, depthWrite:false, side:THREE.DoubleSide, blending:THREE.NormalBlending,
+  uniforms:{ uMap:{value:tex}, uTime:uniforms.uTime, uSeed:{value:seed}, uAlpha:{value:1} },
+  vertexShader:`varying vec2 vUv; varying vec3 vN; varying vec3 vV;
+    void main(){ vUv=uv; vec4 wp=modelMatrix*vec4(position,1.0);
+      vN=normalize(mat3(modelMatrix)*normal); vV=normalize(cameraPosition-wp.xyz);
+      gl_Position=projectionMatrix*viewMatrix*wp; }`,
+  fragmentShader:`uniform sampler2D uMap; uniform float uTime,uSeed,uAlpha; varying vec2 vUv; varying vec3 vN; varying vec3 vV;
+    float h1(float n){ return fract(sin(n)*43758.5453); }
+    void main(){
+      vec2 uv = gl_FrontFacing ? vUv : vec2(1.0-vUv.x, vUv.y);
+      vec2 hs = vec2(0.8,0.5); vec2 p = (vUv-0.5)*vec2(1.6,1.0);
+      vec2 q = abs(p) - (hs - 0.07); float d = length(max(q,0.0)) + min(max(q.x,q.y),0.0) - 0.07;
+      float inside = 1.0 - smoothstep(0.0,0.006,d);
+      float edge = smoothstep(0.014,0.0,abs(d));
+      vec3 iri = 0.5 + 0.5*cos(6.2831*(vec3(0.0,0.33,0.67) + vUv.x*0.55 + vUv.y*0.35 + uTime*0.06 + uSeed));
+      iri = mix(iri, vec3(0.66,0.6,1.0), 0.3);
+      float fres = pow(1.0 - abs(dot(normalize(vN), normalize(vV))), 2.0);
+      float tick = floor(uTime*10.0 + uSeed*7.0);
+      float g = step(0.93, h1(tick*1.37 + uSeed)) ;
+      float band = step(0.55, h1(floor(uv.y*9.0) + tick));
+      vec2 off = vec2(0.006 + g*band*0.05, 0.0);
+      float tr = texture2D(uMap, uv+off).a, tg = texture2D(uMap, uv).a, tb = texture2D(uMap, uv-off).a;
+      vec3 txt = vec3(max(tr,tg*0.6), tg, max(tb,tg*0.6));
+      vec3 col = iri*0.22 + vec3(0.9,0.93,1.0)*txt + edge*iri*1.2 + fres*iri*0.5;
+      float a = inside*(0.13 + fres*0.3) + max(max(tr,tg),tb)*inside*0.95 + edge*0.85;
+      gl_FragColor = vec4(col, a*uAlpha);
+    }`
+});
+function cardTexture(word, i){
+  const c = document.createElement('canvas'); c.width = 640; c.height = 400;
+  const x = c.getContext('2d');
+  x.fillStyle = '#fff';
+  x.font = '500 22px "IBM Plex Mono", monospace'; x.globalAlpha = .75;
+  x.fillText(('0'+(i+1)).slice(-2)+' / 07', 44, 60);
+  x.textAlign = 'right'; x.fillText('HIPNOTERAPIA', 596, 360); x.textAlign = 'left';
+  x.fillRect(44, 352, 120, 1.5);
+  x.globalAlpha = 1; x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.font = (i%2 ? 'italic ' : '') + '400 118px "Instrument Serif", Georgia, serif';
+  x.fillText(word, 320, 205);
+  const t = new THREE.CanvasTexture(c); t.anisotropy = 4; return t;
+}
+const RR = small ? 1.45 : 2.15;
+Promise.race([document.fonts ? document.fonts.load('400 118px "Instrument Serif"') : null, new Promise(r=>setTimeout(r,1500))])
+  .catch(()=>{}).then(() => {
+    WORDS.forEach((w,i) => {
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(1.6*.62, .62), cardMat(cardTexture(w,i), i*1.7));
+      const a = i/WORDS.length*Math.PI*2;
+      m.position.set(Math.cos(a)*RR, Math.sin(a*2+i)*.24, Math.sin(a)*RR);
+      m.rotation.set(.06*Math.sin(i*2.1), Math.PI/2 - a + .35, .07*Math.cos(i*1.3));
+      if(small) m.scale.setScalar(.72);
+      ring.add(m); cards.push(m);
+    });
+  });
+const tmpW = new THREE.Vector3();
+
+/* ---------- bloom ---------- */
+const rt = new THREE.WebGLRenderTarget(innerWidth, innerHeight, { type: THREE.UnsignedByteType }); // clamp light like the plain canvas did
+const composer = new EffectComposer(renderer, rt);
+composer.addPass(new RenderPass(scene, camera));
+const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), small ? .5 : .6, .25, .66);
+composer.addPass(bloom); // last pass draws straight to the screen, keeping the brand navy untouched
+
 /* ---------- motion ---------- */
 const ease = t => t<.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
 const ssf = THREE.MathUtils.smoothstep;
@@ -957,6 +1103,8 @@ const diveCam = new THREE.Vector3(), diveLook = new THREE.Vector3(), cam = new T
 function resize(){
   const w = innerWidth, h = innerHeight;
   renderer.setSize(w, h, false);
+  composer.setPixelRatio(Math.min(devicePixelRatio, small ? 1.25 : 1.5));
+  composer.setSize(w, h);
   camera.aspect = w/h; camera.fov = w < 720 ? 52 : 38;
   camera.updateProjectionMatrix();
 }
@@ -1000,7 +1148,21 @@ function frame(now){
   brain.position.y = (camera.aspect < .8 ? .5 : .6)*(1-e);
   dust.rotation.z = reduce ? 0 : t*.01;
 
-  renderer.render(scene, camera);
+  // glass panels: orbit, then fly outward past the camera as we dive in
+  ring.position.y = brain.position.y;
+  ring.rotation.y = (reduce ? 0 : t*.07) + e*2.4 + mx*.15;
+  ring.rotation.x = .12 + my*.05;
+  ring.scale.setScalar(1 + e*2.6);
+  const ringFade = 1 - ssf(sp, .3, .62);
+  ring.visible = ringFade > .001;
+  for(const c of cards){
+    c.getWorldPosition(tmpW);
+    const depth = ssf(tmpW.z, -RR, RR*.8);
+    c.material.uniforms.uAlpha.value = ringFade*(.32 + .68*depth);
+    c.renderOrder = tmpW.z > 0 ? 2 : -1;
+  }
+
+  composer.render();
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
