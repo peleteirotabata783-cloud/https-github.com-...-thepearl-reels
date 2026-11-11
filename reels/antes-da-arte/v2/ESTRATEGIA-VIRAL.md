@@ -1,5 +1,5 @@
 # v2: versão feita para alcance
-**Arquivo:** `antes-da-arte-pronta-v2.mp4` · ~25,8 s · voz: Will (ElevenLabs) · 1080×1920 · voz + trilha + efeitos sonoros
+**Arquivo:** `antes-da-arte-pronta-v2.mp4` · ~25,3 s · voz: Will animado (ElevenLabs v4) · 1080×1920 · voz + trilha + efeitos sonoros
 
 ## O que mudou do v1 para o v2
 
@@ -11,6 +11,12 @@
 | **Prova visual** | Só a arte final | **Antes e depois**: um pôster “sem briefing” (tudo grita) que se transforma no pôster “com briefing”. É o formato mais compartilhado em conteúdo de design. |
 | **Som** | Só a voz | Trilha lo-fi house que abaixa sozinha quando a voz fala, mais efeitos: clique, carimbo, whoosh nos cortes, digitação e “ding” no destaque. |
 | **Final** | CTA simples | Antes e depois lado a lado + **“Salva pro próximo projeto”**. A última palavra é “arquivo” e a primeira do vídeo também é sobre o arquivo, então o vídeo **emenda em loop**. |
+
+## Movimento (para não ficar parado)
+- Câmera viva o tempo todo: zoom lento contínuo, “punch” de zoom em cada corte e nas palavras-chave, e pulso no ritmo da música (112 BPM).
+- Legendas palavra por palavra, maiores, com a palavra falada destacada em laranja.
+- Cartões entram deslizando dos lados, e o cartão ativo cresce enquanto os outros recuam.
+- Fundo com pontos em movimento contínuo.
 
 ## Legenda do post
 
@@ -48,7 +54,7 @@ A pergunta “comenta o número” é de propósito: responder custa um clique, 
 
 ## Arquivos
 - `video.html`: animação (cada cena sincronizada pelos tempos das palavras em `words.js`)
-- `voz.wav`: narração final (Will, ElevenLabs), montada com `gancho-will.mp3` + `voz-will-orig.mp3`, com pausas encurtadas por `apertar_pausas.py` e fala 1,07× mais rápida
+- `voz.wav`: narração final (Will, ElevenLabs v4, com direção de energia), feita a partir de `voz-animada-orig.mp3`, com pausas encurtadas por `apertar_pausas.py` e fala 1,04× mais rápida
 - `musica.mp3`: trilha gerada no ElevenLabs Music, sem vocais
 - `sfx.py`: gera os efeitos sonoros por síntese, sem samples de terceiros
 - `render.js`: `node render.js` gera o MP4 final

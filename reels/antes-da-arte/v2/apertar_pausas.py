@@ -1,6 +1,7 @@
 # Encurta pausas longas da narração e remapeia os tempos das palavras.
 import json, re, subprocess, numpy as np, wave
-SR=48000; KEEP=0.20; SPEED=1.07; OFF=0.15
+import os
+SR=48000; KEEP=float(os.environ.get("KEEP",0.20)); SPEED=float(os.environ.get("SPEED",1.07)); OFF=0.15
 import sys
 src=sys.argv[1] if len(sys.argv)>1 else 'voz-will-orig.mp3'
 WJSON=sys.argv[2] if len(sys.argv)>2 else 'words-will.json'

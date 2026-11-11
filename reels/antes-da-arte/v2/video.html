@@ -11,7 +11,8 @@
   html,body{width:1080px;height:1920px;overflow:hidden;background:var(--ink)}
   body{font-family:'Inter Tight',sans-serif;color:var(--paper);-webkit-font-smoothing:antialiased}
   #stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(1200px 900px at 50% 40%,#221F28 0%,var(--ink) 60%)}
-  #world{position:absolute;inset:0}
+  #world{position:absolute;inset:0;transform-origin:50% 46%}
+  #dots{position:absolute;inset:-120px;background-image:radial-gradient(rgba(243,237,227,.10) 2px,transparent 2.5px);background-size:60px 60px}
   .abs{position:absolute}
   .mono{font-family:'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase}
   #glow{position:absolute;width:1400px;height:1400px;left:-160px;top:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,90,54,.16) 0%,rgba(255,90,54,0) 60%)}
@@ -37,8 +38,8 @@
   #app .tile b{font:600 22px 'Inter Tight'} #app .tile i{font:500 17px 'JetBrains Mono';color:var(--muted);font-style:normal}
   #btn{position:absolute;right:44px;bottom:44px;padding:24px 42px;border-radius:16px;background:var(--accent);color:#120F10;font:800 32px 'Inter Tight'}
   #mouse{left:0;top:0;width:60px;height:76px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.5))}
-  #stamp{left:120px;top:770px;padding:22px 40px;border:10px solid var(--bad);border-radius:22px;color:var(--bad);white-space:nowrap;
-         font:900 112px/1 'Inter Tight';letter-spacing:-.02em;background:rgba(15,14,18,.55);transform-origin:50% 50%}
+  #stamp{left:175px;top:780px;padding:20px 36px;border:10px solid var(--bad);border-radius:22px;color:var(--bad);white-space:nowrap;
+         font:900 96px/1 'Inter Tight';letter-spacing:-.02em;background:rgba(15,14,18,.55);transform-origin:50% 50%}
 
   /* cards */
   #qh{left:90px;top:200px}
@@ -94,12 +95,12 @@
   #mBad{background:var(--bad);color:#fff} #mOk{background:var(--ok);color:#0B1A13}
   #cta{left:50%;top:1330px;padding:28px 46px;border-radius:999px;background:var(--paper);color:var(--ink);font:800 40px 'Inter Tight';display:flex;gap:18px;align-items:center;white-space:nowrap}
 
-  #cap{left:70px;right:70px;top:1490px;text-align:center;font:800 64px/1.15 'Inter Tight';letter-spacing:-.01em}
-  #cap span{display:inline-block;margin:0 9px;text-shadow:0 4px 24px rgba(0,0,0,.7)}
+  #cap{left:50px;right:50px;top:1480px;text-align:center;font:900 80px/1.2 'Inter Tight';letter-spacing:-.02em}
+  #cap span{display:inline-block;margin:0 6px;padding:0 14px;border-radius:14px;text-shadow:0 4px 24px rgba(0,0,0,.7)}
 </style>
 </head>
 <body>
-<div id="stage"><div id="world">
+<div id="stage"><div id="dots"></div><div id="world">
   <div id="glow"></div>
 
   <!-- HOOK -->
@@ -201,14 +202,14 @@ const grid=$('#grid');[56,182,302,418,538,664].forEach(x=>{const i=document.crea
 const gridLines=[...grid.children];
 
 /* captions */
-const groups=[];{let g=[];W.forEach((w,i)=>{g.push(i);if(/[.,?:!]$/.test(w.w)||g.length>=4){groups.push(g);g=[]}});if(g.length)groups.push(g)}
+const groups=[];{let g=[];W.forEach((w,i)=>{g.push(i);if(/[.,?:!]$/.test(w.w)||g.length>=3){groups.push(g);g=[]}});if(g.length)groups.push(g)}
 const CAP_ON=[[0,T(11)-0.12],[T(28)-0.05,T(50)-0.12]];
 const cap=$('#cap');let lastG=-1;
 function captions(t){const on=CAP_ON.some(([a,b])=>t>=a&&t<b);let gi=-1;for(let k=0;k<groups.length;k++){if(W[groups[k][0]].s-0.05<=t)gi=k}
   if(!on||gi<0){cap.style.opacity=0;return}
   const g=groups[gi];if(gi!==lastG){cap.innerHTML=g.map(i=>`<span>${W[i].w}</span>`).join('');lastG=gi}
   cap.style.opacity=1;[...cap.children].forEach((sp,k)=>{const w=W[g[k]];const q=eo(p(t,w.s-0.06,w.s+0.12));const act=t>=w.s-0.04&&t<w.e+0.08;
-    sp.style.color=act?'#FF5A36':'#F3EDE3';sp.style.opacity=0.28+0.72*q;sp.style.transform=`translateY(${(1-q)*14}px) scale(${act?1.07:1})`})}
+    const b=eb(clamp(p(t,w.s-0.05,w.s+0.22)));sp.style.color=act?'#0F0E12':'#F3EDE3';sp.style.background=act?'#FF5A36':'transparent';sp.style.textShadow=act?'none':'0 4px 24px rgba(0,0,0,.7)';sp.style.opacity=q;sp.style.transform=`translateY(${(1-q)*40}px) scale(${lerp(0.6,1,clamp(b))*(act?1.06:1)}) rotate(${act?-2:0}deg)`})}
 
 function render(t){
   const f=Math.round(t*30);gc.putImageData(gimgs[f%6],0,0);
@@ -219,7 +220,14 @@ function render(t){
   // tremor de câmera: carimbo "errado" e "grita"
   let sh=0; const st=T(5)-0.05; sh+=Math.max(0,1-(t-st)/0.35)*(t>=st?1:0)*22;
   const gr=T(33); if(t>=gr&&t<gr+0.5) sh+=10*(1-(t-gr)/0.5);
-  $('#world').style.transform=sh>0.1?`translate(${(rnd(f)-.5)*sh}px,${(rnd(f+9)-.5)*sh}px)`:'none';
+  { const C=[0,T(11)-0.1,T(28)-0.08,T(50)-0.1,T(59)-0.06,DUR]; let k=0; while(k<C.length-2&&t>=C[k+1])k++;
+    let sc=1+0.045*eio(p(t,C[k],C[k+1]));                       // zoom lento dentro de cada cena
+    C.slice(1,-1).forEach(c=>{ if(t>=c&&t<c+0.55) sc+=0.14*(1-eo((t-c)/0.55)); });   // punch no corte
+    [5,33,49,58,70].forEach(i=>{ const a=T(i); if(t>=a&&t<a+0.4) sc+=0.05*(1-eo((t-a)/0.4)); }); // punch nas palavras-chave
+    const bp=60/112, ph=(t%bp); sc+=0.007*Math.exp(-ph/0.09);   // pulso na batida da música
+    const dx=Math.sin(t*0.6)*10+(rnd(f)-.5)*sh, dy=Math.cos(t*0.45)*8+(rnd(f+9)-.5)*sh, rot=Math.sin(t*0.5)*0.35;
+    $('#world').style.transform=`translate(${dx}px,${dy}px) scale(${sc}) rotate(${rot}deg)`;
+    $('#dots').style.transform=`translate(${(t*22)%60}px,${(-t*48)%60}px)`; }
   // flash nos cortes
   const cuts=[T(11)-0.1,T(28)-0.08,T(50)-0.1,T(59)-0.06];
   $('#flash').style.opacity=Math.max(...cuts.map(c=>t>=c?Math.max(0,0.18*(1-(t-c)/0.18)):0));
@@ -240,7 +248,7 @@ function render(t){
     $('#btn').style.background = t>=click? '#ff7a5c':'#FF5A36';
     // carimbo
     const sa=T(5)-0.06, sq=eo(p(t,sa,sa+0.22));
-    show($('#stamp'),(t>=sa?1:0)*(1-r),0,0,lerp(1.9,1,sq),0,-9);
+    show($('#stamp'),(t>=sa?1:0)*(1-r),0,0,lerp(1.6,1,sq),0,-7);
   }
 
   /* ---- CARDS (T15 → T32) ---- */
@@ -251,7 +259,8 @@ function render(t){
               ['#c3',T(20)-0.05,'→ o nome da oficina e a data',T(24),E(27)-0.05]];
     cs.forEach(([id,a,ans,ta,tb],k)=>{const el=$(id);const q=eb(clamp(p(t,a,a+0.45)));const r=eio(p(t,out[0]+k*0.04,out[1]+k*0.04));
       let o=clamp(p(t,a,a+0.2))*(1-r); const next=k<2?cs[k+1][1]:99; if(t>=next)o*=0.55;
-      show(el,o,(1-clamp(q))*-0,(1-q)*70-r*40,lerp(.93,1,clamp(q)),r*8);
+      const act=(t>=a&&t<next), sc0=lerp(.85,1,clamp(q))*(t>=next?0.95:(act?1.03:1));
+      show(el,o,(1-clamp(q))*(k%2?-260:260),(1-q)*40-r*40,sc0,r*8,(1-clamp(q))*(k%2?-6:6));
       el.style.borderColor=(t>=a&&t<next)?'rgba(255,90,54,.8)':'rgba(255,255,255,.10)';
       const n=Math.floor(ans.length*p(t,ta,tb));const caret=(t>=ta&&t<tb+0.4&&Math.floor(t*5)%2===0)?'▍':'';
       el.querySelector('.a').textContent=ans.slice(0,n)+caret;});
