@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sabrina Fentanes Hipnoterapia</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Hipnoterapia online em português para brasileiros que vivem no exterior. Atendimento profissional e acolhedor para trabalhar ansiedade, insegurança e padrões emocionais.">
+<meta name="theme-color" content="#050F2E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sabrina Fentanes · Hipnoterapia online">
+<meta property="og:description" content="Supere padrões emocionais e reconquiste sua confiança, onde quer que esteja.">
+<meta property="og:image" content="assets/sabrina.jpg">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Sabrina Fentanes · Hipnoterapia online","description":"Hipnoterapia online em português para brasileiros no Brasil e no exterior.","telephone":"+34 695 86 45 31","areaServed":"Online","founder":{"@type":"Person","name":"Sabrina Fentanes","jobTitle":"Hipnoterapeuta"},"sameAs":["https://www.youtube.com/@sabrinafentanes2982"]}
+</script>
+<style>
+/* Layout: one fixed WebGL brain behind the page; the hero is a long sticky "dive" into it,
+   then quiet, wide-spaced chapters float over the brain's interior. Single dark world by choice. */
+:root{
+  --abyss:#050F2E;      /* deepest background */
+  --navy:#0A2561;       /* brand navy, from the logo */
+  --ink:#EEF2FB;        /* pearl text */
+  --mist:#A6B3D3;       /* secondary text */
+  --synapse:#9DB4FF;    /* neural light, accent */
+  --petal:#F2C9BC;      /* the logo's flowers, used rarely */
+  --line:rgba(238,242,251,.13);
+  --surface:rgba(238,242,251,.035);
+  --f-display:"Instrument Serif", "Cormorant Garamond", Georgia, serif;
+  --f-body:"Manrope", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --gut-l:max(16px, env(safe-area-inset-left, 0px));
+  --gut-r:max(16px, env(safe-area-inset-right, 0px));
+  --breath:clamp(120px, 20vh, 240px);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:auto;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--abyss);color:var(--ink);
+  font:400 1.0625rem/1.75 var(--f-body);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--abyss)}
+img{max-width:100%;display:block}
+a{color:inherit}
+::selection{background:var(--synapse);color:var(--abyss)}
+:focus-visible{outline:2px solid var(--synapse);outline-offset:4px;border-radius:4px}
+
+/* ---------- 3D stage ---------- */
+#scene{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;
+  background:radial-gradient(120% 90% at 50% 40%, #0B2462 0%, #071743 45%, var(--abyss) 100%)}
+.veil{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(60% 60% at 50% 50%, rgba(220,230,255,.9), rgba(157,180,255,0) 70%);
+  opacity:0;mix-blend-mode:screen}
+.fallback-brain{display:none}
+.no-webgl .fallback-brain{display:block;position:fixed;left:50%;top:50%;width:min(320px,60vw);transform:translate(-50%,-55%);opacity:.9;z-index:0}
+
+main,header,footer{position:relative;z-index:2}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding-block:18px;padding-left:max(24px, env(safe-area-inset-left,0px));padding-right:max(24px, env(safe-area-inset-right,0px));
+  transition:background .4s ease, padding .4s ease}
+.nav.solid{background:rgba(5,15,46,.86);padding-block:12px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:34px;height:auto}
+.brand b{font:400 1.35rem/1 var(--f-display);letter-spacing:.01em}
+.brand small{display:block;font:500 .62rem/1 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--mist);margin-top:5px}
+.nav ul{display:flex;gap:30px;list-style:none;margin:0;padding:0}
+.nav ul a{text-decoration:none;font-size:.88rem;color:var(--mist);transition:color .2s}
+.nav ul a:hover{color:var(--ink)}
+.btn{white-space:nowrap;display:inline-flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer;
+  font:600 .92rem/1 var(--f-body);letter-spacing:.01em;border-radius:999px;
+  padding:15px 26px;border:1px solid transparent;transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease}
+.btn-solid{background:var(--ink);color:var(--abyss)}
+.btn-solid:hover{background:#fff;transform:translateY(-2px)}
+.btn-ghost{border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--synapse);color:#fff}
+.btn-sm{padding:11px 18px;font-size:.84rem}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* ---------- dive (hero) ---------- */
+.dive{position:relative;height:340vh}
+.dive-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  padding-bottom:calc(118px + env(safe-area-inset-bottom,0px));padding-left:var(--gut-l);padding-right:var(--gut-r)}
+.hero{text-align:center;max-width:980px;will-change:transform,opacity;
+  display:flex;flex-direction:column;align-items:center;gap:20px}
+.eyebrow{font:500 .72rem/1.4 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--synapse)}
+.hero h1{margin:0;font:400 clamp(2.9rem, 6.4vw, 6rem)/.95 var(--f-display);letter-spacing:-.02em;text-wrap:balance;
+  text-shadow:0 2px 40px rgba(5,15,46,.8)}
+.hero h1 em{font-style:italic;color:var(--synapse)}
+.hero p{margin:0;max-width:42ch;font-size:clamp(1rem,1.4vw,1.18rem);line-height:1.6;color:var(--ink);opacity:.86;text-wrap:balance;
+  text-shadow:0 1px 24px rgba(5,15,46,.9)}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.scroll-hint{position:absolute;bottom:calc(28px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  font:500 .66rem/1 var(--f-mono);letter-spacing:.22em;text-transform:uppercase;color:var(--mist)}
+.scroll-hint i{display:block;width:1px;height:48px;background:linear-gradient(var(--synapse),transparent);
+  animation:drip 2.2s cubic-bezier(.6,0,.3,1) infinite;transform-origin:top}
+@keyframes drip{0%{transform:scaleY(0);opacity:1}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+.phrase{position:absolute;left:var(--gut-l);right:var(--gut-r);top:50%;transform:translateY(-50%);
+  text-align:center;margin:0 auto;max-width:900px;opacity:0;pointer-events:none;
+  font:400 clamp(2.2rem,5.8vw,5rem)/1.05 var(--f-display);letter-spacing:-.01em;text-wrap:balance;
+  text-shadow:0 2px 50px rgba(5,15,46,.95)}
+.phrase em{font-style:italic;color:var(--petal)}
+
+/* ---------- depth gauge (brainwave) ---------- */
+.gauge{position:fixed;z-index:40;left:calc(20px + env(safe-area-inset-left,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));
+  display:flex;align-items:center;gap:12px;padding:10px 14px 10px 12px;border-radius:14px;
+  background:rgba(5,15,46,.72);border:1px solid var(--line);font-family:var(--f-mono)}
+.gauge canvas{width:84px;height:26px;display:block}
+.gauge .g-txt{display:flex;flex-direction:column;gap:3px;min-width:96px}
+.gauge .g-hz{font-size:.8rem;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.gauge .g-st{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mist)}
+
+/* ---------- chapters ---------- */
+.chapter{padding-block:var(--breath);padding-left:var(--gut-l);padding-right:var(--gut-r)}
+.wrap{max-width:1180px;margin:0 auto}
+.label{display:flex;align-items:center;gap:14px;font:500 .72rem/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--synapse);margin-bottom:34px}
+.label::before{content:"";width:28px;height:1px;background:currentColor}
+h2{margin:0;font:400 clamp(2.5rem,5.4vw,4.8rem)/1.02 var(--f-display);letter-spacing:-.015em;text-wrap:balance}
+h2 em{font-style:italic;color:var(--synapse)}
+h3{margin:0;font:400 clamp(1.6rem,2.4vw,2.1rem)/1.15 var(--f-display)}
+.lead{font-size:clamp(1.12rem,1.6vw,1.32rem);line-height:1.65;color:var(--ink);max-width:60ch}
+.muted{color:var(--mist)}
+p{margin:0}
+.stack{display:flex;flex-direction:column;gap:24px}
+
+.reveal{transition:opacity 1.1s cubic-bezier(.2,.7,.2,1), transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.js .reveal:not(.in){opacity:.3;transform:translateY(28px)}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(48px,8vw,120px);align-items:center}
+.portrait{position:relative;max-width:460px;justify-self:center;width:100%}
+.portrait .frame{border-radius:240px 240px 24px 24px;overflow:hidden;aspect-ratio:2/3;max-width:100%;
+  box-shadow:0 40px 120px -30px rgba(157,180,255,.35)}
+.portrait .frame img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.portrait::after{content:"";position:absolute;inset:-14px;border:1px solid var(--line);border-radius:254px 254px 34px 34px;pointer-events:none}
+.portrait figcaption{position:absolute;right:-8px;bottom:36px;display:flex;flex-direction:column;gap:4px;
+  background:var(--abyss);border:1px solid var(--line);border-radius:14px;padding:14px 18px}
+.portrait figcaption b{font:400 1.3rem/1 var(--f-display)}
+.portrait figcaption span{font:500 .62rem/1.3 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mist)}
+.bio{display:flex;flex-direction:column;gap:28px;min-width:0}
+.bio p{color:var(--mist);max-width:58ch}
+.bio p.first{color:var(--ink);font-size:1.18rem}
+.quote{margin:12px 0 0;padding:0;font:400 italic clamp(1.6rem,2.6vw,2.2rem)/1.25 var(--f-display);color:var(--ink);text-wrap:balance}
+.quote::before{content:"“";color:var(--petal);margin-right:4px}
+.quote::after{content:"”";color:var(--petal)}
+
+.creds{margin-top:var(--breath);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:48px;border-top:1px solid var(--line);padding-top:56px}
+.creds ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}
+.creds li{padding:22px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
+.creds li b{font-weight:500}
+.creds li span{font:400 .78rem/1.4 var(--f-mono);color:var(--mist);letter-spacing:.02em}
+
+/* what is */
+.center{text-align:center;display:flex;flex-direction:column;align-items:center;gap:32px}
+.center .lead{text-align:center}
+.pillars{margin-top:96px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;text-align:left}
+.pillar{padding:40px 34px;border-top:1px solid var(--synapse);display:flex;flex-direction:column;gap:14px;background:linear-gradient(var(--surface),transparent)}
+.pillar p{color:var(--mist)}
+
+/* process */
+.process{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(40px,7vw,110px);align-items:start}
+.process .sticky{position:sticky;top:120px;display:flex;flex-direction:column;gap:28px}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:64px minmax(0,1fr);gap:20px;padding:44px 0;border-bottom:1px solid var(--line)}
+.steps li:first-child{padding-top:0}
+.steps li::before{content:counter(s, decimal-leading-zero);font:500 .78rem/2.6 var(--f-mono);color:var(--synapse);letter-spacing:.1em}
+.steps li div{display:flex;flex-direction:column;gap:10px}
+.steps p{color:var(--mist);max-width:52ch}
+
+/* benefits */
+.benefits{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:72px;max-width:980px;margin-left:auto;margin-right:auto}
+.chip{display:inline-flex;align-items:center;gap:12px;padding:16px 24px;border:1px solid var(--line);border-radius:999px;font-size:1rem;background:rgba(5,15,46,.55);
+  transition:border-color .3s, transform .3s}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--synapse);box-shadow:0 0 12px var(--synapse);flex:none}
+.chip:nth-child(3n)::before{background:var(--petal);box-shadow:0 0 12px var(--petal)}
+.chip:hover{border-color:var(--synapse);transform:translateY(-3px)}
+.note{margin-top:56px;max-width:62ch;margin-left:auto;margin-right:auto;text-align:center;color:var(--mist);font-size:.98rem}
+
+/* myths */
+.faq{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(40px,7vw,110px)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq details:first-child{border-top:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:30px 0;
+  font:400 clamp(1.35rem,2vw,1.7rem)/1.25 var(--f-display)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .tag{font:500 .62rem/1 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;padding:7px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mist);flex:none}
+.faq summary .q{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.faq summary .plus{width:22px;height:22px;position:relative;flex:none}
+.faq summary .plus::before,.faq summary .plus::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--ink);transition:transform .35s}
+.faq summary .plus::after{transform:rotate(90deg)}
+.faq details[open] .plus::after{transform:rotate(0)}
+.faq details p{padding:0 0 34px;color:var(--mist);max-width:60ch}
+.faq details p b{color:var(--ink);font-weight:500}
+
+/* who */
+.who{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:80px}
+.who article{padding:clamp(32px,4vw,56px);border:1px solid var(--line);border-radius:28px;display:flex;flex-direction:column;gap:22px;background:rgba(5,15,46,.5)}
+.who article.main{background:linear-gradient(160deg, rgba(157,180,255,.14), rgba(5,15,46,.55) 60%);border-color:rgba(157,180,255,.35)}
+.who .kicker{font:500 .68rem/1 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--synapse)}
+.who p{color:var(--mist)}
+.who ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.who li{font-size:.84rem;padding:7px 14px;border-radius:999px;border:1px solid var(--line);color:var(--ink)}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:80px;max-width:980px;margin-left:auto;margin-right:auto}
+.plan{position:relative;padding:clamp(36px,4vw,56px);border-radius:28px;border:1px solid var(--line);display:flex;flex-direction:column;gap:22px;background:rgba(5,15,46,.6)}
+.plan.feat{background:var(--ink);color:var(--abyss);border-color:var(--ink)}
+.plan .badge{position:absolute;top:24px;right:24px;font:500 .62rem/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;padding:8px 12px;border-radius:999px;background:var(--navy);color:var(--ink)}
+.plan .num{font:400 clamp(4rem,8vw,6.2rem)/.9 var(--f-display);letter-spacing:-.03em}
+.plan .num small{font:400 1.3rem/1 var(--f-display);font-style:italic;margin-left:8px;letter-spacing:0}
+.plan dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 18px;font-size:.95rem}
+.plan dt{font:500 .68rem/1.9 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;opacity:.65}
+.plan dd{margin:0}
+.plan p{opacity:.8}
+.plan .btn{align-self:flex-start;margin-top:auto}
+.plan.feat .btn-solid{background:var(--abyss);color:var(--ink)}
+.plan.feat .btn-solid:hover{background:var(--navy)}
+.plans-foot{margin-top:28px;text-align:center;color:var(--mist);font-size:.92rem}
+
+/* contact */
+.contact{text-align:center;display:flex;flex-direction:column;align-items:center;gap:36px}
+.contact h2{font-size:clamp(2.8rem,7vw,6.4rem)}
+.contact .lead{color:var(--mist)}
+.phone{font:500 .9rem/1 var(--f-mono);letter-spacing:.08em;color:var(--mist);user-select:all}
+.yt{margin-top:var(--breath);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:center;text-align:left;
+  border-top:1px solid var(--line);padding-top:56px;max-width:1180px;width:100%}
+.yt p{color:var(--mist);max-width:60ch}
+
+footer{padding-block:48px calc(48px + env(safe-area-inset-bottom,0px));padding-left:var(--gut-l);padding-right:var(--gut-r);border-top:1px solid var(--line);background:var(--abyss)}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center;font-size:.85rem;color:var(--mist)}
+footer a{text-decoration:none}
+footer a:hover{color:var(--ink)}
+
+/* floating whatsapp */
+.wa{position:fixed;z-index:45;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));
+  width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--abyss);
+  box-shadow:0 10px 40px -8px rgba(157,180,255,.6);transition:transform .25s}
+.wa:hover{transform:scale(1.06)}
+.wa svg{width:26px;height:26px}
+
+/* responsive */
+@media (max-width:960px){
+  .nav ul{display:none}
+  .about,.process,.faq,.creds{grid-template-columns:minmax(0,1fr)}
+  .process .sticky{position:static}
+  .pillars{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:680px){
+  .hero h1{font-size:2.7rem}
+  .hero .actions .btn-ghost{display:none}
+  :root{--breath:clamp(96px,14vh,140px)}
+  .brand small{display:none}
+  .creds ul,.who,.plans{grid-template-columns:minmax(0,1fr)}
+  .steps li{grid-template-columns:minmax(0,1fr);gap:8px}
+  .portrait figcaption{right:8px}
+  .yt{grid-template-columns:minmax(0,1fr)}
+  .gauge .g-txt{min-width:0}
+  .gauge canvas{width:56px}
+  .dive{height:280vh}
+}
+@media (prefers-reduced-motion:reduce){
+  .dive{height:auto}
+  .dive-stage{position:relative;height:100svh}
+  .phrase,.veil{display:none}
+  .reveal,.js .reveal:not(.in){opacity:1;transform:none;transition:none}
+  .scroll-hint i{animation:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="scene" aria-hidden="true"></canvas>
+<img class="fallback-brain" src="assets/brain-mark.png" alt="" aria-hidden="true">
+<div class="veil" id="veil" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#topo" aria-label="Sabrina Fentanes, início">
+    <img src="assets/brain-mark.png" alt="">
+    <span><b>Sabrina Fentanes</b><small>Hipnoterapia online</small></span>
+  </a>
+  <nav aria-label="Principal">
+    <ul>
+      <li><a href="#sabrina">Sobre</a></li>
+      <li><a href="#hipnoterapia">Hipnoterapia</a></li>
+      <li><a href="#mitos">Mitos e verdades</a></li>
+      <li><a href="#planos">Sessões</a></li>
+    </ul>
+  </nav>
+  <a class="btn btn-solid btn-sm" href="https://wa.me/34695864531?text=Ol%C3%A1%20Sabrina,%20gostaria%20de%20saber%20mais%20sobre%20a%20hipnoterapia." target="_blank" rel="noopener">Agendar conversa</a>
+</header>
+
+<main id="topo">
+  <!-- 1. Dive -->
+  <section class="dive" id="dive" aria-label="Apresentação">
+    <div class="dive-stage">
+      <div class="hero" id="hero">
+        <span class="eyebrow">Hipnoterapia online · em português</span>
+        <h1>Volte a morar<br>em <em>você</em>.</h1>
+        <p>Supere padrões emocionais e reconquiste sua confiança, onde quer que esteja.</p>
+        <div class="actions">
+          <a class="btn btn-solid" href="#planos">Começar agora</a>
+          <a class="btn btn-ghost" href="#hipnoterapia">O que é hipnoterapia?</a>
+        </div>
+      </div>
+      <p class="phrase" data-from=".24" data-to=".44">Respire.<br><em>Vamos entrar.</em></p>
+      <p class="phrase" data-from=".45" data-to=".65">Aqui moram seus padrões,<br>suas crenças e memórias.</p>
+      <p class="phrase" data-from=".66" data-to=".84">E é aqui que eles podem<br><em>ganhar novo sentido.</em></p>
+      <p class="phrase" data-from=".86" data-to="1.1">Eu sou a Sabrina.<br><em>Vou guiar você daqui.</em></p>
+      <div class="scroll-hint" id="hint"><span>Deslize para entrar</span><i></i></div>
+    </div>
+  </section>
+
+  <!-- 2. Sabrina -->
+  <section class="chapter" id="sabrina">
+    <div class="wrap">
+      <div class="about">
+        <figure class="portrait reveal">
+          <div class="frame"><img src="assets/sabrina.jpg" alt="Sabrina Fentanes sorrindo, de blusa azul-marinho" loading="lazy" width="900" height="1350"></div>
+          <figcaption><b>Sabrina Fentanes</b><span>Hipnoterapeuta</span></figcaption>
+        </figure>
+        <div class="bio reveal">
+          <div class="label">Quem vai caminhar com você</div>
+          <h2>Cuidar das pessoas sempre fez parte da <em>minha história</em>.</h2>
+          <p class="first">Durante muitos anos trabalhei com alimentação saudável, movida pelo desejo de ajudar as pessoas a viverem com mais bem-estar. Com o tempo, percebi que o equilíbrio verdadeiro não envolve apenas o corpo, mas também a mente e as emoções.</p>
+          <p>Hoje vivo fora do Brasil e compreendo de perto os desafios emocionais de morar em outro país: as mudanças internas, a saudade e a busca por pertencimento.</p>
+          <p>Através da hipnoterapia, ofereço um espaço seguro, acolhedor e respeitoso para que você possa acessar suas emoções com mais profundidade, compreender padrões internos e encontrar caminhos para viver com mais leveza.</p>
+          <blockquote class="quote">Meu trabalho é caminhar ao lado de cada pessoa nesse processo de reconexão consigo mesma.</blockquote>
+        </div>
+      </div>
+
+      <div class="creds reveal">
+        <div class="stack">
+          <div class="label">Formação</div>
+          <h3>Uma base ampla, dedicada ao equilíbrio emocional.</h3>
+        </div>
+        <ul>
+          <li><b>Hipnose Clínica Emocional</b><span>Escuela Evolución Consciente · Espanha</span></li>
+          <li><b>Hipnose Clínica</b><span>Universidade Brasileira de Hipnose</span></li>
+          <li><b>Renascimento Bio Flow</b><span>Desenvolvimento emocional</span></li>
+          <li><b>Radiestesia</b><span>Abordagem complementar</span></li>
+          <li><b>Pedagogia</b><span>Graduação</span></li>
+          <li><b>Arquitetura</b><span>Graduação</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. What is -->
+  <section class="chapter" id="hipnoterapia">
+    <div class="wrap center reveal">
+      <div class="label">O que é hipnoterapia</div>
+      <h2>Um estado natural da mente,<br>usado com <em>intenção</em>.</h2>
+      <p class="lead">Sabe quando você está tão concentrado num filme ou numa leitura que quase esquece o que está ao redor? A hipnose é parecida: um estado de foco e relaxamento. Na hipnoterapia, ele é usado de forma ética e estruturada para acessar as camadas onde ficam guardados seus padrões, crenças e comportamentos.</p>
+    </div>
+    <div class="wrap pillars">
+      <div class="pillar reveal"><h3>Sem show, sem truques</h3><p>Nada de palco ou de filme. É um processo sério, cuidadoso e voltado para o seu bem-estar.</p></div>
+      <div class="pillar reveal"><h3>Você no controle</h3><p>Você permanece consciente, lúcido e no controle durante toda a sessão. Ninguém age contra os próprios valores.</p></div>
+      <div class="pillar reveal"><h3>No seu ritmo</h3><p>A condução respeita o seu tempo, a sua história e os limites que você estabelece.</p></div>
+    </div>
+  </section>
+
+  <!-- 4. Process -->
+  <section class="chapter" id="como-funciona">
+    <div class="wrap process">
+      <div class="sticky reveal">
+        <div class="label">Como funciona na prática</div>
+        <h2>Uma sessão, <em>de dentro</em> para fora.</h2>
+        <p class="muted">Online, em português, de 1h a 1h30. Basta um lugar tranquilo e uma conexão estável.</p>
+      </div>
+      <ol class="steps">
+        <li class="reveal"><div><h3>Conversa</h3><p>Começamos entendendo o que você sente, o que se repete na sua vida e o que você deseja transformar.</p></div></li>
+        <li class="reveal"><div><h3>Relaxamento e foco</h3><p>Com orientações de relaxamento e foco da atenção, você entra num estado de concentração interna, sempre consciente.</p></div></li>
+        <li class="reveal"><div><h3>Encontrar a origem</h3><p>Nesse estado fica mais fácil identificar a origem de sintomas como ansiedade, insegurança, medos e padrões repetitivos.</p></div></li>
+        <li class="reveal"><div><h3>Ressignificar</h3><p>Essas experiências ganham um novo sentido, com mais clareza e segurança. As mudanças costumam aparecer de forma progressiva no seu dia a dia.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 5. Benefits -->
+  <section class="chapter" id="beneficios">
+    <div class="wrap center reveal">
+      <div class="label">Onde a hipnoterapia pode ajudar</div>
+      <h2>Para o que pesa <em>por dentro</em>.</h2>
+    </div>
+    <div class="benefits">
+      <span class="chip reveal">Ansiedade e preocupação excessiva</span>
+      <span class="chip reveal">Medos e fobias específicas</span>
+      <span class="chip reveal">Insegurança e baixa autoestima</span>
+      <span class="chip reveal">Autossabotagem</span>
+      <span class="chip reveal">Bloqueios emocionais</span>
+      <span class="chip reveal">Dificuldade de tomar decisões</span>
+      <span class="chip reveal">Adaptação à mudança de país</span>
+      <span class="chip reveal">Dor crônica, como parte de um cuidado integrado</span>
+    </div>
+    <p class="note reveal">Os resultados costumam ser percebidos de forma progressiva, à medida que você integra as mudanças no seu dia a dia.</p>
+  </section>
+
+  <!-- 6. Myths -->
+  <section class="chapter" id="mitos">
+    <div class="wrap faq">
+      <div class="stack reveal">
+        <div class="label">Mitos e verdades</div>
+        <h2>Hipnose é <em>segura</em>?</h2>
+        <p class="muted">Sim. A hipnose terapêutica é um processo natural e seguro. Abaixo, as dúvidas que mais aparecem antes da primeira sessão.</p>
+      </div>
+      <div class="reveal">
+        <details open>
+          <summary><span class="q"><span class="tag">Mito</span>“Eu vou apagar e perder a consciência.”</span><span class="plus"></span></summary>
+          <p>Você <b>não apaga</b>. Entra num estado de atenção focada que permite acessar emoções e padrões internos com mais clareza, e lembra do que acontece.</p>
+        </details>
+        <details>
+          <summary><span class="q"><span class="tag">Mito</span>“Podem me fazer agir contra a minha vontade.”</span><span class="plus"></span></summary>
+          <p>A hipnose <b>não faz ninguém agir contra seus valores</b>. Você permanece no controle o tempo todo, e o processo respeita os limites que você estabelece.</p>
+        </details>
+        <details>
+          <summary><span class="q"><span class="tag">Verdade</span>“É um estado natural da mente.”</span><span class="plus"></span></summary>
+          <p>É o mesmo foco que você sente quando se perde numa leitura ou num filme. Na hipnoterapia, ele é <b>usado de forma intencional</b>, dentro de um processo terapêutico estruturado.</p>
+        </details>
+        <details>
+          <summary><span class="q"><span class="tag">Verdade</span>“Funciona por vídeo, a distância.”</span><span class="plus"></span></summary>
+          <p>A condução acontece por meio de conversa e orientação de foco. Por isso as sessões funcionam online: você só precisa de <b>um lugar tranquilo</b> onde possa ficar à vontade.</p>
+        </details>
+        <details>
+          <summary><span class="q"><span class="tag">Mito</span>“É mágica.”</span><span class="plus"></span></summary>
+          <p>Não é mágica. É uma <b>ferramenta profunda de autoconhecimento e transformação</b>, conduzida de forma responsável e profissional.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Who -->
+  <section class="chapter" id="quem">
+    <div class="wrap">
+      <div class="center reveal">
+        <div class="label">Quem eu ajudo</div>
+        <h2>Longe de casa,<br><em>perto de si</em>.</h2>
+      </div>
+      <div class="who">
+        <article class="main reveal">
+          <span class="kicker">Brasileiros no exterior</span>
+          <h3>Para quem vive fora e sente falta de um espaço para se cuidar em português.</h3>
+          <p>Em meio às mudanças, às adaptações e à saudade, muitas vezes falta um lugar para se reconectar consigo mesmo e encontrar equilíbrio emocional.</p>
+          <ul><li>Saudade</li><li>Pertencimento</li><li>Adaptação</li><li>Solidão</li></ul>
+        </article>
+        <article class="reveal">
+          <span class="kicker">Brasileiros no Brasil</span>
+          <h3>Para quem quer entender e transformar padrões que se repetem.</h3>
+          <p>Também acompanho quem vive no Brasil e busca mais clareza, leveza e bem-estar diante de padrões emocionais que impactam a vida.</p>
+          <ul><li>Clareza</li><li>Leveza</li><li>Autoconfiança</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Plans -->
+  <section class="chapter" id="planos">
+    <div class="wrap center reveal">
+      <div class="label">Sessões</div>
+      <h2>Escolha como<br>quer <em>começar</em>.</h2>
+    </div>
+    <div class="plans">
+      <article class="plan reveal">
+        <div class="num">01<small>sessão</small></div>
+        <p>Sessão individual de hipnoterapia online. Ideal para conhecer o processo e sentir como ele funciona para você.</p>
+        <dl><dt>Formato</dt><dd>Online, por vídeo</dd><dt>Duração</dt><dd>1h a 1h30</dd><dt>Idioma</dt><dd>Português</dd></dl>
+        <a class="btn btn-solid" href="https://wa.me/34695864531?text=Ol%C3%A1%2C%20quero%20fazer%201%20sess%C3%A3o." target="_blank" rel="noopener">Agendar sessão</a>
+      </article>
+      <article class="plan feat reveal">
+        <span class="badge">Processo completo</span>
+        <div class="num">04<small>sessões</small></div>
+        <p>Pacote com 4 sessões de hipnoterapia online, para trabalhar um tema com continuidade e integrar as mudanças no dia a dia.</p>
+        <dl><dt>Formato</dt><dd>Online, por vídeo</dd><dt>Duração</dt><dd>1h a 1h30 cada</dd><dt>Idioma</dt><dd>Português</dd></dl>
+        <a class="btn btn-solid" href="https://wa.me/34695864531?text=Ol%C3%A1%2C%20quero%20fazer%20o%20pacote%20com%204%20sess%C3%B5es." target="_blank" rel="noopener">Quero o pacote</a>
+      </article>
+    </div>
+    <p class="plans-foot reveal">Valores e horários pelo WhatsApp.</p>
+  </section>
+
+  <!-- 9. Contact -->
+  <section class="chapter" id="contato">
+    <div class="wrap contact">
+      <div class="label reveal">Fale comigo</div>
+      <h2 class="reveal">Às vezes, tudo começa<br>com <em>uma conversa</em>.</h2>
+      <p class="lead reveal">Se você tiver dúvidas ou quiser entender melhor o processo, fale comigo diretamente pelo WhatsApp. Vou ficar feliz em ouvir você.</p>
+      <a class="btn btn-solid reveal" href="https://wa.me/34695864531?text=Ol%C3%A1%20Sabrina,%20gostaria%20de%20saber%20mais%20sobre%20a%20hipnoterapia." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm5.8 14.03c-.24.68-1.42 1.3-1.95 1.34-.5.05-.97.23-3.27-.68-2.77-1.09-4.52-3.92-4.66-4.1-.13-.18-1.11-1.48-1.11-2.82 0-1.34.7-2 .95-2.27.25-.27.54-.34.72-.34h.52c.17 0 .4-.06.62.48.24.56.8 1.94.87 2.08.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.27.71 1.17 1.52 1.9 1.05.93 1.93 1.22 2.2 1.36.27.14.43.11.59-.07.16-.18.68-.79.86-1.07.18-.27.36-.23.61-.14.25.09 1.59.75 1.86.89.27.14.45.2.52.32.07.11.07.66-.17 1.34Z"/></svg>
+        Falar comigo no WhatsApp
+      </a>
+      <span class="phone reveal">+34 695 86 45 31</span>
+
+      <div class="yt reveal">
+        <div class="stack">
+          <div class="label" style="margin-bottom:0">Conteúdos para sua jornada</div>
+          <p>No meu canal do YouTube eu falo sobre emoções, autoconhecimento e temas que ajudam você a compreender melhor a si mesmo.</p>
+        </div>
+        <a class="btn btn-ghost" href="https://www.youtube.com/@sabrinafentanes2982" target="_blank" rel="noopener">Assistir no YouTube</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#topo"><img src="assets/brain-mark.png" alt=""><b>Sabrina Fentanes</b></a>
+    <span>Hipnoterapia online para brasileiros no Brasil e no exterior.</span>
+    <span>© <span id="yr">2026</span></span>
+  </div>
+</footer>
+
+<aside class="gauge" id="gauge" aria-label="Profundidade do estado mental">
+  <canvas id="wave" width="168" height="52"></canvas>
+  <div class="g-txt"><span class="g-hz" id="gHz">β · 18 Hz</span><span class="g-st" id="gSt">Vigília</span></div>
+</aside>
+
+<a class="wa" href="https://wa.me/34695864531?text=Ol%C3%A1%20Sabrina,%20gostaria%20de%20saber%20mais%20sobre%20a%20hipnoterapia." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm5.8 14.03c-.24.68-1.42 1.3-1.95 1.34-.5.05-.97.23-3.27-.68-2.77-1.09-4.52-3.92-4.66-4.1-.13-.18-1.11-1.48-1.11-2.82 0-1.34.7-2 .95-2.27.25-.27.54-.34.72-.34h.52c.17 0 .4-.06.62.48.24.56.8 1.94.87 2.08.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.27.71 1.17 1.52 1.9 1.05.93 1.93 1.22 2.2 1.36.27.14.43.11.59-.07.16-.18.68-.79.86-1.07.18-.27.36-.23.61-.14.25.09 1.59.75 1.86.89.27.14.45.2.52.32.07.11.07.66-.17 1.34Z"/></svg>
+</a>
+
+<!-- Page logic: scroll progress, reveals, brainwave gauge. Runs even if WebGL is unavailable. -->
+<script>
+(function(){
+  var root=document.documentElement; root.classList.add('js');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var SF=window.SF={p:0,g:0,mx:0,my:0,reduce:reduce};
+  var dive=document.getElementById('dive'), hero=document.getElementById('hero'), hint=document.getElementById('hint');
+  var veil=document.getElementById('veil'), nav=document.getElementById('nav');
+  var phrases=[].slice.call(document.querySelectorAll('.phrase'));
+  var diveLen=1, maxS=1;
+  function clamp(v){return v<0?0:v>1?1:v}
+  function ss(a,b,x){x=clamp((x-a)/(b-a));return x*x*(3-2*x)}
+  function measure(){diveLen=Math.max(1,dive.offsetHeight-innerHeight);maxS=Math.max(1,root.scrollHeight-innerHeight);update()}
+  function update(){
+    var y=scrollY; SF.p=clamp(y/diveLen); SF.g=clamp(y/maxS);
+    nav.classList.toggle('solid', SF.p>=1);
+    if(reduce) return;
+    var p=SF.p;
+    var h=1-ss(.02,.2,p);
+    hero.style.opacity=h; hero.style.transform='translateY('+(-p*160)+'px) scale('+(1-p*.25)+')';
+    hero.style.visibility=h<.01?'hidden':'visible';
+    hint.style.opacity=1-ss(0,.06,p);
+    phrases.forEach(function(el){
+      var a=+el.dataset.from,b=+el.dataset.to,m=(a+b)/2;
+      var o=ss(a,a+.07,p)*(1-ss(b-.07,b,p));
+      el.style.opacity=o; el.style.transform='translateY(calc(-50% + '+((m-p)*140)+'px)) scale('+(1+(p-m)*.35)+')';
+    });
+    veil.style.opacity=ss(.8,.86,p)*(1-ss(.86,.93,p))*.4;
+  }
+  addEventListener('scroll',update,{passive:true});
+  addEventListener('resize',measure);
+  addEventListener('load',measure);
+  addEventListener('pointermove',function(e){SF.mx=e.clientX/innerWidth*2-1;SF.my=e.clientY/innerHeight*2-1},{passive:true});
+  measure();
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  // Gentle reveal from a visible resting state
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+  } else document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in')});
+
+  // Brainwave gauge: the deeper you scroll, the slower the wave (beta -> alpha -> theta)
+  var cv=document.getElementById('wave'),cx=cv.getContext('2d'),hz=document.getElementById('gHz'),st=document.getElementById('gSt');
+  var phase=0,last=performance.now(),shownHz=-1;
+  function bands(d){ // d: 0..1 depth
+    var f=18-13*d; // 18 Hz -> 5 Hz
+    var s=f>=13?['β','Vigília']:f>=8?['α','Relaxamento']:['θ','Foco interno'];
+    return {f:f,sym:s[0],name:s[1]};
+  }
+  function draw(now){
+    var dt=Math.min(.05,(now-last)/1000); last=now;
+    var d=ss(0,.6,SF.g*.35+SF.p*.65); var b=bands(d);
+    var r=Math.round(b.f); if(r!==shownHz){shownHz=r;hz.textContent=b.sym+' · '+r+' Hz';st.textContent=b.name}
+    if(!reduce) phase+=dt*b.f*.55;
+    var w=cv.width,h=cv.height; cx.clearRect(0,0,w,h);
+    cx.lineWidth=2.2; cx.strokeStyle=d>.62?'#F2C9BC':'#9DB4FF'; cx.beginPath();
+    var cyc=1.2+b.f*.22, amp=h*(.16+.22*d);
+    for(var x=0;x<=w;x+=2){var t=x/w; var yv=h/2+Math.sin(t*cyc*6.283+phase)*amp*Math.sin(t*3.1416); x?cx.lineTo(x,yv):cx.moveTo(x,yv)}
+    cx.stroke(); requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
+
+<!-- 3D brain -->
+<script type="module">
+import * as THREE from './assets/three.module.min.js';
+
+const SF = window.SF || {p:0,g:0,mx:0,my:0};
+const canvas = document.getElementById('scene');
+const small = matchMedia('(max-width: 720px)').matches;
+let renderer;
+try{
+  renderer = new THREE.WebGLRenderer({canvas, antialias:false, alpha:true, powerPreference:'high-performance'});
+}catch(e){ document.documentElement.classList.add('no-webgl'); throw e; }
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+renderer.setClearColor(0x000000, 0);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(small ? 52 : 38, innerWidth/innerHeight, 0.01, 60);
+const brain = new THREE.Group(); scene.add(brain);
+
+/* ---------- procedural brain ---------- */
+let seed = 7;
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+function hash(x,y,z){ const h = Math.sin(x*127.1 + y*311.7 + z*74.7) * 43758.5453; return h - Math.floor(h); }
+function vnoise(x,y,z){
+  const xi=Math.floor(x), yi=Math.floor(y), zi=Math.floor(z);
+  const xf=x-xi, yf=y-yi, zf=z-zi;
+  const u=xf*xf*(3-2*xf), v=yf*yf*(3-2*yf), w=zf*zf*(3-2*zf);
+  const L=(a,b,t)=>a+(b-a)*t;
+  return L(
+    L(L(hash(xi,yi,zi),hash(xi+1,yi,zi),u), L(hash(xi,yi+1,zi),hash(xi+1,yi+1,zi),u), v),
+    L(L(hash(xi,yi,zi+1),hash(xi+1,yi,zi+1),u), L(hash(xi,yi+1,zi+1),hash(xi+1,yi+1,zi+1),u), v), w) * 2 - 1;
+}
+const fbm = (x,y,z) => vnoise(x,y,z)*.62 + vnoise(x*2.03+5.1,y*2.03,z*2.03)*.28 + vnoise(x*4.1,y*4.1+3.3,z*4.1)*.1;
+function randDir(){ const z=rnd()*2-1, a=rnd()*Math.PI*2, r=Math.sqrt(1-z*z); return [r*Math.cos(a), z, r*Math.sin(a)]; }
+
+const N = small ? 15000 : 30000;
+const pos = new Float32Array(N*3), rand = new Float32Array(N), kind = new Float32Array(N);
+let n = 0;
+function push(x,y,z,k){ if(n>=N) return; pos[n*3]=x; pos[n*3+1]=y; pos[n*3+2]=z; rand[n]=rnd(); kind[n]=k; n++; }
+
+// cortex: two hemispheres, points gather on gyri crests so the folds read as lines
+const cortexN = Math.floor(N*.8);
+let guard = 0;
+while(n < cortexN && guard++ < N*60){
+  const u = randDir(), h = rnd()<.5 ? -1 : 1;
+  const inner = u[0]*h < 0;
+  const cx = h*.25;
+  let x = cx + u[0]*(inner ? .23 : .66);
+  let y = u[1]*.74; if(u[1] < -.2) y *= .8;
+  let z = u[2]*1.08;
+  x = cx + (x-cx)*(1 - .12*Math.max(0,u[2]));          // narrower frontal lobe
+  if(!inner && u[1] < .1 && u[1] > -.75 && u[2] > -.3)  // temporal lobe bulge
+    x += h*.05*Math.sin((u[1]+.75)/.85*Math.PI);
+  const nz = fbm(x*3.1+h*9, y*3.1, z*3.1);
+  const ridge = 1 - Math.abs(nz);
+  const pAccept = Math.pow(ridge, 10) * (inner ? .45 : 1) + .035;
+  if(rnd() > pAccept) continue;
+  const bump = 1 + nz*.04;
+  push(cx + (x-cx)*bump, y*bump, z*bump, 0);
+}
+// cerebellum with foliae
+const cbN = cortexN + Math.floor(N*.1);
+guard = 0;
+while(n < cbN && guard++ < N*40){
+  const u = randDir();
+  if(u[1] > .35) continue;
+  const x = u[0]*.6, y = -.5 + u[1]*.27, z = -.66 + u[2]*.36;
+  const f = Math.abs(Math.sin(y*68 + vnoise(x*4,y*4,z*4)*2.2));
+  if(rnd() > Math.pow(f,6)*.9 + .05) continue;
+  push(x*(1 - .25*Math.max(0,-u[1])) , y, z, 1);
+}
+// brainstem
+const bsN = cbN + Math.floor(N*.025);
+while(n < bsN){
+  const t = rnd(), a = rnd()*Math.PI*2, r = .12 - t*.03;
+  push(Math.cos(a)*r, -.42 - t*.62, -.3 + Math.sin(a)*r*.9 - t*.08, 2);
+}
+// interior glow
+while(n < N){
+  const u = randDir(), r = Math.cbrt(rnd());
+  push(u[0]*.8*r, u[1]*.6*r, u[2]*1.0*r, 3);
+}
+
+const geo = new THREE.BufferGeometry();
+geo.setAttribute('position', new THREE.BufferAttribute(pos,3));
+geo.setAttribute('aRand', new THREE.BufferAttribute(rand,1));
+geo.setAttribute('aKind', new THREE.BufferAttribute(kind,1));
+
+const uniforms = {
+  uTime:{value:0}, uPR:{value:renderer.getPixelRatio()}, uSize:{value: small ? 30 : 34},
+  uDive:{value:0}, uDim:{value:1}
+};
+const pointMat = new THREE.ShaderMaterial({
+  uniforms, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+  vertexShader:`
+    uniform float uTime,uPR,uSize,uDive;
+    attribute float aRand,aKind;
+    varying float vA; varying vec3 vC;
+    void main(){
+      vec3 p = position;
+      p *= 1.0 + 0.012*sin(uTime*0.9 + aRand*6.28);                       // breathing
+      float spread = smoothstep(0.45,1.0,uDive);
+      p += normalize(p+vec3(0.0001)) * spread * (0.25 + aRand*1.6);        // opens as we enter
+      vec4 mv = modelViewMatrix * vec4(p,1.0);
+      float d = -mv.z;
+      float big = step(0.955, aRand);                                       // a few "flowers"
+      float s = uSize * (aKind>2.5 ? 0.55 : 1.0) * (0.55 + aRand*0.6 + big*1.4);
+      gl_PointSize = min(s * uPR / d, 26.0*uPR);
+      gl_Position = projectionMatrix * mv;
+      float sig = sin(dot(position, vec3(0.55,0.8,0.35))*7.0 - uTime*1.5 + aRand*0.6);
+      float spark = pow(max(sig,0.0), 22.0);
+      float tw = 0.7 + 0.3*sin(uTime*(0.8+aRand*2.2) + aRand*40.0);
+      vec3 pearl = vec3(0.92,0.95,1.0), syn = vec3(0.58,0.69,1.0), petal = vec3(1.0,0.79,0.73);
+      vC = mix(pearl, syn, smoothstep(0.35,0.95,aRand));
+      vC = mix(vC, petal, big);
+      vC += spark * vec3(0.55,0.65,1.0) * 1.6;
+      vA = (aKind>2.5 ? 0.35 : 0.85) * tw * smoothstep(0.04, 0.5, d);
+    }`,
+  fragmentShader:`
+    uniform float uDim;
+    varying float vA; varying vec3 vC;
+    void main(){
+      vec2 c = gl_PointCoord - 0.5; float r = length(c);
+      float a = smoothstep(0.5, 0.0, r); a *= a;
+      gl_FragColor = vec4(vC, a * vA * uDim);
+    }`
+});
+const points = new THREE.Points(geo, pointMat);
+brain.add(points);
+
+/* ---------- synapses: short links between nearby cortex points ---------- */
+const L = small ? 500 : 1100;
+const lp = new Float32Array(L*6), lt = new Float32Array(L*2), lr = new Float32Array(L*2);
+let m = 0;
+for(let i=0; i<L*4 && m<L; i++){
+  const a = Math.floor(rnd()*cortexN);
+  let best=-1, bd=1e9;
+  for(let k=0;k<36;k++){
+    const b = Math.floor(rnd()*cortexN); if(b===a) continue;
+    const dx=pos[a*3]-pos[b*3], dy=pos[a*3+1]-pos[b*3+1], dz=pos[a*3+2]-pos[b*3+2];
+    const d=dx*dx+dy*dy+dz*dz; if(d<bd && d>.0016){bd=d;best=b}
+  }
+  if(best<0 || bd>.06) continue;
+  lp.set([pos[a*3],pos[a*3+1],pos[a*3+2],pos[best*3],pos[best*3+1],pos[best*3+2]], m*6);
+  lt[m*2]=0; lt[m*2+1]=1; const r=rnd(); lr[m*2]=r; lr[m*2+1]=r; m++;
+}
+const lgeo = new THREE.BufferGeometry();
+lgeo.setAttribute('position', new THREE.BufferAttribute(lp.subarray(0,m*6),3));
+lgeo.setAttribute('aT', new THREE.BufferAttribute(lt.subarray(0,m*2),1));
+lgeo.setAttribute('aR', new THREE.BufferAttribute(lr.subarray(0,m*2),1));
+const lineMat = new THREE.ShaderMaterial({
+  uniforms, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+  vertexShader:`
+    uniform float uDive;
+    attribute float aT,aR; varying float vT,vR;
+    void main(){ vT=aT; vR=aR;
+      vec3 p = position + normalize(position+vec3(0.0001))*smoothstep(0.45,1.0,uDive)*(0.25+aR*1.6);
+      gl_Position = projectionMatrix*modelViewMatrix*vec4(p,1.0); }`,
+  fragmentShader:`
+    uniform float uTime,uDim; varying float vT,vR;
+    void main(){
+      float x = fract(uTime*0.22 + vR*7.0);
+      float pulse = exp(-pow((vT - x)*7.0, 2.0));
+      gl_FragColor = vec4(vec3(0.65,0.75,1.0), (0.05 + pulse*0.55) * uDim);
+    }`
+});
+brain.add(new THREE.LineSegments(lgeo, lineMat));
+
+/* ---------- drifting motes around and beyond the brain (the logo's little bubbles) ---------- */
+const D = small ? 900 : 1800;
+const dp = new Float32Array(D*3), dr = new Float32Array(D), dk = new Float32Array(D).fill(3);
+for(let i=0;i<D;i++){
+  const u = randDir(), r = 1.5 + Math.pow(rnd(),.7)*7;
+  dp[i*3]=u[0]*r; dp[i*3+1]=u[1]*r*.8; dp[i*3+2]=u[2]*r - 2; dr[i]=rnd();
+}
+const dgeo = new THREE.BufferGeometry();
+dgeo.setAttribute('position', new THREE.BufferAttribute(dp,3));
+dgeo.setAttribute('aRand', new THREE.BufferAttribute(dr,1));
+dgeo.setAttribute('aKind', new THREE.BufferAttribute(dk,1));
+const dust = new THREE.Points(dgeo, pointMat);
+scene.add(dust);
+
+/* ---------- motion ---------- */
+const ease = t => t<.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+let sp = 0, sg = 0, mx = 0, my = 0, t0 = performance.now(), running = true;
+const reduce = SF.reduce;
+
+function resize(){
+  const w = innerWidth, h = innerHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w/h;
+  camera.fov = w < 720 ? 52 : 38;
+  camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize); resize();
+document.addEventListener('visibilitychange', () => { running = !document.hidden; if(running) requestAnimationFrame(frame); });
+
+function frame(now){
+  if(!running) return;
+  const t = (now - t0)/1000;
+  sp += (SF.p - sp) * (reduce ? 1 : .075);
+  sg += (SF.g - sg) * (reduce ? 1 : .075);
+  mx += (SF.mx - mx) * .04; my += (SF.my - my) * .04;
+  const e = ease(sp);
+  const far = camera.aspect < .8 ? 6.2 : 6.0;
+
+  uniforms.uTime.value = reduce ? 2 : t;
+  uniforms.uDive.value = sp;
+  // after the dive, dim the interior so the chapters stay readable
+  uniforms.uDim.value = 1 - .55*THREE.MathUtils.smoothstep(sp, .8, 1);
+
+  const after = Math.max(0, sg - .12);
+  camera.position.set(mx*.18*(1-e*.6), .32*(1-e) - my*.12, far + (0.12 - far)*e - after*1.6);
+  camera.lookAt(0, .02*(1-e), -2*e);
+
+  const sway = reduce ? 0 : Math.sin(t*.17)*.3;
+  brain.rotation.y = (-1.25 + sway)*(1-e) + after*2.2;   // side profile, turning to face us as we enter
+  brain.rotation.x = .12*(1-e) + after*.4;
+  brain.position.y = (camera.aspect < .8 ? .55 : .72)*(1-e);
+  dust.rotation.y = t*.01 + sg*.8;
+
+  renderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
