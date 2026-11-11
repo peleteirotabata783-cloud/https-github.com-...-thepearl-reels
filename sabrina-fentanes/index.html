@@ -116,7 +116,7 @@ main,header,footer{position:relative;z-index:2}
 .hero-top{position:absolute;left:0;right:0;top:calc(108px + env(safe-area-inset-top,0px));text-align:center;padding-left:var(--gut-l);padding-right:var(--gut-r)}
 
 /* ---------- synapse interludes ---------- */
-.synapse{position:relative;height:135vh;z-index:2}
+.synapse{position:relative;height:160vh;z-index:2}
 .syn-stage{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center;
   padding-left:var(--gut-l);padding-right:var(--gut-r);pointer-events:none}
 .syn-copy{max-width:920px;display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center;will-change:transform,opacity}
@@ -331,7 +331,7 @@ footer a:hover{color:var(--ink)}
   .hero h1{font-size:2.7rem}
   .hero .actions .btn-ghost{display:none}
   :root{--breath:clamp(56px,9vh,88px)}
-  .synapse{height:125vh}
+  .synapse{height:150vh}
   .faq-list summary{grid-template-columns:32px minmax(0,1fr) 20px;gap:10px;padding:24px 0}
   .faq-list details p{padding-left:42px}
   .helps{margin-top:48px}
@@ -581,16 +581,19 @@ footer a:hover{color:var(--ink)}
   function clamp(v){return v<0?0:v>1?1:v}
   function ss(a,b,x){x=clamp((x-a)/(b-a));return x*x*(3-2*x)}
   function measure(){diveLen=Math.max(1,dive.offsetHeight-innerHeight);maxS=Math.max(1,root.scrollHeight-innerHeight);
-    syns.forEach(function(el,i){synTop[i]=el.getBoundingClientRect().top+scrollY;synLen[i]=Math.max(1,el.offsetHeight-innerHeight)});update()}
+    syns.forEach(function(el,i){synTop[i]=el.getBoundingClientRect().top+scrollY;synLen[i]=Math.max(1,el.offsetHeight)});update()}
   function update(){
     var y=scrollY; SF.p=clamp(y/diveLen); SF.g=clamp(y/maxS);
     nav.classList.toggle('solid', SF.p>=1);
     var tr=0, foc=0; syns.forEach(function(el,i){
-      var q=clamp((y-synTop[i])/synLen[i]); tr+=q; foc=Math.max(foc,Math.sin(Math.PI*q));
+      // q runs from the moment the interlude enters at the bottom until it has fully passed
+      var vh=innerHeight, top=synTop[i]-y, bot=top+synLen[i];
+      var q=clamp((vh-top)/synLen[i]); tr+=q; foc=Math.max(foc,Math.sin(Math.PI*q));
       if(reduce) return;
-      var c=el.firstElementChild.firstElementChild, o=ss(.04,.16,q)*(1-ss(.74,.92,q));
-      c.style.opacity=o; c.style.transform='translateY('+((.5-q)*70)+'px)';
-      c.style.setProperty('--e', ss(.05,.34,q).toFixed(3));
+      var c=el.firstElementChild.firstElementChild;
+      var o=ss(vh*.92,vh*.45,top)*(1-ss(vh*.75,vh*.38,bot));
+      c.style.opacity=o.toFixed(3); c.style.transform='';
+      c.style.setProperty('--e', ss(vh*.95,vh*.3,top).toFixed(3));
     });
     SF.track=tr;
     scrim.style.opacity=(ss(.88,1,SF.p)*(1-foc*.55)).toFixed(3);
@@ -882,9 +885,9 @@ const neuronPts = new THREE.Points(ngeo, new THREE.ShaderMaterial({
         sig = (exp(-pow((aS-head)*16.0,2.0)) + 0.35*step(aS,head)*exp(-(head-aS)*6.0)) * smoothstep(0.0,0.1,head)*(1.0-smoothstep(0.86,1.0,head));
       float wave = (aType>0.5 && aType<1.5) ? pow(max(sin(aS*9.0-uTime*3.0),0.0),10.0)*(0.3+arrive) : 0.0;
       float base = aType<0.5 ? 1.0 : (aType<1.5 ? 0.5 : 0.26);
-      float b = base*(0.5+0.9*arrive) + sig*2.4 + wave*0.9;
-      float sz = uSize*(aType<0.5 ? 1.1 : 0.55)*(0.6+aRand*0.7)*(1.0+sig*1.8);
-      gl_PointSize = min(sz*uPR/d, 30.0*uPR);
+      float b = base*(0.5+0.9*arrive) + sig*1.6 + wave*0.9;
+      float sz = uSize*(aType<0.5 ? 1.1 : 0.55)*(0.6+aRand*0.7)*(1.0+sig*0.6);
+      gl_PointSize = min(sz*uPR/d, (aType>1.5 ? 12.0 : 30.0)*uPR);
       gl_Position = projectionMatrix*mv;
       vec3 pearl=vec3(0.92,0.95,1.0), syn=vec3(0.58,0.69,1.0), petal=vec3(1.0,0.79,0.73);
       vC = mix(syn, pearl, aType<0.5 ? 0.8 : aRand*0.5);
