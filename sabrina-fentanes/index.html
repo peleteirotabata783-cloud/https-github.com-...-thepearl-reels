@@ -35,7 +35,7 @@
   --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --gut-l:max(16px, env(safe-area-inset-left, 0px));
   --gut-r:max(16px, env(safe-area-inset-right, 0px));
-  --breath:clamp(96px, 15vh, 180px);
+  --breath:clamp(64px, 10vh, 120px);
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -57,6 +57,8 @@ a{color:inherit}
 .veil{position:fixed;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(60% 60% at 50% 50%, rgba(220,230,255,.9), rgba(157,180,255,0) 70%);
   opacity:0;mix-blend-mode:screen}
+.scrim{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;
+  background:radial-gradient(90% 75% at 50% 50%, rgba(5,15,46,.82), rgba(5,15,46,.55) 70%, rgba(5,15,46,.4))}
 .fallback-brain{display:none}
 .no-webgl .fallback-brain{display:block;position:fixed;left:50%;top:50%;width:min(320px,60vw);transform:translate(-50%,-55%);opacity:.9;z-index:0}
 
@@ -86,7 +88,7 @@ main,header,footer{position:relative;z-index:2}
 .btn svg{width:18px;height:18px;flex:none}
 
 /* ---------- dive (hero) ---------- */
-.dive{position:relative;height:340vh}
+.dive{position:relative;height:300vh}
 .dive-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
   display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
   padding-bottom:calc(118px + env(safe-area-inset-bottom,0px));padding-left:var(--gut-l);padding-right:var(--gut-r)}
@@ -114,16 +116,16 @@ main,header,footer{position:relative;z-index:2}
 .hero-top{position:absolute;left:0;right:0;top:calc(108px + env(safe-area-inset-top,0px));text-align:center;padding-left:var(--gut-l);padding-right:var(--gut-r)}
 
 /* ---------- synapse interludes ---------- */
-.synapse{position:relative;height:200vh;z-index:2}
+.synapse{position:relative;height:135vh;z-index:2}
 .syn-stage{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center;
   padding-left:var(--gut-l);padding-right:var(--gut-r);pointer-events:none}
 .syn-copy{max-width:920px;display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center;will-change:transform,opacity}
 .syn-k{display:flex;align-items:center;gap:12px;font:500 .72rem/1 var(--f-mono);letter-spacing:.22em;text-transform:uppercase;color:var(--petal)}
 .syn-k i{display:block;width:48px;height:1px;background:linear-gradient(90deg,var(--petal),var(--synapse))}
-.syn-t{font:400 clamp(2.5rem,6.2vw,5.6rem)/1.04 var(--f-display);letter-spacing:-.015em;text-wrap:balance;text-shadow:0 2px 50px rgba(5,15,46,.95)}
+.syn-t{font:400 clamp(2.5rem,6.2vw,5.6rem)/1.04 var(--f-display);letter-spacing:-.015em;text-wrap:balance;text-shadow:0 0 3px rgba(5,15,46,.9),0 2px 24px rgba(5,15,46,.95),0 0 60px rgba(5,15,46,.9)}
 .syn-t em{font-style:italic;color:var(--synapse)}
-.syn-s{max-width:44ch;font:400 clamp(1.08rem,1.5vw,1.3rem)/1.6 var(--f-body);color:var(--ink);text-wrap:balance;text-shadow:0 1px 24px rgba(5,15,46,.95)}
-.chapter p,.chapter li,.chapter h2,.chapter h3{text-shadow:0 1px 22px rgba(5,15,46,.85)}
+.syn-s{max-width:44ch;font:400 clamp(1.08rem,1.5vw,1.3rem)/1.6 var(--f-body);color:var(--ink);text-wrap:balance;text-shadow:0 0 2px rgba(5,15,46,.95),0 1px 18px rgba(5,15,46,.95)}
+.chapter p,.chapter li,.chapter h2,.chapter h3,.chapter .label,.faq-list .qt{text-shadow:0 0 2px rgba(5,15,46,.9),0 2px 18px rgba(5,15,46,.95),0 0 40px rgba(5,15,46,.8)}
 .plan.feat *{text-shadow:none}
 
 /* ---------- depth gauge (brainwave) ---------- */
@@ -138,7 +140,7 @@ main,header,footer{position:relative;z-index:2}
 /* ---------- chapters ---------- */
 .chapter{padding-block:var(--breath);padding-left:var(--gut-l);padding-right:var(--gut-r)}
 .wrap{max-width:1180px;margin:0 auto}
-.label{display:flex;align-items:center;gap:14px;font:500 .72rem/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--synapse);margin-bottom:34px}
+.label{display:flex;align-items:center;gap:14px;font:500 .72rem/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--synapse);margin-bottom:22px}
 .label::before{content:"";width:28px;height:1px;background:currentColor}
 h2{margin:0;font:400 clamp(2.5rem,5.4vw,4.8rem)/1.02 var(--f-display);letter-spacing:-.015em;text-wrap:balance}
 h2 em{font-style:italic;color:var(--synapse)}
@@ -162,7 +164,7 @@ p{margin:0}
   background:var(--abyss);border:1px solid var(--line);border-radius:14px;padding:14px 18px}
 .portrait figcaption b{font:400 1.3rem/1 var(--f-display)}
 .portrait figcaption span{font:500 .62rem/1.3 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mist)}
-.bio{display:flex;flex-direction:column;gap:28px;min-width:0}
+.bio{display:flex;flex-direction:column;gap:20px;min-width:0}
 .bio p{color:var(--mist);max-width:58ch}
 .bio p.first{color:var(--ink);font-size:1.18rem}
 .quote{margin:12px 0 0;padding:0;font:400 italic clamp(1.6rem,2.6vw,2.2rem)/1.25 var(--f-display);color:var(--ink);text-wrap:balance}
@@ -176,7 +178,7 @@ p{margin:0}
 .creds li span{font:400 .78rem/1.4 var(--f-mono);color:var(--mist);letter-spacing:.02em}
 
 /* what is */
-.center{text-align:center;display:flex;flex-direction:column;align-items:center;gap:32px}
+.center{text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px}
 .center .lead{text-align:center}
 .pillars{margin-top:96px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;text-align:left}
 .pillar{padding:40px 34px;border-top:1px solid var(--synapse);display:flex;flex-direction:column;gap:14px;background:linear-gradient(var(--surface),transparent)}
@@ -227,7 +229,7 @@ p{margin:0}
 .who li{font-size:.84rem;padding:7px 14px;border-radius:999px;border:1px solid var(--line);color:var(--ink)}
 
 /* plans */
-.plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:80px;max-width:980px;margin-left:auto;margin-right:auto}
+.plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:44px;max-width:980px;margin-left:auto;margin-right:auto}
 .plan{position:relative;padding:clamp(36px,4vw,56px);border-radius:28px;border:1px solid var(--line);display:flex;flex-direction:column;gap:22px;background:rgba(5,15,46,.6)}
 .plan.feat{background:var(--ink);color:var(--abyss);border-color:var(--ink)}
 .plan .badge{position:absolute;top:24px;right:24px;font:500 .62rem/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;padding:8px 12px;border-radius:999px;background:var(--navy);color:var(--ink)}
@@ -243,7 +245,7 @@ p{margin:0}
 .plans-foot{margin-top:28px;text-align:center;color:var(--mist);font-size:.92rem}
 
 /* contact */
-.contact{text-align:center;display:flex;flex-direction:column;align-items:center;gap:36px}
+.contact{text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px}
 .contact h2{font-size:clamp(2.8rem,7vw,6.4rem)}
 .contact .lead{color:var(--mist)}
 .phone{font:500 .9rem/1 var(--f-mono);letter-spacing:.08em;color:var(--mist);user-select:all}
@@ -283,11 +285,11 @@ footer a:hover{color:var(--ink)}
   grid-template-columns:none;font:400 .8rem/1.45 var(--f-mono);color:var(--mist)}
 .creds li{padding:0;border:0;display:block}
 .creds li b{font:500 .95rem/1.4 var(--f-body);color:var(--ink);margin-right:8px}
-.pillars{margin-top:72px}
+.pillars{margin-top:44px}
 .pillar{padding:32px 30px}
 
 /* helps marquee */
-.helps{margin-top:120px;display:flex;flex-direction:column;gap:18px}
+.helps{margin-top:64px;display:flex;flex-direction:column;gap:18px}
 .center-label{justify-content:center}
 .marquee{overflow:hidden;white-space:nowrap;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
@@ -295,11 +297,10 @@ footer a:hover{color:var(--ink)}
 .marquee span{display:inline-flex;align-items:center;gap:40px;padding-right:40px;font:400 clamp(2.2rem,5.4vw,4.6rem)/1.15 var(--f-display);color:var(--ink)}
 .marquee span::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--synapse);box-shadow:0 0 16px var(--synapse)}
 .marquee em{color:var(--petal)}
-.marquee.alt span{color:transparent;-webkit-text-stroke:1px rgba(238,242,251,.55)}
-.marquee.alt em{-webkit-text-stroke:1px var(--petal)}
+.marquee.alt span{color:var(--synapse)}
 
 /* FAQ: questions fly in from the right */
-.faq-head{display:flex;flex-direction:column;gap:0;margin-bottom:56px;max-width:760px}
+.faq-head{display:flex;flex-direction:column;gap:0;margin-bottom:32px;max-width:760px}
 .faq-list{display:flex;flex-direction:column}
 .faq-list details{border-bottom:1px solid var(--line);
   opacity:var(--e);transform:translateX(calc((1 - var(--e))*75vw)) rotate(calc((1 - var(--e))*-3deg));transform-origin:100% 50%}
@@ -329,11 +330,11 @@ footer a:hover{color:var(--ink)}
 @media (max-width:680px){
   .hero h1{font-size:2.7rem}
   .hero .actions .btn-ghost{display:none}
-  :root{--breath:clamp(80px,12vh,120px)}
-  .synapse{height:170vh}
+  :root{--breath:clamp(56px,9vh,88px)}
+  .synapse{height:125vh}
   .faq-list summary{grid-template-columns:32px minmax(0,1fr) 20px;gap:10px;padding:24px 0}
   .faq-list details p{padding-left:42px}
-  .helps{margin-top:88px}
+  .helps{margin-top:48px}
   .hero-top{top:calc(84px + env(safe-area-inset-top,0px))}
   .brand small{display:none}
   .creds ul,.who,.plans{grid-template-columns:minmax(0,1fr)}
@@ -342,7 +343,7 @@ footer a:hover{color:var(--ink)}
   .yt{grid-template-columns:minmax(0,1fr)}
   .gauge .g-txt{min-width:0}
   .gauge canvas{width:56px}
-  .dive{height:280vh}
+  .dive{height:260vh}
 }
 @media (prefers-reduced-motion:reduce){
   .dive{height:auto}
@@ -362,6 +363,7 @@ footer a:hover{color:var(--ink)}
 <canvas id="scene" aria-hidden="true"></canvas>
 <img class="fallback-brain" src="assets/brain-mark.png" alt="" aria-hidden="true">
 <div class="veil" id="veil" aria-hidden="true"></div>
+<div class="scrim" id="scrim" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
   <a class="brand" href="#topo" aria-label="Sabrina Fentanes, início">
@@ -553,7 +555,7 @@ footer a:hover{color:var(--ink)}
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var SF=window.SF={p:0,g:0,mx:0,my:0,reduce:reduce};
   var dive=document.getElementById('dive'), hero=document.getElementById('hero'), heroTop=document.getElementById('heroTop'), hint=document.getElementById('hint');
-  var veil=document.getElementById('veil'), nav=document.getElementById('nav');
+  var veil=document.getElementById('veil'), scrim=document.getElementById('scrim'), nav=document.getElementById('nav');
   var phrases=[].slice.call(document.querySelectorAll('.phrase'));
   // split headings into words so they can assemble one by one
   function splitWords(el){
@@ -583,14 +585,15 @@ footer a:hover{color:var(--ink)}
   function update(){
     var y=scrollY; SF.p=clamp(y/diveLen); SF.g=clamp(y/maxS);
     nav.classList.toggle('solid', SF.p>=1);
-    var tr=0; syns.forEach(function(el,i){
-      var q=clamp((y-synTop[i])/synLen[i]); tr+=q;
+    var tr=0, foc=0; syns.forEach(function(el,i){
+      var q=clamp((y-synTop[i])/synLen[i]); tr+=q; foc=Math.max(foc,Math.sin(Math.PI*q));
       if(reduce) return;
       var c=el.firstElementChild.firstElementChild, o=ss(.04,.16,q)*(1-ss(.74,.92,q));
       c.style.opacity=o; c.style.transform='translateY('+((.5-q)*70)+'px)';
-      c.style.setProperty('--e', ss(.06,.42,q).toFixed(3));
+      c.style.setProperty('--e', ss(.05,.34,q).toFixed(3));
     });
     SF.track=tr;
+    scrim.style.opacity=(ss(.88,1,SF.p)*(1-foc*.55)).toFixed(3);
     if(reduce) return;
     var vh=innerHeight;
     for(var i=0;i<anims.length;i++){ var el=anims[i], r=el.getBoundingClientRect();
@@ -886,7 +889,7 @@ const neuronPts = new THREE.Points(ngeo, new THREE.ShaderMaterial({
       vec3 pearl=vec3(0.92,0.95,1.0), syn=vec3(0.58,0.69,1.0), petal=vec3(1.0,0.79,0.73);
       vC = mix(syn, pearl, aType<0.5 ? 0.8 : aRand*0.5);
       vC = mix(vC, petal, clamp(sig*1.2,0.0,1.0) + (aType<0.5 ? arrive*0.25 : 0.0));
-      vA = b*(0.4+0.6*uFocus)*uReveal*smoothstep(0.05,0.6,d)*(1.0-smoothstep(10.0,18.0,d));
+      vA = b*(0.28+0.72*uFocus)*uReveal*smoothstep(0.05,0.6,d)*(1.0-smoothstep(10.0,18.0,d));
     }`,
   fragmentShader:`
     varying float vA; varying vec3 vC;
@@ -912,7 +915,7 @@ scene.add(new THREE.LineSegments(nlgeo, new THREE.ShaderMaterial({
         float sig = (head>-0.05 && head<1.15) ? (exp(-pow((s-head)*12.0,2.0)) + 0.3*step(s,head)*exp(-(head-s)*5.0))*smoothstep(0.0,0.1,head)*(1.0-smoothstep(0.86,1.0,head)) : 0.0;
         a = 0.06 + sig*0.9; col = mix(syn, petal, clamp(sig,0.0,1.0)); }
       else a = 0.05 + 0.14*arrive + pow(max(sin(vS*9.0-uTime*3.0),0.0),10.0)*0.3*(0.3+arrive);
-      gl_FragColor = vec4(col, a*(0.4+0.6*uFocus)*uReveal*vF);
+      gl_FragColor = vec4(col, a*(0.28+0.72*uFocus)*uReveal*vF);
     }`
 })));
 
