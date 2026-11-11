@@ -25,7 +25,7 @@
   --abyss:#050F2E;      /* deepest background */
   --navy:#0A2561;       /* brand navy, from the logo */
   --ink:#EEF2FB;        /* pearl text */
-  --mist:#A6B3D3;       /* secondary text */
+  --mist:#BAC5E2;       /* secondary text */
   --synapse:#9DB4FF;    /* neural light, accent */
   --petal:#F2C9BC;      /* the logo's flowers, used rarely */
   --line:rgba(238,242,251,.13);
@@ -35,7 +35,7 @@
   --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --gut-l:max(16px, env(safe-area-inset-left, 0px));
   --gut-r:max(16px, env(safe-area-inset-right, 0px));
-  --breath:clamp(120px, 20vh, 240px);
+  --breath:clamp(96px, 15vh, 180px);
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -110,6 +110,21 @@ main,header,footer{position:relative;z-index:2}
   font:400 clamp(2.2rem,5.8vw,5rem)/1.05 var(--f-display);letter-spacing:-.01em;text-wrap:balance;
   text-shadow:0 2px 50px rgba(5,15,46,.95)}
 .phrase em{font-style:italic;color:var(--petal)}
+
+.hero-top{position:absolute;left:0;right:0;top:calc(108px + env(safe-area-inset-top,0px));text-align:center;padding-left:var(--gut-l);padding-right:var(--gut-r)}
+
+/* ---------- synapse interludes ---------- */
+.synapse{position:relative;height:220vh;z-index:2}
+.syn-stage{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center;
+  padding-left:var(--gut-l);padding-right:var(--gut-r);pointer-events:none}
+.syn-copy{max-width:920px;display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center;will-change:transform,opacity}
+.syn-k{display:flex;align-items:center;gap:12px;font:500 .72rem/1 var(--f-mono);letter-spacing:.22em;text-transform:uppercase;color:var(--petal)}
+.syn-k i{display:block;width:48px;height:1px;background:linear-gradient(90deg,var(--petal),var(--synapse))}
+.syn-t{font:400 clamp(2.5rem,6.2vw,5.6rem)/1.04 var(--f-display);letter-spacing:-.015em;text-wrap:balance;text-shadow:0 2px 50px rgba(5,15,46,.95)}
+.syn-t em{font-style:italic;color:var(--synapse)}
+.syn-s{max-width:44ch;font:400 clamp(1.08rem,1.5vw,1.3rem)/1.6 var(--f-body);color:var(--ink);text-wrap:balance;text-shadow:0 1px 24px rgba(5,15,46,.95)}
+.chapter p,.chapter li,.chapter h2,.chapter h3{text-shadow:0 1px 22px rgba(5,15,46,.85)}
+.plan.feat *{text-shadow:none}
 
 /* ---------- depth gauge (brainwave) ---------- */
 .gauge{position:fixed;z-index:40;left:calc(20px + env(safe-area-inset-left,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));
@@ -258,7 +273,9 @@ footer a:hover{color:var(--ink)}
 @media (max-width:680px){
   .hero h1{font-size:2.7rem}
   .hero .actions .btn-ghost{display:none}
-  :root{--breath:clamp(96px,14vh,140px)}
+  :root{--breath:clamp(80px,12vh,120px)}
+  .synapse{height:190vh}
+  .hero-top{top:calc(84px + env(safe-area-inset-top,0px))}
   .brand small{display:none}
   .creds ul,.who,.plans{grid-template-columns:minmax(0,1fr)}
   .steps li{grid-template-columns:minmax(0,1fr);gap:8px}
@@ -272,6 +289,8 @@ footer a:hover{color:var(--ink)}
   .dive{height:auto}
   .dive-stage{position:relative;height:100svh}
   .phrase,.veil{display:none}
+  .synapse{height:auto}
+  .syn-stage{position:relative;height:auto;padding-block:120px}
   .reveal,.js .reveal:not(.in){opacity:1;transform:none;transition:none}
   .scroll-hint i{animation:none}
 }
@@ -303,13 +322,11 @@ footer a:hover{color:var(--ink)}
   <!-- 1. Dive -->
   <section class="dive" id="dive" aria-label="Apresentação">
     <div class="dive-stage">
+      <span class="eyebrow hero-top" id="heroTop">Hipnoterapia online · em português</span>
       <div class="hero" id="hero">
-        <span class="eyebrow">Hipnoterapia online · em português</span>
         <h1>Volte a morar<br>em <em>você</em>.</h1>
-        <p>Supere padrões emocionais e reconquiste sua confiança, onde quer que esteja.</p>
         <div class="actions">
           <a class="btn btn-solid" href="#planos">Começar agora</a>
-          <a class="btn btn-ghost" href="#hipnoterapia">O que é hipnoterapia?</a>
         </div>
       </div>
       <p class="phrase" data-from=".24" data-to=".44">Respire.<br><em>Vamos entrar.</em></p>
@@ -356,6 +373,16 @@ footer a:hover{color:var(--ink)}
   </section>
 
   <!-- 3. What is -->
+  <section class="synapse" aria-label="Transição">
+    <div class="syn-stage">
+      <div class="syn-copy">
+        <span class="syn-k">Sinapse 01 <i></i> 07</span>
+        <p class="syn-t">Cada pensamento é um <em>sinal</em> entre neurônios.</p>
+        <p class="syn-s">Quando um sinal se repete muitas vezes, ele vira um caminho. É assim que nascem os padrões emocionais.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="chapter" id="hipnoterapia">
     <div class="wrap center reveal">
       <div class="label">O que é hipnoterapia</div>
@@ -370,6 +397,16 @@ footer a:hover{color:var(--ink)}
   </section>
 
   <!-- 4. Process -->
+  <section class="synapse" aria-label="Transição">
+    <div class="syn-stage">
+      <div class="syn-copy">
+        <span class="syn-k">Sinapse 02 <i></i> 07</span>
+        <p class="syn-t">No relaxamento, as ondas cerebrais <em>desaceleram</em>.</p>
+        <p class="syn-s">Nesse estado de foco interno, fica mais fácil observar esses caminhos com calma e clareza.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="chapter" id="como-funciona">
     <div class="wrap process">
       <div class="sticky reveal">
@@ -387,6 +424,16 @@ footer a:hover{color:var(--ink)}
   </section>
 
   <!-- 5. Benefits -->
+  <section class="synapse" aria-label="Transição">
+    <div class="syn-stage">
+      <div class="syn-copy">
+        <span class="syn-k">Sinapse 03 <i></i> 07</span>
+        <p class="syn-t">O cérebro pode aprender <em>caminhos novos</em>.</p>
+        <p class="syn-s">A ciência chama isso de neuroplasticidade. A hipnoterapia ajuda a dar um novo sentido ao que antes se repetia.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="chapter" id="beneficios">
     <div class="wrap center reveal">
       <div class="label">Onde a hipnoterapia pode ajudar</div>
@@ -406,6 +453,16 @@ footer a:hover{color:var(--ink)}
   </section>
 
   <!-- 6. Myths -->
+  <section class="synapse" aria-label="Transição">
+    <div class="syn-stage">
+      <div class="syn-copy">
+        <span class="syn-k">Sinapse 04 <i></i> 07</span>
+        <p class="syn-t">E você continua <em>consciente</em> o tempo todo.</p>
+        <p class="syn-s">Hipnose é atenção focada. Você ouve, lembra e decide.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="chapter" id="mitos">
     <div class="wrap faq">
       <div class="stack reveal">
@@ -439,6 +496,16 @@ footer a:hover{color:var(--ink)}
   </section>
 
   <!-- 7. Who -->
+  <section class="synapse" aria-label="Transição">
+    <div class="syn-stage">
+      <div class="syn-copy">
+        <span class="syn-k">Sinapse 05 <i></i> 07</span>
+        <p class="syn-t">Mesmo longe de casa, sua mente pode ser <em>um lugar seguro</em>.</p>
+        <p class="syn-s">A distância muda muita coisa por fora. O cuidado começa por dentro, e em português.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="chapter" id="quem">
     <div class="wrap">
       <div class="center reveal">
@@ -463,6 +530,16 @@ footer a:hover{color:var(--ink)}
   </section>
 
   <!-- 8. Plans -->
+  <section class="synapse" aria-label="Transição">
+    <div class="syn-stage">
+      <div class="syn-copy">
+        <span class="syn-k">Sinapse 06 <i></i> 07</span>
+        <p class="syn-t">Todo caminho novo começa com <em>um primeiro sinal</em>.</p>
+        <p class="syn-s">Escolha como você quer começar.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="chapter" id="planos">
     <div class="wrap center reveal">
       <div class="label">Sessões</div>
@@ -487,6 +564,16 @@ footer a:hover{color:var(--ink)}
   </section>
 
   <!-- 9. Contact -->
+  <section class="synapse" aria-label="Transição">
+    <div class="syn-stage">
+      <div class="syn-copy">
+        <span class="syn-k">Sinapse 07 <i></i> 07</span>
+        <p class="syn-t">Do outro lado, alguém <em>pronta para ouvir</em> você.</p>
+        <p class="syn-s">Sem pressa e sem julgamento.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="chapter" id="contato">
     <div class="wrap contact">
       <div class="label reveal">Fale comigo</div>
@@ -532,21 +619,29 @@ footer a:hover{color:var(--ink)}
   var root=document.documentElement; root.classList.add('js');
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var SF=window.SF={p:0,g:0,mx:0,my:0,reduce:reduce};
-  var dive=document.getElementById('dive'), hero=document.getElementById('hero'), hint=document.getElementById('hint');
+  var dive=document.getElementById('dive'), hero=document.getElementById('hero'), heroTop=document.getElementById('heroTop'), hint=document.getElementById('hint');
   var veil=document.getElementById('veil'), nav=document.getElementById('nav');
   var phrases=[].slice.call(document.querySelectorAll('.phrase'));
-  var diveLen=1, maxS=1;
+  var diveLen=1, maxS=1, syns=[].slice.call(document.querySelectorAll('.synapse')), synTop=[], synLen=[];
   function clamp(v){return v<0?0:v>1?1:v}
   function ss(a,b,x){x=clamp((x-a)/(b-a));return x*x*(3-2*x)}
-  function measure(){diveLen=Math.max(1,dive.offsetHeight-innerHeight);maxS=Math.max(1,root.scrollHeight-innerHeight);update()}
+  function measure(){diveLen=Math.max(1,dive.offsetHeight-innerHeight);maxS=Math.max(1,root.scrollHeight-innerHeight);
+    syns.forEach(function(el,i){synTop[i]=el.getBoundingClientRect().top+scrollY;synLen[i]=Math.max(1,el.offsetHeight-innerHeight)});update()}
   function update(){
     var y=scrollY; SF.p=clamp(y/diveLen); SF.g=clamp(y/maxS);
     nav.classList.toggle('solid', SF.p>=1);
+    var tr=0; syns.forEach(function(el,i){
+      var q=clamp((y-synTop[i])/synLen[i]); tr+=q;
+      if(reduce) return;
+      var c=el.firstElementChild.firstElementChild, o=ss(.1,.3,q)*(1-ss(.72,.92,q));
+      c.style.opacity=o; c.style.transform='translateY('+((.5-q)*90)+'px) scale('+(.96+o*.04)+')';
+    });
+    SF.track=tr;
     if(reduce) return;
     var p=SF.p;
     var h=1-ss(.02,.2,p);
     hero.style.opacity=h; hero.style.transform='translateY('+(-p*160)+'px) scale('+(1-p*.25)+')';
-    hero.style.visibility=h<.01?'hidden':'visible';
+    hero.style.visibility=h<.01?'hidden':'visible'; heroTop.style.opacity=h;
     hint.style.opacity=1-ss(0,.06,p);
     phrases.forEach(function(el){
       var a=+el.dataset.from,b=+el.dataset.to,m=(a+b)/2;
@@ -595,21 +690,21 @@ footer a:hover{color:var(--ink)}
 <script type="module">
 import * as THREE from './assets/three.module.min.js';
 
-const SF = window.SF || {p:0,g:0,mx:0,my:0};
+const SF = window.SF || {p:0,g:0,mx:0,my:0,track:0};
 const canvas = document.getElementById('scene');
 const small = matchMedia('(max-width: 720px)').matches;
 let renderer;
 try{
-  renderer = new THREE.WebGLRenderer({canvas, antialias:false, alpha:true, powerPreference:'high-performance'});
+  renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, powerPreference:'high-performance'});
 }catch(e){ document.documentElement.classList.add('no-webgl'); throw e; }
 renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
 renderer.setClearColor(0x000000, 0);
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(small ? 52 : 38, innerWidth/innerHeight, 0.01, 60);
+const camera = new THREE.PerspectiveCamera(small ? 52 : 38, innerWidth/innerHeight, 0.01, 80);
 const brain = new THREE.Group(); scene.add(brain);
 
-/* ---------- procedural brain ---------- */
+/* ---------- helpers ---------- */
 let seed = 7;
 const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
 function hash(x,y,z){ const h = Math.sin(x*127.1 + y*311.7 + z*74.7) * 43758.5453; return h - Math.floor(h); }
@@ -624,13 +719,19 @@ function vnoise(x,y,z){
 }
 const fbm = (x,y,z) => vnoise(x,y,z)*.62 + vnoise(x*2.03+5.1,y*2.03,z*2.03)*.28 + vnoise(x*4.1,y*4.1+3.3,z*4.1)*.1;
 function randDir(){ const z=rnd()*2-1, a=rnd()*Math.PI*2, r=Math.sqrt(1-z*z); return [r*Math.cos(a), z, r*Math.sin(a)]; }
+const rv = () => { const d=randDir(); return new THREE.Vector3(d[0],d[1],d[2]); };
 
+const uniforms = {
+  uTime:{value:0}, uPR:{value:renderer.getPixelRatio()}, uSize:{value: small ? 30 : 34},
+  uDive:{value:0}, uDim:{value:1}, uTrack:{value:0}, uReveal:{value:0}, uFocus:{value:0}
+};
+
+/* ---------- procedural brain ---------- */
 const N = small ? 15000 : 30000;
 const pos = new Float32Array(N*3), rand = new Float32Array(N), kind = new Float32Array(N);
 let n = 0;
 function push(x,y,z,k){ if(n>=N) return; pos[n*3]=x; pos[n*3+1]=y; pos[n*3+2]=z; rand[n]=rnd(); kind[n]=k; n++; }
 
-// cortex: two hemispheres, points gather on gyri crests so the folds read as lines
 const cortexN = Math.floor(N*.8);
 let guard = 0;
 while(n < cortexN && guard++ < N*60){
@@ -640,17 +741,14 @@ while(n < cortexN && guard++ < N*60){
   let x = cx + u[0]*(inner ? .23 : .66);
   let y = u[1]*.74; if(u[1] < -.2) y *= .8;
   let z = u[2]*1.08;
-  x = cx + (x-cx)*(1 - .12*Math.max(0,u[2]));          // narrower frontal lobe
-  if(!inner && u[1] < .1 && u[1] > -.75 && u[2] > -.3)  // temporal lobe bulge
-    x += h*.05*Math.sin((u[1]+.75)/.85*Math.PI);
+  x = cx + (x-cx)*(1 - .12*Math.max(0,u[2]));
+  if(!inner && u[1] < .1 && u[1] > -.75 && u[2] > -.3) x += h*.05*Math.sin((u[1]+.75)/.85*Math.PI);
   const nz = fbm(x*3.1+h*9, y*3.1, z*3.1);
   const ridge = 1 - Math.abs(nz);
-  const pAccept = Math.pow(ridge, 10) * (inner ? .45 : 1) + .035;
-  if(rnd() > pAccept) continue;
+  if(rnd() > Math.pow(ridge, 10) * (inner ? .45 : 1) + .035) continue;
   const bump = 1 + nz*.04;
   push(cx + (x-cx)*bump, y*bump, z*bump, 0);
 }
-// cerebellum with foliae
 const cbN = cortexN + Math.floor(N*.1);
 guard = 0;
 while(n < cbN && guard++ < N*40){
@@ -659,15 +757,13 @@ while(n < cbN && guard++ < N*40){
   const x = u[0]*.6, y = -.5 + u[1]*.27, z = -.66 + u[2]*.36;
   const f = Math.abs(Math.sin(y*68 + vnoise(x*4,y*4,z*4)*2.2));
   if(rnd() > Math.pow(f,6)*.9 + .05) continue;
-  push(x*(1 - .25*Math.max(0,-u[1])) , y, z, 1);
+  push(x*(1 - .25*Math.max(0,-u[1])), y, z, 1);
 }
-// brainstem
 const bsN = cbN + Math.floor(N*.025);
 while(n < bsN){
   const t = rnd(), a = rnd()*Math.PI*2, r = .12 - t*.03;
   push(Math.cos(a)*r, -.42 - t*.62, -.3 + Math.sin(a)*r*.9 - t*.08, 2);
 }
-// interior glow
 while(n < N){
   const u = randDir(), r = Math.cbrt(rnd());
   push(u[0]*.8*r, u[1]*.6*r, u[2]*1.0*r, 3);
@@ -678,24 +774,21 @@ geo.setAttribute('position', new THREE.BufferAttribute(pos,3));
 geo.setAttribute('aRand', new THREE.BufferAttribute(rand,1));
 geo.setAttribute('aKind', new THREE.BufferAttribute(kind,1));
 
-const uniforms = {
-  uTime:{value:0}, uPR:{value:renderer.getPixelRatio()}, uSize:{value: small ? 30 : 34},
-  uDive:{value:0}, uDim:{value:1}
-};
+const brainU = {...uniforms, uFade:{value:1}};
 const pointMat = new THREE.ShaderMaterial({
-  uniforms, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+  uniforms: brainU, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
   vertexShader:`
     uniform float uTime,uPR,uSize,uDive;
     attribute float aRand,aKind;
     varying float vA; varying vec3 vC;
     void main(){
       vec3 p = position;
-      p *= 1.0 + 0.012*sin(uTime*0.9 + aRand*6.28);                       // breathing
-      float spread = smoothstep(0.45,1.0,uDive);
-      p += normalize(p+vec3(0.0001)) * spread * (0.25 + aRand*1.6);        // opens as we enter
+      p *= 1.0 + 0.012*sin(uTime*0.9 + aRand*6.28);
+      float spread = smoothstep(0.45,1.0,uDive) * step(aKind, 3.5);
+      p += normalize(p+vec3(0.0001)) * spread * (0.25 + aRand*1.6);
       vec4 mv = modelViewMatrix * vec4(p,1.0);
       float d = -mv.z;
-      float big = step(0.955, aRand);                                       // a few "flowers"
+      float big = step(0.955, aRand);
       float s = uSize * (aKind>2.5 ? 0.55 : 1.0) * (0.55 + aRand*0.6 + big*1.4);
       gl_PointSize = min(s * uPR / d, 26.0*uPR);
       gl_Position = projectionMatrix * mv;
@@ -709,18 +802,17 @@ const pointMat = new THREE.ShaderMaterial({
       vA = (aKind>2.5 ? 0.35 : 0.85) * tw * smoothstep(0.04, 0.5, d);
     }`,
   fragmentShader:`
-    uniform float uDim;
+    uniform float uDim,uFade;
     varying float vA; varying vec3 vC;
     void main(){
       vec2 c = gl_PointCoord - 0.5; float r = length(c);
       float a = smoothstep(0.5, 0.0, r); a *= a;
-      gl_FragColor = vec4(vC, a * vA * uDim);
+      gl_FragColor = vec4(vC, a * vA * uDim * uFade);
     }`
 });
-const points = new THREE.Points(geo, pointMat);
-brain.add(points);
+brain.add(new THREE.Points(geo, pointMat));
 
-/* ---------- synapses: short links between nearby cortex points ---------- */
+/* synapses inside the brain */
 const L = small ? 500 : 1100;
 const lp = new Float32Array(L*6), lt = new Float32Array(L*2), lr = new Float32Array(L*2);
 let m = 0;
@@ -740,8 +832,8 @@ const lgeo = new THREE.BufferGeometry();
 lgeo.setAttribute('position', new THREE.BufferAttribute(lp.subarray(0,m*6),3));
 lgeo.setAttribute('aT', new THREE.BufferAttribute(lt.subarray(0,m*2),1));
 lgeo.setAttribute('aR', new THREE.BufferAttribute(lr.subarray(0,m*2),1));
-const lineMat = new THREE.ShaderMaterial({
-  uniforms, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+brain.add(new THREE.LineSegments(lgeo, new THREE.ShaderMaterial({
+  uniforms: brainU, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
   vertexShader:`
     uniform float uDive;
     attribute float aT,aR; varying float vT,vR;
@@ -749,39 +841,144 @@ const lineMat = new THREE.ShaderMaterial({
       vec3 p = position + normalize(position+vec3(0.0001))*smoothstep(0.45,1.0,uDive)*(0.25+aR*1.6);
       gl_Position = projectionMatrix*modelViewMatrix*vec4(p,1.0); }`,
   fragmentShader:`
-    uniform float uTime,uDim; varying float vT,vR;
+    uniform float uTime,uDim,uFade; varying float vT,vR;
     void main(){
       float x = fract(uTime*0.22 + vR*7.0);
       float pulse = exp(-pow((vT - x)*7.0, 2.0));
-      gl_FragColor = vec4(vec3(0.65,0.75,1.0), (0.05 + pulse*0.55) * uDim);
+      gl_FragColor = vec4(vec3(0.65,0.75,1.0), (0.05 + pulse*0.55) * uDim * uFade);
     }`
-});
-brain.add(new THREE.LineSegments(lgeo, lineMat));
+})));
 
-/* ---------- drifting motes around and beyond the brain (the logo's little bubbles) ---------- */
-const D = small ? 900 : 1800;
-const dp = new Float32Array(D*3), dr = new Float32Array(D), dk = new Float32Array(D).fill(3);
+/* ---------- neural pathway: one neuron per chapter, linked by axons ---------- */
+const K = Math.max(2, document.querySelectorAll('.chapter').length);
+const STEP = 4.5, sideX = small ? .55 : 1.0;
+const somas = [], anchors = [], looks = [];
+for(let i=0;i<K;i++){
+  const s = i%2===0 ? -1 : 1, z = -2.6 - i*STEP;
+  const c = new THREE.Vector3(s*sideX, Math.sin(i*1.7)*.3, z);
+  somas.push(c);
+  anchors.push(i===0 ? new THREE.Vector3(0,0,.12) : new THREE.Vector3(0, c.y*.4, z+2.7));
+  looks.push(new THREE.Vector3(0, c.y*.3, z-2.0));
+}
+const camCurve = new THREE.CatmullRomCurve3(anchors, false, 'centripetal');
+const lookCurve = new THREE.CatmullRomCurve3(looks, false, 'centripetal');
+
+const NP=[], NR=[], NO=[], NT=[], NS=[];      // points: pos, rand, owner neuron, type (0 soma,1 dendrite,2 axon), s
+const LP2=[], LO2=[], LS2=[];                  // lines: pos, owner, s (negative = axon)
+const dens = small ? .5 : 1, tmp = new THREE.Vector3();
+const np = (v,o,t,s) => { NP.push(v.x,v.y,v.z); NR.push(rnd()); NO.push(o); NT.push(t); NS.push(s); };
+function grow(o, start, dir, len, depth, s0){
+  const steps = 7; let p = start.clone(); const d = dir.clone().normalize();
+  for(let k=0;k<steps;k++){
+    d.add(rv().multiplyScalar(.38)).normalize();
+    const q = p.clone().addScaledVector(d, len/steps);
+    const a = s0 + k/steps*len, b = s0 + (k+1)/steps*len;
+    LP2.push(p.x,p.y,p.z,q.x,q.y,q.z); LO2.push(o,o); LS2.push(a,b);
+    const cnt = Math.ceil(6*dens);
+    for(let j=0;j<cnt;j++){ tmp.copy(p).lerp(q,rnd()).add(rv().multiplyScalar(.012)); np(tmp,o,1,a+(b-a)*rnd()); }
+    if(depth<2 && rnd()<.3) grow(o, q, d.clone().add(rv().multiplyScalar(.9)), len*.55, depth+1, b);
+    p = q;
+  }
+}
+for(let i=0;i<K;i++){
+  const c = somas[i];
+  for(let j=0;j<Math.floor(450*dens);j++){ const d=rv(), r=.14*Math.cbrt(rnd()); np(new THREE.Vector3(c.x+d.x*r, c.y+d.y*r*.85, c.z+d.z*r), i, 0, 0); }
+  const br = 7 + Math.floor(rnd()*4);
+  for(let b=0;b<br;b++){ const d=rv(); grow(i, c.clone().addScaledVector(d,.1), d, .7+rnd()*.9, 0, 0); }
+}
+for(let i=0;i<K-1;i++){
+  const a = somas[i], b = somas[i+1];
+  const mid = a.clone().lerp(b,.5); mid.x *= .15; mid.y += .32*(i%2 ? 1 : -1);
+  const curve = new THREE.CatmullRomCurve3([a, a.clone().lerp(mid,.5).add(new THREE.Vector3(0,.12,0)), mid, mid.clone().lerp(b,.5), b]);
+  const cnt = Math.floor(800*dens);
+  for(let j=0;j<cnt;j++){ const s=j/(cnt-1); np(curve.getPoint(s).add(rv().multiplyScalar(.014)), i, 2, s); }
+  const pts = curve.getPoints(80);
+  for(let j=0;j<80;j++){ LP2.push(pts[j].x,pts[j].y,pts[j].z,pts[j+1].x,pts[j+1].y,pts[j+1].z); LO2.push(i,i); LS2.push(-1-j/80, -1-(j+1)/80); }
+}
+const ngeo = new THREE.BufferGeometry();
+ngeo.setAttribute('position', new THREE.Float32BufferAttribute(NP,3));
+ngeo.setAttribute('aRand', new THREE.Float32BufferAttribute(NR,1));
+ngeo.setAttribute('aOwner', new THREE.Float32BufferAttribute(NO,1));
+ngeo.setAttribute('aType', new THREE.Float32BufferAttribute(NT,1));
+ngeo.setAttribute('aS', new THREE.Float32BufferAttribute(NS,1));
+const neuronPts = new THREE.Points(ngeo, new THREE.ShaderMaterial({
+  uniforms, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+  vertexShader:`
+    uniform float uTime,uPR,uSize,uTrack,uReveal,uFocus;
+    attribute float aRand,aOwner,aType,aS;
+    varying float vA; varying vec3 vC;
+    void main(){
+      vec4 mv = modelViewMatrix*vec4(position,1.0); float d = -mv.z;
+      float arrive = exp(-pow((uTrack-aOwner)*3.0,2.0));
+      float head = uTrack-aOwner, sig = 0.0;
+      if(aType>1.5 && head>-0.05 && head<1.15)
+        sig = (exp(-pow((aS-head)*16.0,2.0)) + 0.35*step(aS,head)*exp(-(head-aS)*6.0)) * smoothstep(0.0,0.1,head)*(1.0-smoothstep(0.86,1.0,head));
+      float wave = (aType>0.5 && aType<1.5) ? pow(max(sin(aS*9.0-uTime*3.0),0.0),10.0)*(0.3+arrive) : 0.0;
+      float base = aType<0.5 ? 1.0 : (aType<1.5 ? 0.5 : 0.26);
+      float b = base*(0.5+0.9*arrive) + sig*2.4 + wave*0.9;
+      float sz = uSize*(aType<0.5 ? 1.1 : 0.55)*(0.6+aRand*0.7)*(1.0+sig*1.8);
+      gl_PointSize = min(sz*uPR/d, 30.0*uPR);
+      gl_Position = projectionMatrix*mv;
+      vec3 pearl=vec3(0.92,0.95,1.0), syn=vec3(0.58,0.69,1.0), petal=vec3(1.0,0.79,0.73);
+      vC = mix(syn, pearl, aType<0.5 ? 0.8 : aRand*0.5);
+      vC = mix(vC, petal, clamp(sig*1.2,0.0,1.0) + (aType<0.5 ? arrive*0.25 : 0.0));
+      vA = b*(0.4+0.6*uFocus)*uReveal*smoothstep(0.05,0.6,d)*(1.0-smoothstep(10.0,18.0,d));
+    }`,
+  fragmentShader:`
+    varying float vA; varying vec3 vC;
+    void main(){ float r = length(gl_PointCoord-0.5); float a = smoothstep(0.5,0.0,r); a*=a; gl_FragColor = vec4(vC, a*vA); }`
+}));
+scene.add(neuronPts);
+const nlgeo = new THREE.BufferGeometry();
+nlgeo.setAttribute('position', new THREE.Float32BufferAttribute(LP2,3));
+nlgeo.setAttribute('aOwner', new THREE.Float32BufferAttribute(LO2,1));
+nlgeo.setAttribute('aS', new THREE.Float32BufferAttribute(LS2,1));
+scene.add(new THREE.LineSegments(nlgeo, new THREE.ShaderMaterial({
+  uniforms, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+  vertexShader:`
+    attribute float aOwner,aS; varying float vO,vS,vF;
+    void main(){ vO=aOwner; vS=aS; vec4 mv=modelViewMatrix*vec4(position,1.0); float d=-mv.z;
+      vF = smoothstep(0.1,0.8,d)*(1.0-smoothstep(10.0,18.0,d)); gl_Position=projectionMatrix*mv; }`,
+  fragmentShader:`
+    uniform float uTime,uTrack,uReveal,uFocus; varying float vO,vS,vF;
+    void main(){
+      vec3 syn=vec3(0.62,0.72,1.0), petal=vec3(1.0,0.8,0.74);
+      float arrive = exp(-pow((uTrack-vO)*3.0,2.0)); float a; vec3 col = syn;
+      if(vS<0.0){ float s=-vS-1.0, head=uTrack-vO;
+        float sig = (head>-0.05 && head<1.15) ? (exp(-pow((s-head)*12.0,2.0)) + 0.3*step(s,head)*exp(-(head-s)*5.0))*smoothstep(0.0,0.1,head)*(1.0-smoothstep(0.86,1.0,head)) : 0.0;
+        a = 0.06 + sig*0.9; col = mix(syn, petal, clamp(sig,0.0,1.0)); }
+      else a = 0.05 + 0.14*arrive + pow(max(sin(vS*9.0-uTime*3.0),0.0),10.0)*0.3*(0.3+arrive);
+      gl_FragColor = vec4(col, a*(0.4+0.6*uFocus)*uReveal*vF);
+    }`
+})));
+
+/* ---------- drifting motes along the whole journey ---------- */
+const D = small ? 1400 : 2800, pathLen = K*STEP + 8;
+const dp = new Float32Array(D*3), dr = new Float32Array(D), dk = new Float32Array(D).fill(4);
 for(let i=0;i<D;i++){
-  const u = randDir(), r = 1.5 + Math.pow(rnd(),.7)*7;
-  dp[i*3]=u[0]*r; dp[i*3+1]=u[1]*r*.8; dp[i*3+2]=u[2]*r - 2; dr[i]=rnd();
+  const a = rnd()*Math.PI*2, r = .8 + Math.pow(rnd(),.6)*6.5;
+  dp[i*3]=Math.cos(a)*r; dp[i*3+1]=Math.sin(a)*r*.8; dp[i*3+2]=4 - rnd()*pathLen; dr[i]=rnd();
 }
 const dgeo = new THREE.BufferGeometry();
 dgeo.setAttribute('position', new THREE.BufferAttribute(dp,3));
 dgeo.setAttribute('aRand', new THREE.BufferAttribute(dr,1));
 dgeo.setAttribute('aKind', new THREE.BufferAttribute(dk,1));
-const dust = new THREE.Points(dgeo, pointMat);
+const dustMat = pointMat.clone();
+dustMat.uniforms = {...uniforms, uFade:{value:.8}};
+const dust = new THREE.Points(dgeo, dustMat);
 scene.add(dust);
 
 /* ---------- motion ---------- */
 const ease = t => t<.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
-let sp = 0, sg = 0, mx = 0, my = 0, t0 = performance.now(), running = true;
+const ssf = THREE.MathUtils.smoothstep;
+let sp = 0, st = 0, mx = 0, my = 0, t0 = performance.now(), running = true;
 const reduce = SF.reduce;
+const diveCam = new THREE.Vector3(), diveLook = new THREE.Vector3(), cam = new THREE.Vector3(), look = new THREE.Vector3();
 
 function resize(){
   const w = innerWidth, h = innerHeight;
   renderer.setSize(w, h, false);
-  camera.aspect = w/h;
-  camera.fov = w < 720 ? 52 : 38;
+  camera.aspect = w/h; camera.fov = w < 720 ? 52 : 38;
   camera.updateProjectionMatrix();
 }
 addEventListener('resize', resize); resize();
@@ -790,26 +987,39 @@ document.addEventListener('visibilitychange', () => { running = !document.hidden
 function frame(now){
   if(!running) return;
   const t = (now - t0)/1000;
-  sp += (SF.p - sp) * (reduce ? 1 : .075);
-  sg += (SF.g - sg) * (reduce ? 1 : .075);
+  const dt = Math.min(.1, (now - (frame.last || now))/1000); frame.last = now;
+  const k = reduce ? 1 : 1 - Math.pow(.93, dt*60);
+  sp += (SF.p - sp) * k;
+  st += ((SF.track||0) - st) * k;
   mx += (SF.mx - mx) * .04; my += (SF.my - my) * .04;
   const e = ease(sp);
   const far = camera.aspect < .8 ? 6.2 : 6.0;
 
   uniforms.uTime.value = reduce ? 2 : t;
   uniforms.uDive.value = sp;
-  // after the dive, dim the interior so the chapters stay readable
-  uniforms.uDim.value = 1 - .55*THREE.MathUtils.smoothstep(sp, .8, 1);
+  uniforms.uDim.value = 1 - .55*ssf(sp, .8, 1);
+  uniforms.uTrack.value = st;
+  uniforms.uReveal.value = ssf(sp, .8, 1);
+  brainU.uFade.value = 1 - .9*ssf(st, .02, .55);
+  const fr = st - Math.floor(st);
+  uniforms.uFocus.value = st > 0 && st < K-1 ? Math.sin(Math.PI*fr) : 0;
 
-  const after = Math.max(0, sg - .12);
-  camera.position.set(mx*.18*(1-e*.6), .32*(1-e) - my*.12, far + (0.12 - far)*e - after*1.6);
-  camera.lookAt(0, .02*(1-e), -2*e);
+  // 1) the dive into the brain
+  diveCam.set(mx*.18*(1-e*.6), .32*(1-e) - my*.12, far + (0.12 - far)*e);
+  diveLook.set(0, .02*(1-e), -2*e);
+  // 2) then travel neuron to neuron, following the signal
+  const u = Math.min(1, Math.max(0, st/(K-1)));
+  cam.copy(camCurve.getPoint(u)); cam.x += mx*.12; cam.y -= my*.08;
+  look.copy(lookCurve.getPoint(Math.min(1, u + .02)));
+  const w = ssf(sp, .96, 1);
+  camera.position.lerpVectors(diveCam, cam, w);
+  camera.lookAt(look.lerp(diveLook, 1-w));
 
   const sway = reduce ? 0 : Math.sin(t*.17)*.3;
-  brain.rotation.y = (-1.25 + sway)*(1-e) + after*2.2;   // side profile, turning to face us as we enter
-  brain.rotation.x = .12*(1-e) + after*.4;
-  brain.position.y = (camera.aspect < .8 ? .55 : .72)*(1-e);
-  dust.rotation.y = t*.01 + sg*.8;
+  brain.rotation.y = (-1.25 + sway)*(1-e) + st*.25;
+  brain.rotation.x = .12*(1-e);
+  brain.position.y = (camera.aspect < .8 ? .5 : .6)*(1-e);
+  dust.rotation.z = reduce ? 0 : t*.01;
 
   renderer.render(scene, camera);
   requestAnimationFrame(frame);
