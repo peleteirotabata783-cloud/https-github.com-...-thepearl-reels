@@ -178,7 +178,7 @@
 </div>
 
 <script>
-const DUR=25.4, $=s=>document.querySelector(s);
+const $=s=>document.querySelector(s);
 const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), lerp=(a,b,p)=>a+(b-a)*p, p=(t,a,b)=>clamp((t-a)/(b-a));
 const eo=x=>1-Math.pow(1-x,3), eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 const eb=x=>{const c1=1.6,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
@@ -187,7 +187,7 @@ function show(el,op,tx=0,ty=0,sc=1,blur=0,rot=0){el.style.opacity=op;el.style.vi
   el.style.transform=`translate(${tx}px,${ty}px) scale(${sc}) rotate(${rot}deg)`;el.style.filter=blur>0.05?`blur(${blur}px)`:'none';}
 function pop(el,t,a,d=.45,dy=50,out=null){const q=eo(p(t,a,a+d));let o=q,y=(1-q)*dy,b=(1-q)*10;
   if(out){const r=eio(p(t,out[0],out[1]));o*=1-r;y-=r*30;b+=r*8;} show(el,o,0,y,1,b);}
-const W=window.WORDS.map(([w,s,e])=>({w,s,e})); const T=i=>W[i].s, E=i=>W[i].e;
+const W=window.WORDS.map(([w,s,e])=>({w,s,e})); const T=i=>W[i].s, E=i=>W[i].e; const DUR=Math.round((E(W.length-1)+0.55)*30)/30;
 // pseudo-random determinístico
 const rnd=(n)=>{const x=Math.sin(n*127.1)*43758.5453;return x-Math.floor(x)};
 
