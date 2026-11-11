@@ -109,9 +109,9 @@ main,header,footer{position:relative;z-index:2}
 @keyframes drip{0%{transform:scaleY(0);opacity:1}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
 .phrase{position:absolute;left:var(--gut-l);right:var(--gut-r);top:50%;transform:translateY(-50%);
   text-align:center;margin:0 auto;max-width:900px;opacity:0;pointer-events:none;
-  font:400 clamp(2.2rem,5.8vw,5rem)/1.05 var(--f-display);letter-spacing:-.01em;text-wrap:balance;
-  text-shadow:0 2px 50px rgba(5,15,46,.95)}
-.phrase em{font-style:italic;color:var(--petal)}
+  font:400 clamp(2.4rem,6.4vw,5.4rem)/1.05 var(--f-display);letter-spacing:-.01em;text-wrap:balance;color:#fff;
+  text-shadow:0 0 3px rgba(5,15,46,.95),0 0 14px rgba(5,15,46,.95),0 2px 30px rgba(5,15,46,.95),0 0 70px rgba(5,15,46,.9)}
+.phrase em{font-style:italic;color:#FFD9CE}
 
 .hero-top{position:absolute;left:0;right:0;top:calc(108px + env(safe-area-inset-top,0px));text-align:center;padding-left:var(--gut-l);padding-right:var(--gut-r)}
 
@@ -596,7 +596,7 @@ footer a:hover{color:var(--ink)}
       c.style.setProperty('--e', ss(vh*.95,vh*.3,top).toFixed(3));
     });
     SF.track=tr;
-    scrim.style.opacity=(ss(.88,1,SF.p)*(1-foc*.55)).toFixed(3);
+    scrim.style.opacity=(Math.max(ss(.17,.27,SF.p)*.7, ss(.88,1,SF.p))*(1-foc*.55)).toFixed(3);
     if(reduce) return;
     var vh=innerHeight;
     for(var i=0;i<anims.length;i++){ var el=anims[i], r=el.getBoundingClientRect();
@@ -967,7 +967,7 @@ function frame(now){
 
   uniforms.uTime.value = reduce ? 2 : t;
   uniforms.uDive.value = sp;
-  uniforms.uDim.value = 1 - .55*ssf(sp, .8, 1);
+  uniforms.uDim.value = 1 - .38*ssf(sp, .16, .28) - .2*ssf(sp, .8, 1);
   uniforms.uTrack.value = st;
   uniforms.uReveal.value = ssf(sp, .8, 1);
   brainU.uFade.value = 1 - .9*ssf(st, .02, .55);
