@@ -114,7 +114,7 @@ main,header,footer{position:relative;z-index:2}
 .hero-top{position:absolute;left:0;right:0;top:calc(108px + env(safe-area-inset-top,0px));text-align:center;padding-left:var(--gut-l);padding-right:var(--gut-r)}
 
 /* ---------- synapse interludes ---------- */
-.synapse{position:relative;height:220vh;z-index:2}
+.synapse{position:relative;height:200vh;z-index:2}
 .syn-stage{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center;
   padding-left:var(--gut-l);padding-right:var(--gut-r);pointer-events:none}
 .syn-copy{max-width:920px;display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center;will-change:transform,opacity}
@@ -263,6 +263,62 @@ footer a:hover{color:var(--ink)}
 .wa:hover{transform:scale(1.06)}
 .wa svg{width:26px;height:26px}
 
+/* ---------- scroll-driven motion (--e: 0 entering → 1 settled) ---------- */
+[data-anim]{--e:1}
+[data-anim="up"]{opacity:calc(.08 + var(--e)*.92);transform:translateY(calc((1 - var(--e))*56px))}
+[data-anim="left"]{opacity:calc(.05 + var(--e)*.95);transform:translateX(calc((1 - var(--e))*-110px))}
+[data-anim="right"]{opacity:calc(.05 + var(--e)*.95);transform:translateX(calc((1 - var(--e))*110px))}
+.wi{display:inline-block;--w:clamp(0, calc(var(--e,1)*1.8 - var(--t,0)*.8), 1);
+  opacity:var(--w);transform:translateY(calc((1 - var(--w))*.75em)) rotate(calc((1 - var(--w))*7deg));
+  transform-origin:0 100%;filter:blur(calc((1 - var(--w))*8px))}
+[data-anim="photo"] .frame{clip-path:inset(calc((1 - var(--e))*45%) 0 0 0 round 240px 240px 24px 24px)}
+[data-anim="photo"] .frame img{transform:scale(calc(1.3 - var(--e)*.3))}
+[data-anim="photo"]::after,[data-anim="photo"] figcaption{opacity:var(--e)}
+[data-anim="photo"] figcaption{transform:translateX(calc((1 - var(--e))*60px))}
+.chapter{overflow-x:clip}
+
+/* compact about */
+.about .bio h2{font-size:clamp(2.3rem,4.4vw,4rem)}
+.creds{list-style:none;margin:8px 0 0;padding:20px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px;
+  grid-template-columns:none;font:400 .8rem/1.45 var(--f-mono);color:var(--mist)}
+.creds li{padding:0;border:0;display:block}
+.creds li b{font:500 .95rem/1.4 var(--f-body);color:var(--ink);margin-right:8px}
+.pillars{margin-top:72px}
+.pillar{padding:32px 30px}
+
+/* helps marquee */
+.helps{margin-top:120px;display:flex;flex-direction:column;gap:18px}
+.center-label{justify-content:center}
+.marquee{overflow:hidden;white-space:nowrap;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marquee .track{display:inline-flex;will-change:transform}
+.marquee span{display:inline-flex;align-items:center;gap:40px;padding-right:40px;font:400 clamp(2.2rem,5.4vw,4.6rem)/1.15 var(--f-display);color:var(--ink)}
+.marquee span::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--synapse);box-shadow:0 0 16px var(--synapse)}
+.marquee em{color:var(--petal)}
+.marquee.alt span{color:transparent;-webkit-text-stroke:1px rgba(238,242,251,.55)}
+.marquee.alt em{-webkit-text-stroke:1px var(--petal)}
+
+/* FAQ: questions fly in from the right */
+.faq-head{display:flex;flex-direction:column;gap:0;margin-bottom:56px;max-width:760px}
+.faq-list{display:flex;flex-direction:column}
+.faq-list details{border-bottom:1px solid var(--line);
+  opacity:var(--e);transform:translateX(calc((1 - var(--e))*75vw)) rotate(calc((1 - var(--e))*-3deg));transform-origin:100% 50%}
+.faq-list details:first-child{border-top:1px solid var(--line)}
+.faq-list summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:56px minmax(0,1fr) 24px;align-items:center;gap:16px;padding:30px 0;transition:padding .35s ease}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:hover{padding-left:12px}
+.faq-list .qn{font:500 .75rem/1 var(--f-mono);letter-spacing:.12em;color:var(--petal)}
+.faq-list .qt{font:400 clamp(1.6rem,3vw,2.6rem)/1.15 var(--f-display);text-wrap:balance}
+.faq-list .plus{width:22px;height:22px;position:relative}
+.faq-list .plus::before,.faq-list .plus::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--ink);transition:transform .35s}
+.faq-list .plus::after{transform:rotate(90deg)}
+.faq-list details[open] .plus::after{transform:rotate(0)}
+.faq-list details p{padding:0 0 32px 72px;color:var(--mist);max-width:62ch;font-size:1.08rem;animation:ans .5s cubic-bezier(.2,.7,.2,1)}
+@keyframes ans{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+
+.plan .num{font-size:clamp(3.6rem,7vw,5.4rem)}
+.contact-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+
 /* responsive */
 @media (max-width:960px){
   .nav ul{display:none}
@@ -274,7 +330,10 @@ footer a:hover{color:var(--ink)}
   .hero h1{font-size:2.7rem}
   .hero .actions .btn-ghost{display:none}
   :root{--breath:clamp(80px,12vh,120px)}
-  .synapse{height:190vh}
+  .synapse{height:170vh}
+  .faq-list summary{grid-template-columns:32px minmax(0,1fr) 20px;gap:10px;padding:24px 0}
+  .faq-list details p{padding-left:42px}
+  .helps{margin-top:88px}
   .hero-top{top:calc(84px + env(safe-area-inset-top,0px))}
   .brand small{display:none}
   .creds ul,.who,.plans{grid-template-columns:minmax(0,1fr)}
@@ -290,6 +349,8 @@ footer a:hover{color:var(--ink)}
   .dive-stage{position:relative;height:100svh}
   .phrase,.veil{display:none}
   .synapse{height:auto}
+  [data-anim],.syn-copy{--e:1 !important}
+  .marquee .track{transform:none !important}
   .syn-stage{position:relative;height:auto;padding-block:120px}
   .reveal,.js .reveal:not(.in){opacity:1;transform:none;transition:none}
   .scroll-hint i{animation:none}
@@ -311,7 +372,7 @@ footer a:hover{color:var(--ink)}
     <ul>
       <li><a href="#sabrina">Sobre</a></li>
       <li><a href="#hipnoterapia">Hipnoterapia</a></li>
-      <li><a href="#mitos">Mitos e verdades</a></li>
+      <li><a href="#duvidas">Dúvidas</a></li>
       <li><a href="#planos">Sessões</a></li>
     </ul>
   </nav>
@@ -339,259 +400,131 @@ footer a:hover{color:var(--ink)}
 
   <!-- 2. Sabrina -->
   <section class="chapter" id="sabrina">
-    <div class="wrap">
-      <div class="about">
-        <figure class="portrait reveal">
-          <div class="frame"><img src="assets/sabrina.jpg" alt="Sabrina Fentanes sorrindo, de blusa azul-marinho" loading="lazy" width="900" height="1350"></div>
-          <figcaption><b>Sabrina Fentanes</b><span>Hipnoterapeuta</span></figcaption>
-        </figure>
-        <div class="bio reveal">
-          <div class="label">Quem vai caminhar com você</div>
-          <h2>Cuidar das pessoas sempre fez parte da <em>minha história</em>.</h2>
-          <p class="first">Durante muitos anos trabalhei com alimentação saudável, movida pelo desejo de ajudar as pessoas a viverem com mais bem-estar. Com o tempo, percebi que o equilíbrio verdadeiro não envolve apenas o corpo, mas também a mente e as emoções.</p>
-          <p>Hoje vivo fora do Brasil e compreendo de perto os desafios emocionais de morar em outro país: as mudanças internas, a saudade e a busca por pertencimento.</p>
-          <p>Através da hipnoterapia, ofereço um espaço seguro, acolhedor e respeitoso para que você possa acessar suas emoções com mais profundidade, compreender padrões internos e encontrar caminhos para viver com mais leveza.</p>
-          <blockquote class="quote">Meu trabalho é caminhar ao lado de cada pessoa nesse processo de reconexão consigo mesma.</blockquote>
-        </div>
-      </div>
-
-      <div class="creds reveal">
-        <div class="stack">
-          <div class="label">Formação</div>
-          <h3>Uma base ampla, dedicada ao equilíbrio emocional.</h3>
-        </div>
-        <ul>
-          <li><b>Hipnose Clínica Emocional</b><span>Escuela Evolución Consciente · Espanha</span></li>
-          <li><b>Hipnose Clínica</b><span>Universidade Brasileira de Hipnose</span></li>
-          <li><b>Renascimento Bio Flow</b><span>Desenvolvimento emocional</span></li>
-          <li><b>Radiestesia</b><span>Abordagem complementar</span></li>
-          <li><b>Pedagogia</b><span>Graduação</span></li>
-          <li><b>Arquitetura</b><span>Graduação</span></li>
+    <div class="wrap about">
+      <figure class="portrait" data-anim="photo">
+        <div class="frame"><img src="assets/sabrina.jpg" alt="Sabrina Fentanes sorrindo, de blusa azul-marinho" loading="lazy" width="900" height="1350"></div>
+        <figcaption><b>Sabrina Fentanes</b><span>Hipnoterapeuta</span></figcaption>
+      </figure>
+      <div class="bio">
+        <div class="label" data-anim="left">Quem vai caminhar com você</div>
+        <h2 data-anim="words">Cuidar das pessoas sempre fez parte da <em>minha história</em>.</h2>
+        <p class="first" data-anim="up">Trabalhei muitos anos com alimentação saudável até perceber que o equilíbrio verdadeiro também passa pela mente e pelas emoções.</p>
+        <p data-anim="up">Hoje vivo fora do Brasil e conheço de perto a saudade, as mudanças e a busca por pertencimento. Na hipnoterapia, ofereço um espaço seguro e acolhedor para você se reconectar consigo.</p>
+        <ul class="creds" data-anim="up">
+          <li><b>Hipnose Clínica Emocional</b> Escuela Evolución Consciente, Espanha</li>
+          <li><b>Hipnose Clínica</b> Universidade Brasileira de Hipnose</li>
+          <li><b>Renascimento Bio Flow e Radiestesia</b></li>
+          <li><b>Arquitetura e Pedagogia</b></li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- 3. What is -->
   <section class="synapse" aria-label="Transição">
-    <div class="syn-stage">
-      <div class="syn-copy">
-        <span class="syn-k">Sinapse 01 <i></i> 07</span>
-        <p class="syn-t">Cada pensamento é um <em>sinal</em> entre neurônios.</p>
-        <p class="syn-s">Quando um sinal se repete muitas vezes, ele vira um caminho. É assim que nascem os padrões emocionais.</p>
-      </div>
-    </div>
+    <div class="syn-stage"><div class="syn-copy">
+      <span class="syn-k">Sinapse 01 <i></i> 04</span>
+      <p class="syn-t">Cada pensamento é um <em>sinal</em> entre neurônios.</p>
+      <p class="syn-s">Quando um sinal se repete, ele vira um caminho. É assim que nascem os padrões emocionais.</p>
+    </div></div>
   </section>
 
+  <!-- 3. Hipnoterapia -->
   <section class="chapter" id="hipnoterapia">
-    <div class="wrap center reveal">
-      <div class="label">O que é hipnoterapia</div>
-      <h2>Um estado natural da mente,<br>usado com <em>intenção</em>.</h2>
-      <p class="lead">Sabe quando você está tão concentrado num filme ou numa leitura que quase esquece o que está ao redor? A hipnose é parecida: um estado de foco e relaxamento. Na hipnoterapia, ele é usado de forma ética e estruturada para acessar as camadas onde ficam guardados seus padrões, crenças e comportamentos.</p>
+    <div class="wrap center">
+      <div class="label" data-anim="up">O que é hipnoterapia</div>
+      <h2 data-anim="words">Um estado natural da mente, usado com <em>intenção</em>.</h2>
+      <p class="lead" data-anim="up">Sabe quando você se concentra tanto num filme que quase esquece o que está ao redor? É parecido. Nesse estado de foco, fica mais fácil acessar e dar novo sentido aos seus padrões emocionais.</p>
     </div>
     <div class="wrap pillars">
-      <div class="pillar reveal"><h3>Sem show, sem truques</h3><p>Nada de palco ou de filme. É um processo sério, cuidadoso e voltado para o seu bem-estar.</p></div>
-      <div class="pillar reveal"><h3>Você no controle</h3><p>Você permanece consciente, lúcido e no controle durante toda a sessão. Ninguém age contra os próprios valores.</p></div>
-      <div class="pillar reveal"><h3>No seu ritmo</h3><p>A condução respeita o seu tempo, a sua história e os limites que você estabelece.</p></div>
+      <div class="pillar" data-anim="left"><h3>Você no controle</h3><p>Consciente e lúcido durante toda a sessão.</p></div>
+      <div class="pillar" data-anim="up"><h3>Online, em português</h3><p>De 1h a 1h30, de onde você estiver.</p></div>
+      <div class="pillar" data-anim="right"><h3>No seu ritmo</h3><p>Respeitando sua história e seus limites.</p></div>
+    </div>
+    <div class="helps">
+      <div class="label center-label" data-anim="up">Pode ajudar com</div>
+      <div class="marquee" data-dir="-1" aria-label="Ansiedade, insegurança, medos e fobias, autossabotagem, baixa autoestima">
+        <div class="track"><span>Ansiedade</span><span>Insegurança</span><span><em>Medos e fobias</em></span><span>Autossabotagem</span><span>Baixa autoestima</span><span>Ansiedade</span><span>Insegurança</span><span><em>Medos e fobias</em></span><span>Autossabotagem</span><span>Baixa autoestima</span></div>
+      </div>
+      <div class="marquee alt" data-dir="1" aria-label="Bloqueios emocionais, indecisão, saudade de casa, adaptação a um novo país">
+        <div class="track"><span>Bloqueios emocionais</span><span><em>Indecisão</em></span><span>Saudade de casa</span><span>Adaptação a um novo país</span><span>Bloqueios emocionais</span><span><em>Indecisão</em></span><span>Saudade de casa</span><span>Adaptação a um novo país</span></div>
+      </div>
     </div>
   </section>
 
-  <!-- 4. Process -->
   <section class="synapse" aria-label="Transição">
-    <div class="syn-stage">
-      <div class="syn-copy">
-        <span class="syn-k">Sinapse 02 <i></i> 07</span>
-        <p class="syn-t">No relaxamento, as ondas cerebrais <em>desaceleram</em>.</p>
-        <p class="syn-s">Nesse estado de foco interno, fica mais fácil observar esses caminhos com calma e clareza.</p>
-      </div>
-    </div>
+    <div class="syn-stage"><div class="syn-copy">
+      <span class="syn-k">Sinapse 02 <i></i> 04</span>
+      <p class="syn-t">E você continua <em>consciente</em> o tempo todo.</p>
+      <p class="syn-s">Hipnose é atenção focada. Você ouve, lembra e decide.</p>
+    </div></div>
   </section>
 
-  <section class="chapter" id="como-funciona">
-    <div class="wrap process">
-      <div class="sticky reveal">
-        <div class="label">Como funciona na prática</div>
-        <h2>Uma sessão, <em>de dentro</em> para fora.</h2>
-        <p class="muted">Online, em português, de 1h a 1h30. Basta um lugar tranquilo e uma conexão estável.</p>
-      </div>
-      <ol class="steps">
-        <li class="reveal"><div><h3>Conversa</h3><p>Começamos entendendo o que você sente, o que se repete na sua vida e o que você deseja transformar.</p></div></li>
-        <li class="reveal"><div><h3>Relaxamento e foco</h3><p>Com orientações de relaxamento e foco da atenção, você entra num estado de concentração interna, sempre consciente.</p></div></li>
-        <li class="reveal"><div><h3>Encontrar a origem</h3><p>Nesse estado fica mais fácil identificar a origem de sintomas como ansiedade, insegurança, medos e padrões repetitivos.</p></div></li>
-        <li class="reveal"><div><h3>Ressignificar</h3><p>Essas experiências ganham um novo sentido, com mais clareza e segurança. As mudanças costumam aparecer de forma progressiva no seu dia a dia.</p></div></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- 5. Benefits -->
-  <section class="synapse" aria-label="Transição">
-    <div class="syn-stage">
-      <div class="syn-copy">
-        <span class="syn-k">Sinapse 03 <i></i> 07</span>
-        <p class="syn-t">O cérebro pode aprender <em>caminhos novos</em>.</p>
-        <p class="syn-s">A ciência chama isso de neuroplasticidade. A hipnoterapia ajuda a dar um novo sentido ao que antes se repetia.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="chapter" id="beneficios">
-    <div class="wrap center reveal">
-      <div class="label">Onde a hipnoterapia pode ajudar</div>
-      <h2>Para o que pesa <em>por dentro</em>.</h2>
-    </div>
-    <div class="benefits">
-      <span class="chip reveal">Ansiedade e preocupação excessiva</span>
-      <span class="chip reveal">Medos e fobias específicas</span>
-      <span class="chip reveal">Insegurança e baixa autoestima</span>
-      <span class="chip reveal">Autossabotagem</span>
-      <span class="chip reveal">Bloqueios emocionais</span>
-      <span class="chip reveal">Dificuldade de tomar decisões</span>
-      <span class="chip reveal">Adaptação à mudança de país</span>
-      <span class="chip reveal">Dor crônica, como parte de um cuidado integrado</span>
-    </div>
-    <p class="note reveal">Os resultados costumam ser percebidos de forma progressiva, à medida que você integra as mudanças no seu dia a dia.</p>
-  </section>
-
-  <!-- 6. Myths -->
-  <section class="synapse" aria-label="Transição">
-    <div class="syn-stage">
-      <div class="syn-copy">
-        <span class="syn-k">Sinapse 04 <i></i> 07</span>
-        <p class="syn-t">E você continua <em>consciente</em> o tempo todo.</p>
-        <p class="syn-s">Hipnose é atenção focada. Você ouve, lembra e decide.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="chapter" id="mitos">
-    <div class="wrap faq">
-      <div class="stack reveal">
-        <div class="label">Mitos e verdades</div>
-        <h2>Hipnose é <em>segura</em>?</h2>
-        <p class="muted">Sim. A hipnose terapêutica é um processo natural e seguro. Abaixo, as dúvidas que mais aparecem antes da primeira sessão.</p>
-      </div>
-      <div class="reveal">
-        <details open>
-          <summary><span class="q"><span class="tag">Mito</span>“Eu vou apagar e perder a consciência.”</span><span class="plus"></span></summary>
-          <p>Você <b>não apaga</b>. Entra num estado de atenção focada que permite acessar emoções e padrões internos com mais clareza, e lembra do que acontece.</p>
-        </details>
-        <details>
-          <summary><span class="q"><span class="tag">Mito</span>“Podem me fazer agir contra a minha vontade.”</span><span class="plus"></span></summary>
-          <p>A hipnose <b>não faz ninguém agir contra seus valores</b>. Você permanece no controle o tempo todo, e o processo respeita os limites que você estabelece.</p>
-        </details>
-        <details>
-          <summary><span class="q"><span class="tag">Verdade</span>“É um estado natural da mente.”</span><span class="plus"></span></summary>
-          <p>É o mesmo foco que você sente quando se perde numa leitura ou num filme. Na hipnoterapia, ele é <b>usado de forma intencional</b>, dentro de um processo terapêutico estruturado.</p>
-        </details>
-        <details>
-          <summary><span class="q"><span class="tag">Verdade</span>“Funciona por vídeo, a distância.”</span><span class="plus"></span></summary>
-          <p>A condução acontece por meio de conversa e orientação de foco. Por isso as sessões funcionam online: você só precisa de <b>um lugar tranquilo</b> onde possa ficar à vontade.</p>
-        </details>
-        <details>
-          <summary><span class="q"><span class="tag">Mito</span>“É mágica.”</span><span class="plus"></span></summary>
-          <p>Não é mágica. É uma <b>ferramenta profunda de autoconhecimento e transformação</b>, conduzida de forma responsável e profissional.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. Who -->
-  <section class="synapse" aria-label="Transição">
-    <div class="syn-stage">
-      <div class="syn-copy">
-        <span class="syn-k">Sinapse 05 <i></i> 07</span>
-        <p class="syn-t">Mesmo longe de casa, sua mente pode ser <em>um lugar seguro</em>.</p>
-        <p class="syn-s">A distância muda muita coisa por fora. O cuidado começa por dentro, e em português.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="chapter" id="quem">
+  <!-- 4. FAQ -->
+  <section class="chapter" id="duvidas">
     <div class="wrap">
-      <div class="center reveal">
-        <div class="label">Quem eu ajudo</div>
-        <h2>Longe de casa,<br><em>perto de si</em>.</h2>
+      <div class="faq-head">
+        <div class="label" data-anim="left">Dúvidas frequentes</div>
+        <h2 data-anim="words">As perguntas que <em>todo mundo</em> faz.</h2>
       </div>
-      <div class="who">
-        <article class="main reveal">
-          <span class="kicker">Brasileiros no exterior</span>
-          <h3>Para quem vive fora e sente falta de um espaço para se cuidar em português.</h3>
-          <p>Em meio às mudanças, às adaptações e à saudade, muitas vezes falta um lugar para se reconectar consigo mesmo e encontrar equilíbrio emocional.</p>
-          <ul><li>Saudade</li><li>Pertencimento</li><li>Adaptação</li><li>Solidão</li></ul>
-        </article>
-        <article class="reveal">
-          <span class="kicker">Brasileiros no Brasil</span>
-          <h3>Para quem quer entender e transformar padrões que se repetem.</h3>
-          <p>Também acompanho quem vive no Brasil e busca mais clareza, leveza e bem-estar diante de padrões emocionais que impactam a vida.</p>
-          <ul><li>Clareza</li><li>Leveza</li><li>Autoconfiança</li></ul>
-        </article>
+      <div class="faq-list">
+        <details data-anim="faq"><summary><span class="qn">01</span><span class="qt">Hipnose é segura?</span><span class="plus"></span></summary><p>Sim. É um processo natural e seguro, conduzido de forma ética e profissional.</p></details>
+        <details data-anim="faq"><summary><span class="qn">02</span><span class="qt">Vou perder a consciência?</span><span class="plus"></span></summary><p>Não. Você fica consciente, lúcido e lembra do que acontece. É um estado de atenção focada.</p></details>
+        <details data-anim="faq"><summary><span class="qn">03</span><span class="qt">Posso fazer algo contra a minha vontade?</span><span class="plus"></span></summary><p>Não. A hipnose não faz ninguém agir contra seus valores. Você está no controle o tempo todo.</p></details>
+        <details data-anim="faq"><summary><span class="qn">04</span><span class="qt">Funciona mesmo online?</span><span class="plus"></span></summary><p>Sim. A sessão é guiada por conversa e orientação de foco. Basta um lugar tranquilo e uma boa conexão.</p></details>
+        <details data-anim="faq"><summary><span class="qn">05</span><span class="qt">Em quanto tempo percebo resultado?</span><span class="plus"></span></summary><p>Os resultados costumam aparecer de forma progressiva, à medida que você integra as mudanças no dia a dia.</p></details>
+        <details data-anim="faq"><summary><span class="qn">06</span><span class="qt">Para quem é o atendimento?</span><span class="plus"></span></summary><p>Para brasileiros que vivem fora do Brasil e também para quem vive no Brasil e quer transformar padrões emocionais.</p></details>
       </div>
     </div>
   </section>
 
-  <!-- 8. Plans -->
   <section class="synapse" aria-label="Transição">
-    <div class="syn-stage">
-      <div class="syn-copy">
-        <span class="syn-k">Sinapse 06 <i></i> 07</span>
-        <p class="syn-t">Todo caminho novo começa com <em>um primeiro sinal</em>.</p>
-        <p class="syn-s">Escolha como você quer começar.</p>
-      </div>
-    </div>
+    <div class="syn-stage"><div class="syn-copy">
+      <span class="syn-k">Sinapse 03 <i></i> 04</span>
+      <p class="syn-t">O cérebro pode aprender <em>caminhos novos</em>.</p>
+      <p class="syn-s">A ciência chama isso de neuroplasticidade.</p>
+    </div></div>
   </section>
 
+  <!-- 5. Plans -->
   <section class="chapter" id="planos">
-    <div class="wrap center reveal">
-      <div class="label">Sessões</div>
-      <h2>Escolha como<br>quer <em>começar</em>.</h2>
+    <div class="wrap center">
+      <div class="label" data-anim="up">Sessões online</div>
+      <h2 data-anim="words">Escolha como quer <em>começar</em>.</h2>
     </div>
     <div class="plans">
-      <article class="plan reveal">
+      <article class="plan" data-anim="left">
         <div class="num">01<small>sessão</small></div>
-        <p>Sessão individual de hipnoterapia online. Ideal para conhecer o processo e sentir como ele funciona para você.</p>
-        <dl><dt>Formato</dt><dd>Online, por vídeo</dd><dt>Duração</dt><dd>1h a 1h30</dd><dt>Idioma</dt><dd>Português</dd></dl>
+        <p>Para conhecer o processo e sentir como ele funciona para você.</p>
         <a class="btn btn-solid" href="https://wa.me/34695864531?text=Ol%C3%A1%2C%20quero%20fazer%201%20sess%C3%A3o." target="_blank" rel="noopener">Agendar sessão</a>
       </article>
-      <article class="plan feat reveal">
+      <article class="plan feat" data-anim="right">
         <span class="badge">Processo completo</span>
         <div class="num">04<small>sessões</small></div>
-        <p>Pacote com 4 sessões de hipnoterapia online, para trabalhar um tema com continuidade e integrar as mudanças no dia a dia.</p>
-        <dl><dt>Formato</dt><dd>Online, por vídeo</dd><dt>Duração</dt><dd>1h a 1h30 cada</dd><dt>Idioma</dt><dd>Português</dd></dl>
+        <p>Para trabalhar um tema com continuidade e integrar as mudanças no dia a dia.</p>
         <a class="btn btn-solid" href="https://wa.me/34695864531?text=Ol%C3%A1%2C%20quero%20fazer%20o%20pacote%20com%204%20sess%C3%B5es." target="_blank" rel="noopener">Quero o pacote</a>
       </article>
     </div>
-    <p class="plans-foot reveal">Valores e horários pelo WhatsApp.</p>
+    <p class="plans-foot" data-anim="up">1h a 1h30 por sessão · valores e horários pelo WhatsApp</p>
   </section>
 
-  <!-- 9. Contact -->
   <section class="synapse" aria-label="Transição">
-    <div class="syn-stage">
-      <div class="syn-copy">
-        <span class="syn-k">Sinapse 07 <i></i> 07</span>
-        <p class="syn-t">Do outro lado, alguém <em>pronta para ouvir</em> você.</p>
-        <p class="syn-s">Sem pressa e sem julgamento.</p>
-      </div>
-    </div>
+    <div class="syn-stage"><div class="syn-copy">
+      <span class="syn-k">Sinapse 04 <i></i> 04</span>
+      <p class="syn-t">Todo caminho novo começa com <em>um primeiro sinal</em>.</p>
+    </div></div>
   </section>
 
+  <!-- 6. Contact -->
   <section class="chapter" id="contato">
     <div class="wrap contact">
-      <div class="label reveal">Fale comigo</div>
-      <h2 class="reveal">Às vezes, tudo começa<br>com <em>uma conversa</em>.</h2>
-      <p class="lead reveal">Se você tiver dúvidas ou quiser entender melhor o processo, fale comigo diretamente pelo WhatsApp. Vou ficar feliz em ouvir você.</p>
-      <a class="btn btn-solid reveal" href="https://wa.me/34695864531?text=Ol%C3%A1%20Sabrina,%20gostaria%20de%20saber%20mais%20sobre%20a%20hipnoterapia." target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm5.8 14.03c-.24.68-1.42 1.3-1.95 1.34-.5.05-.97.23-3.27-.68-2.77-1.09-4.52-3.92-4.66-4.1-.13-.18-1.11-1.48-1.11-2.82 0-1.34.7-2 .95-2.27.25-.27.54-.34.72-.34h.52c.17 0 .4-.06.62.48.24.56.8 1.94.87 2.08.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.27.71 1.17 1.52 1.9 1.05.93 1.93 1.22 2.2 1.36.27.14.43.11.59-.07.16-.18.68-.79.86-1.07.18-.27.36-.23.61-.14.25.09 1.59.75 1.86.89.27.14.45.2.52.32.07.11.07.66-.17 1.34Z"/></svg>
-        Falar comigo no WhatsApp
-      </a>
-      <span class="phone reveal">+34 695 86 45 31</span>
-
-      <div class="yt reveal">
-        <div class="stack">
-          <div class="label" style="margin-bottom:0">Conteúdos para sua jornada</div>
-          <p>No meu canal do YouTube eu falo sobre emoções, autoconhecimento e temas que ajudam você a compreender melhor a si mesmo.</p>
-        </div>
-        <a class="btn btn-ghost" href="https://www.youtube.com/@sabrinafentanes2982" target="_blank" rel="noopener">Assistir no YouTube</a>
+      <div class="label" data-anim="up">Fale comigo</div>
+      <h2 data-anim="words">Às vezes, tudo começa com <em>uma conversa</em>.</h2>
+      <p class="lead" data-anim="up">Tem dúvidas ou quer entender melhor o processo? Fale comigo pelo WhatsApp. Vou ficar feliz em ouvir você.</p>
+      <div class="contact-actions" data-anim="up">
+        <a class="btn btn-solid" href="https://wa.me/34695864531?text=Ol%C3%A1%20Sabrina,%20gostaria%20de%20saber%20mais%20sobre%20a%20hipnoterapia." target="_blank" rel="noopener">Falar no WhatsApp</a>
+        <a class="btn btn-ghost" href="https://www.youtube.com/@sabrinafentanes2982" target="_blank" rel="noopener">Canal no YouTube</a>
       </div>
+      <span class="phone" data-anim="up">+34 695 86 45 31</span>
     </div>
   </section>
 </main>
@@ -622,6 +555,26 @@ footer a:hover{color:var(--ink)}
   var dive=document.getElementById('dive'), hero=document.getElementById('hero'), heroTop=document.getElementById('heroTop'), hint=document.getElementById('hint');
   var veil=document.getElementById('veil'), nav=document.getElementById('nav');
   var phrases=[].slice.call(document.querySelectorAll('.phrase'));
+  // split headings into words so they can assemble one by one
+  function splitWords(el){
+    var words=[];
+    (function walk(node){
+      [].slice.call(node.childNodes).forEach(function(ch){
+        if(ch.nodeType===3){
+          var frag=document.createDocumentFragment();
+          ch.textContent.split(/(\s+)/).forEach(function(part){
+            if(!part) return;
+            if(/^\s+$/.test(part)){frag.appendChild(document.createTextNode(part));return}
+            var w=document.createElement('span'); w.className='wi'; w.textContent=part; words.push(w); frag.appendChild(w);
+          });
+          node.replaceChild(frag,ch);
+        } else if(ch.nodeType===1 && ch.tagName!=='BR') walk(ch);
+      });
+    })(el);
+    words.forEach(function(w,i){w.style.setProperty('--t',(words.length>1?i/(words.length-1):0).toFixed(3))});
+  }
+  [].slice.call(document.querySelectorAll('[data-anim="words"], .syn-t')).forEach(splitWords);
+  var anims=[].slice.call(document.querySelectorAll('[data-anim]'));
   var diveLen=1, maxS=1, syns=[].slice.call(document.querySelectorAll('.synapse')), synTop=[], synLen=[];
   function clamp(v){return v<0?0:v>1?1:v}
   function ss(a,b,x){x=clamp((x-a)/(b-a));return x*x*(3-2*x)}
@@ -633,11 +586,17 @@ footer a:hover{color:var(--ink)}
     var tr=0; syns.forEach(function(el,i){
       var q=clamp((y-synTop[i])/synLen[i]); tr+=q;
       if(reduce) return;
-      var c=el.firstElementChild.firstElementChild, o=ss(.1,.3,q)*(1-ss(.72,.92,q));
-      c.style.opacity=o; c.style.transform='translateY('+((.5-q)*90)+'px) scale('+(.96+o*.04)+')';
+      var c=el.firstElementChild.firstElementChild, o=ss(.04,.16,q)*(1-ss(.74,.92,q));
+      c.style.opacity=o; c.style.transform='translateY('+((.5-q)*70)+'px)';
+      c.style.setProperty('--e', ss(.06,.42,q).toFixed(3));
     });
     SF.track=tr;
     if(reduce) return;
+    var vh=innerHeight;
+    for(var i=0;i<anims.length;i++){ var el=anims[i], r=el.getBoundingClientRect();
+      if(r.bottom<-200||r.top>vh+200) continue;
+      var e=clamp((vh-r.top)/(vh*(el.dataset.anim==='faq'?.42:.62)));
+      el.style.setProperty('--e', e.toFixed(3)); }
     var p=SF.p;
     var h=1-ss(.02,.2,p);
     hero.style.opacity=h; hero.style.transform='translateY('+(-p*160)+'px) scale('+(1-p*.25)+')';
@@ -666,6 +625,7 @@ footer a:hover{color:var(--ink)}
   // Brainwave gauge: the deeper you scroll, the slower the wave (beta -> alpha -> theta)
   var cv=document.getElementById('wave'),cx=cv.getContext('2d'),hz=document.getElementById('gHz'),st=document.getElementById('gSt');
   var phase=0,last=performance.now(),shownHz=-1;
+  var marq=[].slice.call(document.querySelectorAll('.marquee')).map(function(m){return {t:m.firstElementChild,dir:+m.dataset.dir}});
   function bands(d){ // d: 0..1 depth
     var f=18-13*d; // 18 Hz -> 5 Hz
     var s=f>=13?['β','Vigília']:f>=8?['α','Relaxamento']:['θ','Foco interno'];
@@ -680,7 +640,11 @@ footer a:hover{color:var(--ink)}
     cx.lineWidth=2.2; cx.strokeStyle=d>.62?'#F2C9BC':'#9DB4FF'; cx.beginPath();
     var cyc=1.2+b.f*.22, amp=h*(.16+.22*d);
     for(var x=0;x<=w;x+=2){var t=x/w; var yv=h/2+Math.sin(t*cyc*6.283+phase)*amp*Math.sin(t*3.1416); x?cx.lineTo(x,yv):cx.moveTo(x,yv)}
-    cx.stroke(); requestAnimationFrame(draw);
+    cx.stroke();
+    for(var mi=0;mi<marq.length;mi++){ var mq=marq[mi], half=mq.t.scrollWidth/2||1;
+      var off=((reduce?0:now*.02)+scrollY*.35)*mq.dir; var xx=-(((off%half)+half)%half);
+      mq.t.style.transform='translate3d('+xx+'px,0,0)'; }
+    requestAnimationFrame(draw);
   }
   requestAnimationFrame(draw);
 })();
