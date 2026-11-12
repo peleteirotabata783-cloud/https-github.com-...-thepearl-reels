@@ -61,9 +61,11 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:va
 .head-tools.right{justify-content:flex-end}
 .logo{font-family:var(--font-sans);font-weight:300;font-size:27px;letter-spacing:.42em;margin-right:-.42em;white-space:nowrap;line-height:1}
 .logo i{font-style:normal;display:inline-block;width:.32em;height:.32em;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0,#efe9df 30%,var(--nacre) 100%);vertical-align:.05em;margin:0 0 0 -.18em;box-shadow:0 0 0 .5px rgba(0,0,0,.08)}
-.bag{position:relative}
-.bag b{position:absolute;top:-6px;right:-9px;font-size:9px;font-weight:500;min-width:15px;height:15px;border-radius:8px;background:var(--ink);color:var(--paper);display:grid;place-items:center;padding:0 4px;transition:transform .3s var(--ease)}
-.bag b[data-n="0"]{transform:scale(0)}
+.bag,.favbtn{position:relative}
+.favbtn svg{transition:fill .25s}
+.favbtn.has svg{fill:currentColor}
+.bag b,.favbtn b{position:absolute;top:-6px;right:-9px;font-size:9px;font-weight:500;min-width:15px;height:15px;border-radius:8px;background:var(--ink);color:var(--paper);display:grid;place-items:center;padding:0 4px;transition:transform .3s var(--ease)}
+.bag b[data-n="0"],.favbtn b[data-n="0"]{transform:scale(0)}
 nav.main{display:flex;justify-content:center;gap:34px;padding-block:12px 14px}
 nav.main > div > a{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:400;position:relative;padding-block:6px}
 nav.main > div > a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
@@ -207,8 +209,11 @@ footer li a:hover{color:var(--pearl)}
 /* ---------- Sacola (gaveta) ---------- */
 .veil{position:fixed;inset:0;z-index:80;background:var(--scrim);opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s}
 .drawer{position:fixed;z-index:90;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--paper);transform:translateX(100%);transition:transform .5s var(--ease);display:flex;flex-direction:column;padding:calc(24px + env(safe-area-inset-top,0px)) max(28px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) 28px}
-.open-bag .veil,.open-nav .veil{opacity:1;visibility:visible}
-.open-bag .drawer{transform:none}
+.open-bag .veil,.open-nav .veil,.open-fav .veil{opacity:1;visibility:visible}
+.open-bag #drawer,.open-fav #fav-drawer{transform:none}
+.fav-sizes{display:flex;gap:4px;flex-wrap:wrap;margin-top:10px}
+.line-item .fav-sizes button{text-decoration:none;color:var(--ink);min-width:32px;height:28px;font-size:10px;letter-spacing:.06em;border:1px solid var(--line);transition:border-color .2s,background .2s,color .2s}
+.line-item .fav-sizes button:hover{border-color:var(--ink)}
 .drawer header{position:static;background:none;border:0;display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--line)}
 .lines-list{flex:1;overflow:auto;padding-block:8px}
 .line-item{display:grid;grid-template-columns:72px 1fr auto;gap:16px;padding-block:16px;border-bottom:1px solid var(--line);align-items:start}
@@ -310,7 +315,7 @@ footer li a:hover{color:var(--pearl)}
     <a href="#top" class="logo" aria-label="BK Modas, página inicial">BK MODAS</a>
     <div class="head-tools right">
       <a href="#conta" class="hide-m" aria-label="Minha conta"><svg class="icon"><use href="#i-user"/></svg></a>
-      <a href="#novidades" class="hide-m" aria-label="Favoritos"><svg class="icon"><use href="#i-heart"/></svg></a>
+      <button type="button" class="favbtn" id="fav-open" aria-label="Abrir favoritos"><svg class="icon"><use href="#i-heart"/></svg><b id="fav-count" data-n="0">0</b></button>
       <button type="button" class="bag" id="bag-open" aria-label="Abrir sacola"><svg class="icon"><use href="#i-bag"/></svg><b id="bag-count" data-n="0">0</b></button>
     </div>
   </div>
@@ -476,6 +481,10 @@ footer li a:hover{color:var(--pearl)}
     <button type="button" class="btn solid" id="checkout">Finalizar compra</button>
   </div>
 </aside>
+<aside class="drawer" id="fav-drawer" aria-label="Favoritos">
+  <header><span class="label">Favoritos (<span id="fav-n">0</span>)</span><button type="button" id="fav-close" aria-label="Fechar favoritos"><svg class="icon"><use href="#i-close"/></svg></button></header>
+  <div class="lines-list" id="fav-lines"></div>
+</aside>
 <nav class="mnav" id="mnav" aria-label="Menu móvel">
   <div style="display:flex;justify-content:space-between;align-items:center"><span class="logo" style="font-size:18px">BK MODAS</span><button type="button" id="menu-close" aria-label="Fechar menu"><svg class="icon"><use href="#i-close"/></svg></button></div>
   <ul>
@@ -542,7 +551,7 @@ footer li a:hover{color:var(--pearl)}
       const on=fav.getAttribute("aria-pressed")!=="true";
       document.querySelectorAll(`.card[data-id="${prod.id}"] .fav`).forEach(f=>f.setAttribute("aria-pressed",on));
       on?favs.add(prod.id):favs.delete(prod.id);
-      try{localStorage.setItem("tp-favs",JSON.stringify([...favs]))}catch(e){}
+      saveFavs();
       toast(on?"Adicionado aos favoritos":"Removido dos favoritos"); return;
     }
     if(e.target.closest(".plus")){cardEl.classList.toggle("open");return}
@@ -578,15 +587,41 @@ footer li a:hover{color:var(--pearl)}
       :`<div class="empty"><strong>Sua sacola está vazia</strong>Escolha um tamanho em qualquer peça para adicionar.</div>`;
   }
   updateBag();
+
+  // Favoritos
+  function saveFavs(){
+    try{localStorage.setItem("tp-favs",JSON.stringify([...favs]))}catch(e){}
+    updateFavs();
+  }
+  function updateFavs(){
+    const list=P.filter(x=>favs.has(x.id)), n=list.length;
+    const fc=document.getElementById("fav-count"); fc.textContent=n; fc.dataset.n=n;
+    document.getElementById("fav-open").classList.toggle("has",n>0);
+    document.getElementById("fav-n").textContent=n;
+    document.getElementById("fav-lines").innerHTML=n?list.map(x=>`
+      <div class="line-item" data-id="${x.id}"><img src="img/${x.img}" alt=""><div><h5>${x.n}</h5><small>${fmt(x.p)} · 10x de ${fmt(Math.round(x.p/10*100)/100)}</small>
+        <div class="fav-sizes" role="group" aria-label="Adicionar à sacola no tamanho">${sizes.map(z=>`<button type="button" data-s="${z}">${z}</button>`).join("")}</div></div>
+        <button type="button" data-unfav="${x.id}">Remover</button></div>`).join("")
+      :`<div class="empty"><strong>Nenhum favorito ainda</strong>Toque no coração de uma peça para guardar aqui.</div>`;
+  }
+  updateFavs();
+  document.getElementById("fav-lines").addEventListener("click",e=>{
+    const un=e.target.closest("[data-unfav]");
+    if(un){const id=+un.dataset.unfav;favs.delete(id);document.querySelectorAll(`.card[data-id="${id}"] .fav`).forEach(f=>f.setAttribute("aria-pressed","false"));saveFavs();return}
+    const z=e.target.closest(".fav-sizes button");
+    if(z){const prod=P.find(x=>x.id==z.closest(".line-item").dataset.id);bag.push({...prod,size:z.dataset.s});updateBag();toast(`${prod.n.split(" ").slice(0,2).join(" ")} · ${z.dataset.s} na sacola`)}
+  });
   document.getElementById("lines").addEventListener("click",e=>{const b=e.target.closest("[data-rm]");if(b){bag.splice(+b.dataset.rm,1);updateBag()}});
   const root=document.documentElement;
   document.getElementById("bag-open").onclick=()=>root.classList.add("open-bag");
   document.getElementById("bag-close").onclick=()=>root.classList.remove("open-bag");
+  document.getElementById("fav-open").onclick=()=>root.classList.add("open-fav");
+  document.getElementById("fav-close").onclick=()=>root.classList.remove("open-fav");
   document.getElementById("menu-open").onclick=()=>root.classList.add("open-nav");
   document.getElementById("menu-close").onclick=()=>root.classList.remove("open-nav");
-  document.getElementById("veil").onclick=()=>root.classList.remove("open-bag","open-nav");
+  document.getElementById("veil").onclick=()=>root.classList.remove("open-bag","open-nav","open-fav");
   document.querySelectorAll(".mnav a").forEach(a=>a.addEventListener("click",()=>root.classList.remove("open-nav")));
-  document.addEventListener("keydown",e=>{if(e.key==="Escape")root.classList.remove("open-bag","open-nav")});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")root.classList.remove("open-bag","open-nav","open-fav")});
   document.getElementById("checkout").onclick=()=>toast(bag.length?"Prévia: o checkout entra na próxima fase":"Adicione uma peça primeiro");
 
   // Avisos rotativos
