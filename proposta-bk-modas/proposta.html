@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Proposta · Site BK Modas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap">
+<style>
+:root{--pearl:#F7F7F5;--paper:#fff;--studio:#E3E5E6;--ink:#121212;--soft:#5E6062;--line:#DCDDDB;--nacre:#A8977E;
+--sans:"Jost","Futura","Helvetica Neue",Arial,sans-serif;--serif:"EB Garamond","Didot",Georgia,serif}
+@page{size:1920px 1080px;margin:0}
+*{box-sizing:border-box}
+body{margin:0;background:#888;font-family:var(--sans);font-weight:300;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.s{width:1920px;height:1080px;position:relative;overflow:hidden;background:var(--pearl);page-break-after:always;break-after:page;padding:110px 130px}
+.s:last-child{page-break-after:auto}
+.k{font-size:20px;letter-spacing:.3em;text-transform:uppercase;font-weight:400;color:var(--soft)}
+h2{font-family:var(--serif);font-weight:300;font-size:96px;line-height:1;margin:22px 0 0}
+h2 em{font-style:italic}
+.foot{position:absolute;left:130px;right:130px;bottom:56px;display:flex;justify-content:space-between;font-size:17px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);border-top:1px solid var(--line);padding-top:22px}
+.logo{font-weight:300;letter-spacing:.42em}
+
+/* 1 capa */
+.cover{padding:0;color:#fff;background:#1d2530}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 30%}
+.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,12,18,.72),rgba(8,12,18,.08) 62%)}
+.cover .c{position:absolute;z-index:1;left:150px;top:50%;transform:translateY(-50%)}
+.cover .k{color:rgba(255,255,255,.8)}
+.cover h1{margin:34px 0 26px;font-weight:300;font-size:116px;letter-spacing:.32em;line-height:1}
+.cover p{margin:0;font-family:var(--serif);font-style:italic;font-size:52px}
+.cover .d{position:absolute;z-index:1;left:150px;bottom:70px;font-size:18px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+
+/* 2 o site */
+.site{display:grid;grid-template-columns:1fr 1.45fr;gap:90px;align-items:center}
+.site ul{list-style:none;padding:0;margin:48px 0 0;display:grid;gap:24px}
+.site li{font-size:28px;line-height:1.35;padding-left:34px;position:relative}
+.site li:before{content:"";position:absolute;left:0;top:.55em;width:12px;height:12px;border-radius:50%;background:var(--nacre)}
+.site li b{font-weight:400}
+.frame{position:relative;height:760px}
+.frame .desk{position:absolute;left:0;top:0;width:92%;border-radius:14px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.18);border:1px solid var(--line)}
+.frame .desk img,.frame .mob img{display:block;width:100%}
+.frame .mob{position:absolute;right:0;bottom:0;width:250px;border-radius:30px;overflow:hidden;border:8px solid #121212;box-shadow:0 30px 60px rgba(0,0,0,.25)}
+
+/* 3 planos */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:64px}
+.plan{background:var(--paper);border:1px solid var(--line);padding:56px 60px;display:flex;flex-direction:column}
+.plan.dark{background:var(--ink);color:var(--pearl);border-color:var(--ink)}
+.plan .tag{font-size:18px;letter-spacing:.28em;text-transform:uppercase;font-weight:400;color:var(--nacre)}
+.plan h3{font-family:var(--serif);font-weight:300;font-size:64px;margin:14px 0 6px;line-height:1}
+.plan .price{font-size:84px;font-weight:300;letter-spacing:.02em;margin:22px 0 4px;font-variant-numeric:tabular-nums}
+.plan .price small{font-size:28px;margin-right:8px;vertical-align:.9em}
+.plan .once{font-size:20px;color:var(--soft)}
+.plan.dark .once{color:rgba(247,247,245,.6)}
+.plan ul{list-style:none;padding:28px 0 0;margin:28px 0 0;border-top:1px solid var(--line);display:grid;gap:16px}
+.plan.dark ul{border-color:rgba(247,247,245,.18)}
+.plan li{font-size:25px;line-height:1.35;padding-left:36px;position:relative}
+.plan li:before{content:"✓";position:absolute;left:0;color:var(--nacre)}
+.plan li.plus{font-weight:400}
+
+/* 4 manutenção */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:64px}
+.tier{border:1px solid var(--line);background:var(--paper);padding:48px 50px}
+.tier.mid{border-color:var(--ink)}
+.tier .n{font-family:var(--serif);font-size:120px;line-height:.9;font-weight:300}
+.tier .u{font-size:20px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);margin-top:8px}
+.tier .v{font-size:58px;margin-top:40px;padding-top:30px;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
+.tier .v small{font-size:22px;color:var(--soft);margin-left:6px}
+.ex{margin-top:56px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.ex span{font-size:22px;border:1px solid var(--line);border-radius:999px;padding:12px 26px;background:var(--paper)}
+.ex b{font-weight:400;font-size:20px;letter-spacing:.2em;text-transform:uppercase;margin-right:10px;color:var(--soft)}
+
+/* 5 pagamento */
+.pay{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:64px}
+.way{background:var(--paper);border:1px solid var(--line);padding:50px 50px 54px}
+.way .t{font-size:20px;letter-spacing:.26em;text-transform:uppercase;font-weight:400;color:var(--nacre)}
+.way h3{font-family:var(--serif);font-weight:300;font-size:54px;line-height:1.05;margin:16px 0 20px}
+.way p{font-size:25px;line-height:1.45;margin:0;color:var(--soft)}
+.note{margin-top:44px;background:var(--ink);color:var(--pearl);padding:36px 50px;display:flex;gap:40px;align-items:center}
+.note strong{font-size:20px;letter-spacing:.24em;text-transform:uppercase;font-weight:400;white-space:nowrap;color:var(--nacre)}
+.note p{margin:0;font-size:25px;line-height:1.45}
+
+/* 6 próximos passos */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;margin-top:80px}
+.step .n{font-family:var(--serif);font-style:italic;font-size:64px;color:var(--nacre);line-height:1}
+.step h3{font-size:30px;font-weight:400;margin:22px 0 14px}
+.step p{font-size:25px;line-height:1.45;color:var(--soft);margin:0}
+.close{margin-top:110px;font-family:var(--serif);font-style:italic;font-size:62px;line-height:1.15}
+</style>
+</head>
+<body>
+
+<section class="s cover">
+  <img src="hero.jpg" alt="">
+  <div class="c">
+    <div class="k">Proposta de site</div>
+    <h1>BK MODAS</h1>
+    <p>A sua loja, com cara de grife.</p>
+  </div>
+  <div class="d">Novembro de 2026</div>
+</section>
+
+<section class="s site">
+  <div>
+    <div class="k">01 · O site</div>
+    <h2>Pronto para <em>vender</em></h2>
+    <ul>
+      <li><b>Visual de grife</b>, no padrão das grandes marcas de moda</li>
+      <li><b>Novidades</b> com filtros por categoria e tamanhos</li>
+      <li><b>Mais vendidos</b>: coleções e peças em destaque</li>
+      <li><b>Favoritos e sacola</b> para a cliente montar o pedido</li>
+      <li><b>Perfeito no celular</b>, onde está a maior parte das clientes</li>
+    </ul>
+  </div>
+  <div class="frame">
+    <div class="desk"><img src="shot-desk.jpg" alt=""></div>
+    <div class="mob"><img src="shot-mob.jpg" alt=""></div>
+  </div>
+  <div class="foot"><span class="logo">BK MODAS</span><span>Proposta de site</span></div>
+</section>
+
+<section class="s">
+  <div class="k">02 · Planos</div>
+  <h2>Escolha o <em>formato</em> da sua loja</h2>
+  <div class="plans">
+    <div class="plan">
+      <span class="tag">Site vitrine</span>
+      <h3>Pagamento direto com você</h3>
+      <div class="price"><small>R$</small>600</div>
+      <div class="once">Valor único</div>
+      <ul>
+        <li>O site pronto, do jeito que você viu</li>
+        <li>Catálogo com fotos, preços e tamanhos</li>
+        <li>A cliente escolhe as peças e fecha a compra direto com você</li>
+        <li>Você recebe do seu jeito: Pix, cartão ou na loja</li>
+      </ul>
+    </div>
+    <div class="plan dark">
+      <span class="tag">Loja online</span>
+      <h3>Compra dentro do site</h3>
+      <div class="price"><small>R$</small>1.000</div>
+      <div class="once">Valor único</div>
+      <ul>
+        <li class="plus">Tudo do site vitrine, e mais:</li>
+        <li>A cliente paga dentro do próprio site</li>
+        <li>Carrinho e finalização da compra online</li>
+        <li>Você vende 24 horas, mesmo com a loja fechada</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span class="logo">BK MODAS</span><span>Proposta de site</span></div>
+</section>
+
+<section class="s">
+  <div class="k">03 · Manutenção mensal (opcional)</div>
+  <h2>Seu catálogo sempre <em>em dia</em></h2>
+  <div class="tiers">
+    <div class="tier"><div class="n">5</div><div class="u">Alterações por mês</div><div class="v">R$ 70<small>/mês</small></div></div>
+    <div class="tier mid"><div class="n">10</div><div class="u">Alterações por mês</div><div class="v">R$ 90<small>/mês</small></div></div>
+    <div class="tier"><div class="n">15</div><div class="u">Alterações por mês</div><div class="v">R$ 150<small>/mês</small></div></div>
+  </div>
+  <div class="ex"><b>Exemplos</b><span>Trocar o catálogo</span><span>Incluir roupas novas</span><span>Marcar peça esgotada</span><span>Lançar nova coleção</span><span>Tirar coleção do ar</span><span>Mudar preços</span></div>
+  <div class="foot"><span class="logo">BK MODAS</span><span>Proposta de site</span></div>
+</section>
+
+<section class="s">
+  <div class="k">04 · Pagamento</div>
+  <h2>Do jeito que for <em>melhor</em> para você</h2>
+  <div class="pay">
+    <div class="way"><span class="t">Pix</span><h3>Valor direto, sem acréscimo</h3><p>Você paga exatamente o valor do plano escolhido.</p></div>
+    <div class="way"><span class="t">Em duas etapas</span><h3>50% no início, 50% na entrega</h3><p>Metade para começar e a outra metade quando o site estiver pronto.</p></div>
+    <div class="way"><span class="t">Cartão de crédito</span><h3>Em até 4x</h3><p>Com o acréscimo da maquininha, a parcela fica um pouco maior: a partir de cerca de R$ 190.</p></div>
+  </div>
+  <div class="note"><strong>Por fora</strong><p>Domínio (o endereço, como bkmodas.com.br) e hospedagem (o serviço que mantém o site no ar) não estão inclusos e são pagos à parte.</p></div>
+  <div class="foot"><span class="logo">BK MODAS</span><span>Proposta de site</span></div>
+</section>
+
+<section class="s">
+  <div class="k">05 · Próximos passos</div>
+  <h2>Vamos <em>conversar</em></h2>
+  <div class="steps">
+    <div class="step"><div class="n">Primeiro</div><h3>Você conta o que quer</h3><p>O que gostou, o que não quer, as cores, as fotos e as peças da BK Modas.</p></div>
+    <div class="step"><div class="n">Depois</div><h3>Ajustes no site</h3><p>O site ganha a cara da sua marca, com o seu catálogo de verdade.</p></div>
+    <div class="step"><div class="n">Por fim</div><h3>Site no ar</h3><p>Entrega, publicação e, se quiser, manutenção todo mês.</p></div>
+  </div>
+  <p class="close">Agradeço a atenção.<br>Vamos deixar a BK Modas linda na internet.</p>
+  <div class="foot"><span class="logo">BK MODAS</span><span>Proposta de site</span></div>
+</section>
+
+</body>
+</html>
