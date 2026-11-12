@@ -1129,11 +1129,39 @@ Promise.race([document.fonts ? document.fonts.load('400 118px "Instrument Serif"
 const tmpW = new THREE.Vector3();
 
 /* ---------- morphing form: one meaningful shape per chapter ----------
-   lotus (Sabrina) → hypnotic spiral → double helix of patterns → orbits (paths) → the brain again */
+   lotus (Sabrina) → hypnotic spiral → a neuron (where patterns live) → orbits (paths) → the brain again */
 const SH = 5, MC = small ? 6000 : 12000;
 const shapes = Array.from({length:SH}, () => new Float32Array(MC*3));
 const mDir = new Float32Array(MC*3), mRand = new Float32Array(MC);
 const setP = (a,i,x,y,z) => { a[i*3]=x; a[i*3+1]=y; a[i*3+2]=z; };
+// neuron skeleton: soma, branching dendrites, a long axon with myelin beads and terminal branches
+const NSEG = [];
+(function(){
+  const V = (x,y,z) => new THREE.Vector3(x,y,z);
+  function branch(p, d, len, depth){
+    let q = p.clone(); const dir = d.clone().normalize();
+    for(let k=0;k<5;k++){
+      dir.add(rv().multiplyScalar(.3)).normalize();
+      const n2 = q.clone().addScaledVector(dir, len/5);
+      NSEG.push([q, n2, .018*(1-depth*.3)]);
+      if(depth<2 && rnd()<.3) branch(n2, dir.clone().add(rv().multiplyScalar(.8)), len*.5, depth+1);
+      q = n2;
+    }
+  }
+  const soma = V(0,.65,0);
+  for(let b=0;b<8;b++){ const a=b/8*Math.PI*2, d=V(Math.cos(a), .5+rnd()*.6, Math.sin(a)*.6);
+    branch(soma.clone().addScaledVector(d.clone().normalize(), .16), d, .55+rnd()*.35, 0); }
+  let q = V(0,.48,0);
+  for(let k=0;k<22;k++){ const n2=V(Math.sin(k*.45)*.06, .48-(k+1)*.075, Math.cos(k*.5)*.04); NSEG.push([q, n2, k%3===1 ? .06 : .018]); q=n2; }
+  for(let b=0;b<6;b++) branch(q.clone(), V(Math.cos(b*1.05)*.8, -1, Math.sin(b*1.05)*.8), .4, 1);
+})();
+const NCUM = []; let NTOT = 0; for(const sg of NSEG){ NTOT += sg[0].distanceTo(sg[1]); NCUM.push(NTOT); }
+function neuronPoint(i){
+  if(rnd()<.15){ const u=randDir(), r=.17*Math.cbrt(rnd()); setP(shapes[2],i,u[0]*r,.65+u[1]*r*.9,u[2]*r); return; }
+  const x = rnd()*NTOT; let lo=0, hi=NCUM.length-1; while(lo<hi){ const mid=(lo+hi)>>1; if(NCUM[mid]<x) lo=mid+1; else hi=mid; }
+  const sg = NSEG[lo], f = rnd(), th = sg[2], j = rv().multiplyScalar(th*Math.cbrt(rnd()));
+  setP(shapes[2],i, sg[0].x+(sg[1].x-sg[0].x)*f+j.x, sg[0].y+(sg[1].y-sg[0].y)*f+j.y, sg[0].z+(sg[1].z-sg[0].z)*f+j.z);
+}
 for(let i=0;i<MC;i++){
   const d = randDir(); setP(mDir,i,d[0],d[1],d[2]); mRand[i] = rnd();
   { // lotus
@@ -1146,11 +1174,7 @@ for(let i=0;i<MC;i++){
   { // spiral
     const t=rnd(), arm=rnd()<.5?0:Math.PI, th=t*Math.PI*7+arm, r=.06+t*1.2, j=(rnd()-.5)*.05*(1+t);
     setP(shapes[1],i, Math.cos(th)*r+j, Math.sin(th)*r+j, -t*.3+(rnd()-.5)*.05); }
-  { // double helix with rungs
-    const t=rnd(), R=.42;
-    if(rnd()<.78){ const th=t*Math.PI*5+(rnd()<.5?0:Math.PI), y=(t-.5)*2.6;
-      setP(shapes[2],i, Math.cos(th)*R+(rnd()-.5)*.05, y+(rnd()-.5)*.05, Math.sin(th)*R+(rnd()-.5)*.05); }
-    else { const q=Math.round(t*28)/28, th=q*Math.PI*5, f=rnd()*2-1; setP(shapes[2],i, Math.cos(th)*R*f, (q-.5)*2.6, Math.sin(th)*R*f); } }
+  neuronPoint(i); // a neuron
   { // orbits around a core
     if(rnd()<.25){ const u=randDir(), r=.22*Math.cbrt(rnd()); setP(shapes[3],i,u[0]*r,u[1]*r,u[2]*r); }
     else { const k=Math.floor(rnd()*3), a=rnd()*Math.PI*2, R=[.6,.9,1.2][k], tilt=[.3,-.5,1.1][k], spin=[0,1.2,2.2][k], j=(rnd()-.5)*.04;
@@ -1189,7 +1213,7 @@ const morph = new THREE.Points(mgeo, new THREE.ShaderMaterial({
 }));
 const morphG = new THREE.Group(); morphG.add(morph); camera.add(morphG); scene.add(camera);
 const MPX = small ? [0,0,0,0,0] : [1.25,1.3,1.4,1.25,0];
-const MPY = small ? [1.2,.95,.95,.95,.9] : [-.7,0,0,0,0];
+const MPY = small ? [1.2,.95,.55,.95,.9] : [-.7,0,-.4,0,0];
 const MSC = small ? [.6,.55,.5,.55,.55] : [1.05,1,.95,1,.85];
 
 /* ---------- bloom ---------- */
