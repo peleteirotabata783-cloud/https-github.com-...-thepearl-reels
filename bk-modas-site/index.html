@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#121212">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BK Modas">
+<meta property="og:title" content="BK Modas · Lançamento Resort">
+<meta property="og:description" content="Moda feminina: vestidos, alfaiataria em linho e seda. Conheça a nova coleção Resort.">
+<meta property="og:image" content="https://bkmodas.netlify.app/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>body{margin:0}</style>
+<title>BK Modas</title>
+<meta name="description" content="BK Modas — moda feminina. Coleção Resort.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&display=swap">
+<style>
+/* Layout: galeria silenciosa — logo central espaçado, imagem de campanha a sangrar, painéis recortados, grade de 4 colunas em fundo de estúdio cinza-pérola */
+:root{
+  --pearl:#F7F7F5;      /* fundo: branco-pérola frio */
+  --paper:#FFFFFF;      /* superfícies elevadas */
+  --studio:#E3E5E6;     /* cinza de estúdio, atrás das fotos */
+  --ink:#121212;        /* texto principal */
+  --ink-soft:#5E6062;   /* texto secundário */
+  --line:#DCDDDB;       /* filetes */
+  --nacre:#A8977E;      /* acento: madrepérola dourada, usado com parcimônia */
+  --on-image:#FFFFFF;
+  --scrim:rgba(10,10,10,.42);
+  --font-sans:"Jost","Futura","Avenir Next","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Cormorant","Cormorant Garamond","Didot","Bodoni 72",Georgia,serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --gutter:max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --pearl:#0F0F0F; --paper:#171717; --studio:#1F2021; --ink:#EDECE8; --ink-soft:#9C9B97;
+    --line:#2A2A2A; --nacre:#C9B596; --scrim:rgba(0,0,0,.55); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --pearl:#0F0F0F; --paper:#171717; --studio:#1F2021; --ink:#EDECE8; --ink-soft:#9C9B97;
+  --line:#2A2A2A; --nacre:#C9B596; --scrim:rgba(0,0,0,.55); color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--pearl);color:var(--ink);font-family:var(--font-sans);font-weight:300;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+img{display:block;max-width:100%}
+:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
+.wrap{padding-left:var(--gutter);padding-right:var(--gutter-r)}
+.inner{max-width:1440px;margin:0 auto}
+.label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:400}
+.icon{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.1}
+
+/* ---------- Barra de anúncio ---------- */
+.announce{background:var(--ink);color:var(--pearl)}
+.announce .inner{display:flex;align-items:center;justify-content:center;gap:18px;min-height:36px}
+.announce p{margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:center;min-width:0}
+.announce p u{text-underline-offset:4px;margin-left:10px}
+.announce button{opacity:.7;display:grid;place-items:center;width:24px;height:24px}
+.announce button:hover{opacity:1}
+.announce .msg{transition:opacity .4s var(--ease)}
+
+/* ---------- Cabeçalho ---------- */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--paper);border-bottom:1px solid var(--line)}
+.head-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding-block:18px 6px}
+.head-tools{display:flex;gap:18px;align-items:center}
+.head-tools.right{justify-content:flex-end}
+.logo{font-family:var(--font-sans);font-weight:300;font-size:27px;letter-spacing:.42em;margin-right:-.42em;white-space:nowrap;line-height:1}
+.logo i{font-style:normal;display:inline-block;width:.32em;height:.32em;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0,#efe9df 30%,var(--nacre) 100%);vertical-align:.05em;margin:0 0 0 -.18em;box-shadow:0 0 0 .5px rgba(0,0,0,.08)}
+.bag,.favbtn{position:relative}
+.favbtn svg{transition:fill .25s}
+.favbtn.has svg{fill:currentColor}
+.bag b,.favbtn b{position:absolute;top:-6px;right:-9px;font-size:9px;font-weight:500;min-width:15px;height:15px;border-radius:8px;background:var(--ink);color:var(--paper);display:grid;place-items:center;padding:0 4px;transition:transform .3s var(--ease)}
+.bag b[data-n="0"],.favbtn b[data-n="0"]{transform:scale(0)}
+nav.main{display:flex;justify-content:center;gap:34px;padding-block:12px 14px}
+nav.main > div > a{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:400;position:relative;padding-block:6px}
+nav.main > div > a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+nav.main > div:hover > a::after,nav.main > div:focus-within > a::after{transform:scaleX(1)}
+nav.main a.bf{font-weight:500}
+.menu-btn{display:none}
+
+/* Mega menu */
+.mega{position:absolute;left:0;right:0;top:100%;background:var(--paper);border-bottom:1px solid var(--line);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s}
+nav.main > div:hover .mega,nav.main > div:focus-within .mega{opacity:1;visibility:visible;transform:none}
+.mega .inner{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:48px;padding-block:40px 48px}
+.mega h4{margin:0 0 22px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500}
+.mega ul{list-style:none;margin:0;padding:0;display:grid;gap:12px 32px}
+.mega .cats ul{grid-template-columns:repeat(3,auto);justify-content:start}
+.mega .lines{border-left:1px solid var(--line);padding-left:48px}
+.mega .lines ul{grid-template-columns:repeat(2,auto);justify-content:start}
+.mega li a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);transition:color .2s}
+.mega li a:hover{color:var(--ink)}
+.mega li a.all{color:var(--ink);font-weight:500}
+.mega figure{margin:0;position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--studio)}
+.mega figure img{width:100%;height:100%;object-fit:cover;object-position:center 25%}
+.mega figcaption{position:absolute;left:20px;bottom:18px;color:var(--on-image);display:flex;align-items:baseline;gap:14px}
+.mega figcaption span{font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+.mega figcaption strong{font-weight:300;font-size:26px;letter-spacing:.4em}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;height:clamp(460px,78vh,820px);overflow:hidden;background:#1d2530;color:var(--on-image)}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% 30%;transform:scale(1.06);animation:settle 2.4s var(--ease) forwards}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,12,18,.55) 0%,rgba(8,12,18,.1) 45%,rgba(8,12,18,.25) 100%)}
+.hero .copy{position:relative;z-index:1;height:100%;max-width:1440px;margin:0 auto;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:22px}
+.hero .kicker{font-size:12px;letter-spacing:.3em;text-transform:uppercase;opacity:.85}
+.hero h1{margin:0;font-weight:300;font-size:clamp(44px,6.6vw,108px);letter-spacing:.38em;margin-right:-.38em;line-height:1;white-space:nowrap}
+.hero .tag{margin:0;font-family:var(--font-serif);font-style:italic;font-size:clamp(20px,1.8vw,26px);letter-spacing:.02em;opacity:.92}
+.hero .cta{display:flex;gap:14px;margin-top:18px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:46px;padding:0 30px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:400;border:1px solid currentColor;transition:background .35s var(--ease),color .35s var(--ease)}
+.btn.light{color:var(--on-image)}
+.btn.light:hover{background:var(--on-image);color:#121212}
+.btn.solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.solid:hover{background:transparent;color:var(--ink)}
+@keyframes settle{to{transform:scale(1)}}
+.reveal{animation:rise 1.2s var(--ease) both}
+.reveal.d2{animation-delay:.25s}.reveal.d3{animation-delay:.5s}
+@keyframes rise{from{opacity:.001;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ---------- Painéis (inspirados no recorte arredondado) ---------- */
+.panels{padding-block:16px 0}
+.panels .inner{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.panel{position:relative;overflow:hidden;border-radius:18px;background:var(--studio);aspect-ratio:4/5;color:var(--on-image);isolation:isolate}
+.panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.6s var(--ease)}
+.panel:hover img{transform:scale(1.04)}
+.panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.38));z-index:0}
+.panel .cap{position:absolute;z-index:1;left:32px;right:32px;bottom:30px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.panel .cap span{display:block;font-size:10px;letter-spacing:.24em;text-transform:uppercase;opacity:.85;margin-bottom:6px}
+.panel .cap strong{font-family:var(--font-serif);font-weight:300;font-style:italic;font-size:clamp(30px,3.4vw,48px);line-height:1}
+.panel .cap em{font-style:normal;font-size:11px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px;white-space:nowrap}
+
+/* ---------- Novidades ---------- */
+.shop{padding-block:88px 40px}
+.shop-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+.shop-head h2{margin:0;font-family:var(--font-serif);font-weight:300;font-size:clamp(34px,4vw,54px);line-height:1;letter-spacing:.01em}
+.shop-head h2 small{display:block;font-family:var(--font-sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:14px;margin-bottom:28px;flex-wrap:wrap}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border:1px solid var(--line);border-radius:999px;transition:all .25s}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip:hover{border-color:var(--ink)}
+.view{display:flex;align-items:center;gap:16px;color:var(--ink-soft);font-size:12px}
+.view button{display:grid;place-items:center;width:28px;height:28px;opacity:.4}
+.view button[aria-pressed="true"]{opacity:1;color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 14px}
+.grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{min-width:0}
+.card .ph{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--studio)}
+.card .ph img{width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform 1.2s var(--ease)}
+.card:hover .ph img{transform:scale(1.035)}
+.card .badge{position:absolute;top:16px;left:16px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#2a2a2a;background:rgba(255,255,255,.7);padding:4px 8px;backdrop-filter:none}
+.card .quick{position:absolute;left:12px;right:12px;bottom:12px;background:rgba(255,255,255,.94);color:#121212;padding:14px 12px 12px;transform:translateY(calc(100% + 14px));transition:transform .45s var(--ease)}
+.card:hover .quick,.card:focus-within .quick,.card.open .quick{transform:none}
+.quick p{margin:0 0 10px;text-align:center;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#555}
+.sizes{display:flex;justify-content:center;gap:4px;flex-wrap:wrap}
+.sizes button{min-width:38px;height:34px;font-size:11px;letter-spacing:.08em;border:1px solid transparent;transition:border-color .2s,background .2s}
+.sizes button:hover{border-color:#121212}
+.sizes button.added{background:#121212;color:#fff}
+.plus{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.85);color:#121212;display:none;place-items:center}
+.card .meta{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding-top:14px}
+.card h3{margin:0;font-size:13px;font-weight:300;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .price{font-size:13px;font-weight:400;font-variant-numeric:tabular-nums}
+.card .inst{grid-column:1;font-size:11px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.card .fav{grid-row:1/3;grid-column:2;align-self:start;width:28px;height:28px;display:grid;place-items:center}
+.fav svg{transition:fill .25s,transform .3s var(--ease)}
+.fav[aria-pressed="true"] svg{fill:var(--ink);transform:scale(1.08)}
+.swatches{display:flex;gap:6px;margin-top:8px;grid-column:1}
+.swatches i{width:10px;height:10px;border-radius:50%;box-shadow:0 0 0 1px var(--line)}
+.more{display:flex;justify-content:center;padding-top:56px}
+
+/* ---------- Mais vendidos ---------- */
+.best{padding-block:40px 104px}
+.best .link{font-size:11px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:8px}
+.col{display:grid;gap:18px;min-width:0}
+.col .ph{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--studio)}
+.col .ph img{width:100%;height:100%;object-fit:cover;object-position:center 22%;transition:transform 1.4s var(--ease)}
+.col:hover .ph img{transform:scale(1.04)}
+.col .rank{position:absolute;top:18px;left:18px;font-family:var(--font-serif);font-style:italic;font-size:22px;line-height:1;color:#121212;background:rgba(255,255,255,.78);padding:8px 12px 9px}
+.col-cap{display:grid;grid-template-columns:1fr auto;align-items:end;gap:4px 16px}
+.col-cap strong{font-family:var(--font-serif);font-weight:300;font-size:clamp(30px,2.8vw,40px);line-height:1}
+.col-cap span{grid-column:1;font-size:12px;color:var(--ink-soft)}
+.col-cap em{grid-row:1/3;grid-column:2;font-style:normal;font-size:11px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px;white-space:nowrap}
+.best .sub{margin:88px 0 24px;padding-bottom:14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:400}
+.best .sub span{color:var(--ink-soft)}
+.card .badge.top{background:#121212;color:#fff}
+
+/* ---------- Serviços ---------- */
+.services{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.services .inner{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.svc{padding:34px 24px;text-align:center;display:grid;gap:6px;justify-items:center}
+.svc + .svc{border-left:1px solid var(--line)}
+.svc strong{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:400}
+.svc span{font-size:12px;color:var(--ink-soft)}
+
+/* ---------- Newsletter + rodapé ---------- */
+.news{padding-block:96px;text-align:center}
+.news h2{margin:0 0 12px;font-family:var(--font-serif);font-weight:300;font-style:italic;font-size:clamp(32px,3.6vw,48px)}
+.news p{margin:0 auto 32px;color:var(--ink-soft);max-width:44ch}
+.news form{display:flex;max-width:520px;margin:0 auto;border-bottom:1px solid var(--ink)}
+.news label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.news input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:14px;color:var(--ink);padding:14px 4px;outline:none}
+.news input::placeholder{color:var(--ink-soft)}
+.news button{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;padding:0 6px}
+.news .ok{margin-top:18px;font-size:12px;letter-spacing:.08em;color:var(--nacre)}
+footer{background:var(--ink);color:var(--pearl)}
+footer .inner{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px;padding-block:72px 40px}
+footer .logo{font-size:22px;color:var(--pearl)}
+footer p{color:color-mix(in srgb,var(--pearl) 60%,transparent);font-size:13px;max-width:34ch;margin:22px 0 0}
+footer h4{margin:0 0 18px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:400}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+footer li a{font-size:13px;color:color-mix(in srgb,var(--pearl) 62%,transparent);transition:color .2s}
+footer li a:hover{color:var(--pearl)}
+.legal{border-top:1px solid color-mix(in srgb,var(--pearl) 14%,transparent);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:22px calc(22px + env(safe-area-inset-bottom,0px));font-size:11px;letter-spacing:.08em;color:color-mix(in srgb,var(--pearl) 50%,transparent)}
+
+/* ---------- Sacola (gaveta) ---------- */
+.veil{position:fixed;inset:0;z-index:80;background:var(--scrim);opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s}
+.drawer{position:fixed;z-index:90;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--paper);transform:translateX(100%);transition:transform .5s var(--ease);display:flex;flex-direction:column;padding:calc(24px + env(safe-area-inset-top,0px)) max(28px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) 28px}
+.open-bag .veil,.open-nav .veil,.open-fav .veil{opacity:1;visibility:visible}
+.open-bag #drawer,.open-fav #fav-drawer{transform:none}
+.fav-sizes{display:flex;gap:4px;flex-wrap:wrap;margin-top:10px}
+.line-item .fav-sizes button{text-decoration:none;color:var(--ink);min-width:32px;height:28px;font-size:10px;letter-spacing:.06em;border:1px solid var(--line);transition:border-color .2s,background .2s,color .2s}
+.line-item .fav-sizes button:hover{border-color:var(--ink)}
+.drawer header{position:static;background:none;border:0;display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.lines-list{flex:1;overflow:auto;padding-block:8px}
+.line-item{display:grid;grid-template-columns:72px 1fr auto;gap:16px;padding-block:16px;border-bottom:1px solid var(--line);align-items:start}
+.line-item img{aspect-ratio:3/4;object-fit:cover;background:var(--studio);width:72px}
+.line-item h5{margin:0 0 4px;font-size:13px;font-weight:400}
+.line-item small{color:var(--ink-soft);font-size:12px}
+.line-item button{font-size:11px;color:var(--ink-soft);text-decoration:underline;text-underline-offset:3px}
+.empty{padding:48px 0;text-align:center;color:var(--ink-soft)}
+.empty strong{display:block;font-family:var(--font-serif);font-weight:300;font-style:italic;font-size:28px;color:var(--ink);margin-bottom:8px}
+.total{padding-top:20px;display:grid;gap:14px}
+.total div{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}
+.total .free{font-size:12px;color:var(--ink-soft)}
+.bar{height:2px;background:var(--line);position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--nacre);transition:width .5s var(--ease)}
+
+/* Menu móvel */
+.mnav{position:fixed;z-index:90;top:0;left:0;bottom:0;width:min(360px,88%);background:var(--paper);transform:translateX(-100%);transition:transform .5s var(--ease);padding:calc(24px + env(safe-area-inset-top,0px)) 24px 24px max(24px,env(safe-area-inset-left,0px));overflow:auto}
+.open-nav .mnav{transform:none}
+.mnav ul{list-style:none;margin:32px 0 0;padding:0}
+.mnav li a{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+
+.toast{position:fixed;z-index:95;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--paper);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:14px 22px;opacity:0;pointer-events:none;transition:all .4s var(--ease);white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- Responsivo ---------- */
+@media (max-width:1080px){
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:860px){
+  nav.main{display:none}
+  .menu-btn{display:grid}
+  .head-top{padding-block:16px}
+  .hide-m{display:none}
+  .logo{font-size:21px;letter-spacing:.34em;margin-right:-.34em}
+  .panels .inner{grid-template-columns:1fr}
+  .panel{aspect-ratio:4/5}
+  .grid,.grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 10px}
+  .cols{grid-template-columns:repeat(3,78%);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+  .col{scroll-snap-align:start}
+  .col-cap{grid-template-columns:1fr}
+  .col-cap em{grid-row:auto;grid-column:1;justify-self:start;margin-top:10px}
+  .best .sub span{display:none}
+  .services .inner{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .svc:nth-child(3){border-left:0}
+  .svc:nth-child(n+3){border-top:1px solid var(--line)}
+  footer .inner{grid-template-columns:1fr 1fr}
+  footer .brand{grid-column:1/-1}
+  .view .sw{display:none}
+  .card .quick{display:none}
+  .plus{display:grid}
+  .card.open .quick{display:block}
+}
+@media (max-width:560px){
+  .hero{height:clamp(480px,82vh,700px)}
+  .hero img{object-position:66% 30%}
+  .hero::after{background:linear-gradient(180deg,rgba(8,12,18,.05) 30%,rgba(8,12,18,.7) 100%)}
+  .hero .copy{justify-content:flex-end;padding-block:0 32px;gap:12px}
+  .hero h1{font-size:clamp(40px,13vw,64px);letter-spacing:.3em}
+  .hero .cta{flex-direction:column;align-self:stretch}
+  .announce p u{display:none}
+  .panel .cap{left:20px;right:20px;bottom:22px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .hero img{transform:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-6.1-6.5-11.2A6.5 6.5 0 0 1 18.5 9.8C18.5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.8" r="2.3"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20.5c1.2-3.6 4-5.4 7.5-5.4s6.3 1.8 7.5 5.4"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.1A4.1 4.1 0 0 1 12 7.6a4.1 4.1 0 0 1 7.5 2.3C19.5 15.4 12 20 12 20Z"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12.5H6L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3.5 8h17M3.5 16h17"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 6v12M6 12h12"/></symbol>
+  <symbol id="i-g2" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></symbol>
+  <symbol id="i-g4" viewBox="0 0 24 24"><g><rect x="3" y="3" width="3.6" height="3.6"/><rect x="8.2" y="3" width="3.6" height="3.6"/><rect x="13.4" y="3" width="3.6" height="3.6"/><rect x="18.6" y="3" width="2.4" height="3.6"/><rect x="3" y="10" width="3.6" height="3.6"/><rect x="8.2" y="10" width="3.6" height="3.6"/><rect x="13.4" y="10" width="3.6" height="3.6"/><rect x="18.6" y="10" width="2.4" height="3.6"/><rect x="3" y="17" width="3.6" height="3.6"/><rect x="8.2" y="17" width="3.6" height="3.6"/><rect x="13.4" y="17" width="3.6" height="3.6"/><rect x="18.6" y="17" width="2.4" height="3.6"/></g></symbol>
+</svg>
+
+<div class="announce wrap" role="region" aria-label="Avisos">
+  <div class="inner">
+    <button type="button" id="ann-prev" aria-label="Aviso anterior"><svg class="icon" style="width:14px;height:14px"><use href="#i-left"/></svg></button>
+    <p class="msg" id="ann-msg" aria-live="polite">15% off na primeira compra · cupom BKMODAS15 <u>Comprar agora</u></p>
+    <button type="button" id="ann-next" aria-label="Próximo aviso"><svg class="icon" style="width:14px;height:14px"><use href="#i-right"/></svg></button>
+  </div>
+</div>
+
+<header class="wrap">
+  <div class="inner head-top">
+    <div class="head-tools">
+      <button type="button" class="menu-btn" id="menu-open" aria-label="Abrir menu"><svg class="icon"><use href="#i-menu"/></svg></button>
+      <a href="#lojas" class="hide-m" aria-label="Nossas lojas"><svg class="icon"><use href="#i-pin"/></svg></a>
+      <button type="button" aria-label="Buscar"><svg class="icon"><use href="#i-search"/></svg></button>
+    </div>
+    <a href="#top" class="logo" aria-label="BK Modas, página inicial">BK MODAS</a>
+    <div class="head-tools right">
+      <a href="#conta" class="hide-m" aria-label="Minha conta"><svg class="icon"><use href="#i-user"/></svg></a>
+      <button type="button" class="favbtn" id="fav-open" aria-label="Abrir favoritos"><svg class="icon"><use href="#i-heart"/></svg><b id="fav-count" data-n="0">0</b></button>
+      <button type="button" class="bag" id="bag-open" aria-label="Abrir sacola"><svg class="icon"><use href="#i-bag"/></svg><b id="bag-count" data-n="0">0</b></button>
+    </div>
+  </div>
+  <nav class="main inner" aria-label="Principal">
+    <div><a href="#novidades" class="bf">Black Friday</a></div>
+    <div><a href="#top">Resort</a></div>
+    <div>
+      <a href="#novidades">Roupas</a>
+      <div class="mega wrap">
+        <div class="inner">
+          <div class="cats">
+            <h4>Categorias</h4>
+            <ul>
+              <li><a href="#novidades">Vestidos</a></li><li><a href="#novidades">Macacão</a></li><li><a href="#novidades">Best-sellers</a></li>
+              <li><a href="#novidades">Blusas</a></li><li><a href="#novidades">Body</a></li><li><a href="#novidades">Resort</a></li>
+              <li><a href="#novidades">Calças</a></li><li><a href="#novidades">Saias</a></li><li><a href="#novidades" class="all">Ver tudo ›</a></li>
+              <li><a href="#novidades">Camisas</a></li><li><a href="#novidades">Shorts</a></li><li></li>
+              <li><a href="#novidades">Jaquetas</a></li><li><a href="#novidades">Blazer</a></li><li></li>
+              <li><a href="#novidades">Casacos</a></li><li><a href="#novidades">Ocasiões especiais</a></li>
+            </ul>
+          </div>
+          <div class="lines">
+            <h4>Linhas</h4>
+            <ul>
+              <li><a href="#novidades">Linho</a></li><li><a href="#novidades">Casual</a></li>
+              <li><a href="#novidades">Tricot</a></li><li><a href="#novidades">Intimates</a></li>
+              <li><a href="#novidades">Couro</a></li><li><a href="#novidades">Alfaiataria</a></li>
+              <li><a href="#novidades">Malha</a></li><li><a href="#novidades" class="all">Ver tudo ›</a></li>
+              <li><a href="#novidades">Seda</a></li>
+            </ul>
+          </div>
+          <figure>
+            <img src="img/col-white.jpg" alt="Modelo com vestido coluna branco em estúdio azul-acinzentado">
+            <figcaption><span>Lançamento</span><strong>RESORT</strong></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+    <div><a href="#novidades">Acessórios</a></div>
+    <div><a href="#mais-vendidos">Mais vendidos</a></div>
+    <div><a href="#novidades">BK Jeans</a></div>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="Lançamento Resort">
+    <img src="img/hero.jpg" alt="Modelo com vestido de seda marfim e colares de pérolas barrocas sobre as pedras do litoral do Rio, ao entardecer">
+    <div class="copy wrap">
+      <span class="kicker reveal">Lançamento</span>
+      <h1 class="reveal d2">RESORT</h1>
+      <p class="tag reveal d3">A essência de um verão sob o sol</p>
+      <div class="cta reveal d3">
+        <a href="#novidades" class="btn light">Comprar coleção</a>
+        <a href="#mais-vendidos" class="btn light">Mais vendidos</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="panels wrap" aria-label="Coleções">
+    <div class="inner">
+      <a href="#novidades" class="panel">
+        <img src="img/col-stripe.jpg" alt="Detalhe de camisa de linho listrada com anel de pérola">
+        <div class="cap"><div><span>Linha</span><strong>Alfaiataria leve</strong></div><em>Ver linha</em></div>
+      </a>
+      <a href="#novidades" class="panel">
+        <img src="img/col-white.jpg" alt="Modelo com vestido coluna branco">
+        <div class="cap"><div><span>Coleção</span><strong>Branco absoluto</strong></div><em>Comprar</em></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="shop wrap" id="novidades" aria-label="Novidades">
+    <div class="inner">
+      <div class="shop-head">
+        <h2><small>New in · Resort 2027</small>Novidades</h2>
+      </div>
+      <div class="toolbar">
+        <div class="chips" role="group" aria-label="Filtrar por categoria">
+          <button type="button" class="chip" data-f="all" aria-pressed="true">Tudo</button>
+          <button type="button" class="chip" data-f="vestidos" aria-pressed="false">Vestidos</button>
+          <button type="button" class="chip" data-f="alfaiataria" aria-pressed="false">Alfaiataria</button>
+          <button type="button" class="chip" data-f="seda" aria-pressed="false">Seda</button>
+          <button type="button" class="chip" data-f="linho" aria-pressed="false">Linho</button>
+        </div>
+        <div class="view">
+          <span id="count">8 produtos</span>
+          <button type="button" class="sw" data-cols="2" aria-pressed="false" aria-label="Ver 2 por linha"><svg class="icon"><use href="#i-g2"/></svg></button>
+          <button type="button" class="sw" data-cols="4" aria-pressed="true" aria-label="Ver 4 por linha"><svg class="icon"><use href="#i-g4"/></svg></button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <div class="more"><a href="#novidades" class="btn solid">Ver todos os 48 produtos</a></div>
+    </div>
+  </section>
+
+  <section class="best wrap" id="mais-vendidos" aria-label="Mais vendidos">
+    <div class="inner">
+      <div class="shop-head">
+        <h2><small>As preferidas das clientes</small>Mais vendidos</h2>
+        <a href="#novidades" class="link">Ver todos os best-sellers</a>
+      </div>
+      <div class="cols">
+        <a href="#novidades" class="col">
+          <div class="ph"><img src="img/p-satin.jpg" alt="Vestido midi de cetim cor pérola" loading="lazy"><span class="rank">Nº 1</span></div>
+          <div class="col-cap"><strong>Coleção Seda</strong><span>Vestidos fluidos, slip dresses e cetim</span><em>Ver coleção</em></div>
+        </a>
+        <a href="#novidades" class="col">
+          <div class="ph"><img src="img/p-suit.jpg" alt="Conjunto de alfaiataria em linho areia" loading="lazy"><span class="rank">Nº 2</span></div>
+          <div class="col-cap"><strong>Coleção Linho</strong><span>Alfaiataria leve e pantalonas</span><em>Ver coleção</em></div>
+        </a>
+        <a href="#novidades" class="col">
+          <div class="ph"><img src="img/p-geo.jpg" alt="Vestido longo com estampa geométrica preta e marfim" loading="lazy"><span class="rank">Nº 3</span></div>
+          <div class="col-cap"><strong>Coleção Resort</strong><span>Estampas de verão e peças de viagem</span><em>Ver coleção</em></div>
+        </a>
+      </div>
+      <h3 class="sub">Peças mais vendidas da semana <span>Atualizado toda segunda</span></h3>
+      <div class="grid" id="best"></div>
+    </div>
+  </section>
+
+  <section class="services wrap" aria-label="Serviços">
+    <div class="inner">
+      <div class="svc"><strong>Frete grátis</strong><span>Em compras acima de R$ 999</span></div>
+      <div class="svc"><strong>10x sem juros</strong><span>Em todos os cartões</span></div>
+      <div class="svc"><strong>Troca fácil</strong><span>Até 30 dias, sem custo</span></div>
+      <div class="svc"><strong>Embalagem presente</strong><span>Caixa pérola com laço de seda</span></div>
+    </div>
+  </section>
+
+  <section class="news wrap" aria-label="Newsletter">
+    <h2>Seja a primeira a saber</h2>
+    <p>Lançamentos, pré-vendas e convites para eventos nas lojas. Ganhe 15% off na primeira compra.</p>
+    <form id="news-form" novalidate>
+      <label for="news-email">Seu e-mail</label>
+      <input id="news-email" type="email" placeholder="Seu e-mail" autocomplete="email" required>
+      <button type="submit">Cadastrar</button>
+    </form>
+    <div class="ok" id="news-ok" aria-live="polite"></div>
+  </section>
+</main>
+
+<footer class="wrap" id="lojas">
+  <div class="inner">
+    <div class="brand">
+      <span class="logo">BK MODAS</span>
+      <p>Moda feminina pensada no Rio, feita para durar. Peças em fibras nobres, acabamento à mão.</p>
+    </div>
+    <div><h4>Comprar</h4><ul><li><a href="#novidades">Novidades</a></li><li><a href="#novidades">Roupas</a></li><li><a href="#mais-vendidos">Mais vendidos</a></li><li><a href="#novidades">Black Friday</a></li></ul></div>
+    <div><h4>Atendimento</h4><ul><li><a href="#conta">Minha conta</a></li><li><a href="#lojas">Trocas e devoluções</a></li><li><a href="#lojas">Guia de medidas</a></li><li><a href="#lojas">Fale conosco</a></li></ul></div>
+    <div><h4>BK Modas</h4><ul><li><a href="#lojas">Nossa história</a></li><li><a href="#lojas">Lojas</a></li><li><a href="#lojas">Sustentabilidade</a></li><li><a href="#lojas">Instagram</a></li></ul></div>
+  </div>
+  <div class="inner legal"><span>© 2026 BK Modas. Todos os direitos reservados.</span><span>Prévia do site · imagens geradas para demonstração</span></div>
+</footer>
+
+<div class="veil" id="veil"></div>
+<aside class="drawer" id="drawer" aria-label="Sacola">
+  <header><span class="label">Sacola (<span id="bag-n">0</span>)</span><button type="button" id="bag-close" aria-label="Fechar sacola"><svg class="icon"><use href="#i-close"/></svg></button></header>
+  <div class="lines-list" id="lines"></div>
+  <div class="total">
+    <div class="free" id="free"></div>
+    <div class="bar"><i id="bar" style="width:0"></i></div>
+    <div><span class="label">Subtotal</span><strong id="sub" style="font-weight:400">R$ 0,00</strong></div>
+    <button type="button" class="btn solid" id="checkout">Finalizar compra</button>
+  </div>
+</aside>
+<aside class="drawer" id="fav-drawer" aria-label="Favoritos">
+  <header><span class="label">Favoritos (<span id="fav-n">0</span>)</span><button type="button" id="fav-close" aria-label="Fechar favoritos"><svg class="icon"><use href="#i-close"/></svg></button></header>
+  <div class="lines-list" id="fav-lines"></div>
+</aside>
+<nav class="mnav" id="mnav" aria-label="Menu móvel">
+  <div style="display:flex;justify-content:space-between;align-items:center"><span class="logo" style="font-size:18px">BK MODAS</span><button type="button" id="menu-close" aria-label="Fechar menu"><svg class="icon"><use href="#i-close"/></svg></button></div>
+  <ul>
+    <li><a href="#novidades"><strong style="font-weight:500">Black Friday</strong><span>›</span></a></li>
+    <li><a href="#top">Resort<span>›</span></a></li>
+    <li><a href="#novidades">Roupas<span>›</span></a></li>
+    <li><a href="#novidades">Acessórios<span>›</span></a></li>
+    <li><a href="#mais-vendidos">Mais vendidos<span>›</span></a></li>
+    <li><a href="#novidades">BK Jeans<span>›</span></a></li>
+    <li><a href="#conta">Minha conta<span>›</span></a></li>
+    <li><a href="#lojas">Lojas<span>›</span></a></li>
+  </ul>
+</nav>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+  const P=[
+    {id:1,n:"Vestido Longo Viscose Geo Maré",p:798,img:"p-geo.jpg",t:["vestidos"],c:["#1a1a1a","#efece4"]},
+    {id:2,n:"Calça Pantalona Linho Bordô",p:898,img:"p-burgundy.jpg",t:["linho"],c:["#6d1f24","#efece4"]},
+    {id:3,n:"Blazer Alfaiataria Linho Areia",p:1298,img:"p-suit.jpg",t:["alfaiataria","linho"],c:["#cdb797"]},
+    {id:4,n:"Vestido Midi Cetim Pérola",p:1198,img:"p-satin.jpg",t:["vestidos","seda"],c:["#ece6da","#1a1a1a"]},
+    {id:5,n:"Saia Midi Plissada Marfim",p:698,img:"p-knit.jpg",t:["alfaiataria"],c:["#efece4","#4a3426"]},
+    {id:6,n:"Vestido Slip Seda Noir",p:1098,img:"p-slip.jpg",t:["vestidos","seda"],c:["#121212"]},
+    {id:7,n:"Chemise Tricoline Branca",p:748,img:"p-shirt.jpg",t:["vestidos"],c:["#ffffff","#a9b8c9"]},
+    {id:8,n:"Vestido Coluna Branco Absoluto",p:1398,img:"col-white.jpg",t:["vestidos","seda"],c:["#ffffff"]}
+  ];
+  const fmt=v=>"R$ "+v.toLocaleString("pt-BR",{minimumFractionDigits:2});
+  const grid=document.getElementById("grid");
+  let favs=new Set(); try{favs=new Set(JSON.parse(localStorage.getItem("tp-favs")||"[]"))}catch(e){}
+  let bag=[];
+  const sizes=["PP","P","M","G","GG"];
+
+  const card=(x,badge,top)=>`
+      <article class="card" data-id="${x.id}">
+        <div class="ph">
+          <img src="img/${x.img}" alt="${x.n}" loading="lazy">
+          <span class="badge${top?" top":""}">${badge}</span>
+          <button type="button" class="plus" aria-label="Escolher tamanho de ${x.n}"><svg class="icon" style="width:14px;height:14px"><use href="#i-plus"/></svg></button>
+          <div class="quick"><p>Adicionar à sacola</p><div class="sizes">${sizes.map(s=>`<button type="button" data-s="${s}">${s}</button>`).join("")}</div></div>
+        </div>
+        <div class="meta">
+          <h3 title="${x.n}">${x.n}</h3>
+          <button type="button" class="fav" aria-pressed="${favs.has(x.id)}" aria-label="Favoritar ${x.n}"><svg class="icon" style="width:17px;height:17px"><use href="#i-heart"/></svg></button>
+          <span class="price">${fmt(x.p)}</span>
+          <span class="inst">10x de ${fmt(Math.round(x.p/10*100)/100)}</span>
+          <div class="swatches">${x.c.map(c=>`<i style="background:${c}"></i>`).join("")}</div>
+        </div>
+      </article>`;
+  function render(filter){
+    const list=P.filter(x=>filter==="all"||x.t.includes(filter));
+    document.getElementById("count").textContent=list.length+(list.length===1?" produto":" produtos");
+    grid.innerHTML=list.map(x=>card(x,"New in")).join("");
+  }
+  render("all");
+  const best=document.getElementById("best");
+  best.innerHTML=[6,2,7,5].map((id,i)=>card(P.find(x=>x.id===id),"Nº "+(i+1),i===0)).join("");
+
+  [grid,best].forEach(g=>g.addEventListener("click",e=>{
+    const cardEl=e.target.closest(".card"); if(!cardEl) return;
+    const prod=P.find(x=>x.id==cardEl.dataset.id);
+    const fav=e.target.closest(".fav");
+    if(fav){
+      const on=fav.getAttribute("aria-pressed")!=="true";
+      document.querySelectorAll(`.card[data-id="${prod.id}"] .fav`).forEach(f=>f.setAttribute("aria-pressed",on));
+      on?favs.add(prod.id):favs.delete(prod.id);
+      saveFavs();
+      toast(on?"Adicionado aos favoritos":"Removido dos favoritos"); return;
+    }
+    if(e.target.closest(".plus")){cardEl.classList.toggle("open");return}
+    const s=e.target.closest(".sizes button");
+    if(s){
+      bag.push({...prod,size:s.dataset.s});
+      s.classList.add("added"); setTimeout(()=>s.classList.remove("added"),900);
+      cardEl.classList.remove("open");
+      updateBag(); toast(`${prod.n.split(" ").slice(0,2).join(" ")} · ${s.dataset.s} na sacola`);
+    }
+  }));
+
+  document.querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
+    document.querySelectorAll(".chip").forEach(o=>o.setAttribute("aria-pressed",o===c));
+    render(c.dataset.f);
+  }));
+  document.querySelectorAll(".view .sw").forEach(b=>b.addEventListener("click",()=>{
+    document.querySelectorAll(".view .sw").forEach(o=>o.setAttribute("aria-pressed",o===b));
+    grid.classList.toggle("cols-2",b.dataset.cols==="2");
+  }));
+
+  // Sacola
+  const FREE=999;
+  function updateBag(){
+    const n=bag.length, sub=bag.reduce((a,x)=>a+x.p,0);
+    const bc=document.getElementById("bag-count"); bc.textContent=n; bc.dataset.n=n;
+    document.getElementById("bag-n").textContent=n;
+    document.getElementById("sub").textContent=fmt(sub);
+    document.getElementById("bar").style.width=Math.min(100,sub/FREE*100)+"%";
+    document.getElementById("free").textContent=sub>=FREE?"Você ganhou frete grátis.":`Faltam ${fmt(FREE-sub)} para o frete grátis.`;
+    document.getElementById("lines").innerHTML=n?bag.map((x,i)=>`
+      <div class="line-item"><img src="img/${x.img}" alt=""><div><h5>${x.n}</h5><small>Tamanho ${x.size} · ${fmt(x.p)}</small></div><button type="button" data-rm="${i}">Remover</button></div>`).join("")
+      :`<div class="empty"><strong>Sua sacola está vazia</strong>Escolha um tamanho em qualquer peça para adicionar.</div>`;
+  }
+  updateBag();
+
+  // Favoritos
+  function saveFavs(){
+    try{localStorage.setItem("tp-favs",JSON.stringify([...favs]))}catch(e){}
+    updateFavs();
+  }
+  function updateFavs(){
+    const list=P.filter(x=>favs.has(x.id)), n=list.length;
+    const fc=document.getElementById("fav-count"); fc.textContent=n; fc.dataset.n=n;
+    document.getElementById("fav-open").classList.toggle("has",n>0);
+    document.getElementById("fav-n").textContent=n;
+    document.getElementById("fav-lines").innerHTML=n?list.map(x=>`
+      <div class="line-item" data-id="${x.id}"><img src="img/${x.img}" alt=""><div><h5>${x.n}</h5><small>${fmt(x.p)} · 10x de ${fmt(Math.round(x.p/10*100)/100)}</small>
+        <div class="fav-sizes" role="group" aria-label="Adicionar à sacola no tamanho">${sizes.map(z=>`<button type="button" data-s="${z}">${z}</button>`).join("")}</div></div>
+        <button type="button" data-unfav="${x.id}">Remover</button></div>`).join("")
+      :`<div class="empty"><strong>Nenhum favorito ainda</strong>Toque no coração de uma peça para guardar aqui.</div>`;
+  }
+  updateFavs();
+  document.getElementById("fav-lines").addEventListener("click",e=>{
+    const un=e.target.closest("[data-unfav]");
+    if(un){const id=+un.dataset.unfav;favs.delete(id);document.querySelectorAll(`.card[data-id="${id}"] .fav`).forEach(f=>f.setAttribute("aria-pressed","false"));saveFavs();return}
+    const z=e.target.closest(".fav-sizes button");
+    if(z){const prod=P.find(x=>x.id==z.closest(".line-item").dataset.id);bag.push({...prod,size:z.dataset.s});updateBag();toast(`${prod.n.split(" ").slice(0,2).join(" ")} · ${z.dataset.s} na sacola`)}
+  });
+  document.getElementById("lines").addEventListener("click",e=>{const b=e.target.closest("[data-rm]");if(b){bag.splice(+b.dataset.rm,1);updateBag()}});
+  const root=document.documentElement;
+  document.getElementById("bag-open").onclick=()=>root.classList.add("open-bag");
+  document.getElementById("bag-close").onclick=()=>root.classList.remove("open-bag");
+  document.getElementById("fav-open").onclick=()=>root.classList.add("open-fav");
+  document.getElementById("fav-close").onclick=()=>root.classList.remove("open-fav");
+  document.getElementById("menu-open").onclick=()=>root.classList.add("open-nav");
+  document.getElementById("menu-close").onclick=()=>root.classList.remove("open-nav");
+  document.getElementById("veil").onclick=()=>root.classList.remove("open-bag","open-nav","open-fav");
+  document.querySelectorAll(".mnav a").forEach(a=>a.addEventListener("click",()=>root.classList.remove("open-nav")));
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")root.classList.remove("open-bag","open-nav","open-fav")});
+  document.getElementById("checkout").onclick=()=>toast(bag.length?"Prévia: o checkout entra na próxima fase":"Adicione uma peça primeiro");
+
+  // Avisos rotativos
+  const msgs=["15% off na primeira compra · cupom BKMODAS15 <u>Comprar agora</u>","BK Modas · Lançamento Resort <u>Descubra</u>","Frete grátis acima de R$ 999 · 10x sem juros"];
+  let ai=0; const m=document.getElementById("ann-msg");
+  function show(d){ai=(ai+d+msgs.length)%msgs.length;m.style.opacity=0;setTimeout(()=>{m.innerHTML=msgs[ai];m.style.opacity=1},300)}
+  document.getElementById("ann-prev").onclick=()=>show(-1);
+  document.getElementById("ann-next").onclick=()=>show(1);
+  if(!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(()=>show(1),6000);
+
+  // Newsletter
+  document.getElementById("news-form").addEventListener("submit",e=>{
+    e.preventDefault(); const i=document.getElementById("news-email"), ok=document.getElementById("news-ok");
+    if(!/^\S+@\S+\.\S+$/.test(i.value)){ok.textContent="Confira o e-mail: falta o @ ou o domínio.";return}
+    ok.textContent="Cadastro feito. Seu cupom BKMODAS15 chega no e-mail."; i.value="";
+  });
+
+  let tt; function toast(t){const el=document.getElementById("toast");el.textContent=t;el.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>el.classList.remove("show"),2200)}
+})();
+</script>
+
+</body>
+</html>
