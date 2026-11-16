@@ -338,6 +338,46 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
 .links a:hover{padding-left:16px;color:#fff}
 .links a:hover i{background:var(--ink);color:var(--abyss);transform:rotate(-45deg)}
 
+/* online agenda */
+.booking{width:100%;max-width:880px;margin-top:20px;padding:clamp(22px,4vw,44px);border-radius:28px;text-align:left;display:flex;flex-direction:column;gap:16px}
+.bk-step{display:flex;align-items:center;gap:12px;margin-top:8px}
+.bk-step h3{font:400 clamp(1.3rem,2.2vw,1.65rem)/1.2 var(--f-display)}
+.bk-n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;font:500 .75rem/1 var(--f-mono);color:var(--abyss);background:var(--ink)}
+.bk-days{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.bk-day{flex:none;scroll-snap-align:start;width:84px;padding:14px 8px;border-radius:16px;border:1px solid var(--line);background:rgba(5,15,46,.45);
+  color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font:inherit;transition:background .25s,border-color .25s,transform .25s}
+.bk-day:hover{border-color:var(--synapse);transform:translateY(-2px)}
+.bk-day .wd{font:500 .66rem/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mist)}
+.bk-day .dn{font:400 2rem/1 var(--f-display)}
+.bk-day .mo{font-size:.78rem;color:var(--mist)}
+.bk-day[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--abyss)}
+.bk-day[aria-pressed="true"] .wd,.bk-day[aria-pressed="true"] .mo{color:var(--navy)}
+.bk-times{display:flex;flex-wrap:wrap;gap:10px;min-height:52px;align-items:center}
+.bk-time{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:12px 20px;border-radius:14px;border:1px solid var(--line);background:rgba(5,15,46,.45);
+  color:var(--ink);cursor:pointer;font:inherit;transition:background .25s,border-color .25s}
+.bk-time b{font:500 1.15rem/1.1 var(--f-body);font-variant-numeric:tabular-nums}
+.bk-time small{font-size:.76rem;color:var(--mist)}
+.bk-time:hover{border-color:var(--synapse)}
+.bk-time[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--abyss)}
+.bk-time[aria-pressed="true"] small{color:var(--navy)}
+.bk-empty,.bk-tz{color:var(--mist);font-size:.9rem}
+.bk-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.bk-field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.bk-field label{font-size:.9rem;font-weight:500}
+.bk-field label i{font-style:normal;color:var(--mist);font-weight:400}
+.bk-field input,.bk-field textarea{width:100%;font:400 1rem/1.5 var(--f-body);color:var(--ink);background:rgba(5,15,46,.55);
+  border:1px solid var(--line);border-radius:12px;padding:12px 14px;resize:vertical}
+.bk-field input:focus,.bk-field textarea:focus{outline:2px solid var(--synapse);outline-offset:1px;border-color:transparent}
+.bk-field input[aria-invalid="true"]{border-color:#FFB3C1}
+.bk-err{font-size:.84rem;color:#FFC2CE}
+.bk-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:8px;padding-top:20px;border-top:1px solid var(--line)}
+.bk-sum{color:var(--ink);font-size:.98rem;min-width:0;flex:1 1 240px}
+.bk-go[aria-disabled="true"]{opacity:.45;cursor:not-allowed}
+.bk-done{color:#BFF3D6;font-size:.95rem}
+.bk-note{font:500 .66rem/1.5 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mist)}
+.plans-foot a{color:var(--ink)}
+@media (max-width:680px){ .bk-fields{grid-template-columns:minmax(0,1fr)} .bk-day{width:74px} .bk-go{width:100%;justify-content:center} }
+
 /* compact about */
 .about .bio h2{font-size:clamp(2.3rem,4.4vw,4rem)}
 .creds{list-style:none;margin:8px 0 0;padding:20px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px;
@@ -442,7 +482,7 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
       <li><a href="#planos">Sessões</a></li>
     </ul>
   </nav>
-  <a class="btn btn-solid btn-sm" href="https://wa.me/34695864531?text=Ol%C3%A1%20Sabrina,%20gostaria%20de%20saber%20mais%20sobre%20a%20hipnoterapia." target="_blank" rel="noopener">Agendar conversa</a>
+  <a class="btn btn-solid btn-sm" href="#contato">Agendar conversa</a>
 </header>
 
 <main id="topo">
@@ -574,7 +614,7 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
         <a class="btn btn-solid" href="https://wa.me/34695864531?text=Ol%C3%A1%2C%20quero%20fazer%20o%20pacote%20com%204%20sess%C3%B5es." target="_blank" rel="noopener">Quero o pacote</a>
       </article>
     </div>
-    <p class="plans-foot" data-anim="up">1h a 1h30 por sessão · valores e horários pelo WhatsApp</p>
+    <p class="plans-foot" data-anim="up">1h a 1h30 por sessão · valores pelo WhatsApp · <a href="#contato">comece com uma conversa gratuita</a></p>
   </section>
 
   <section class="synapse" aria-label="Transição">
@@ -587,15 +627,44 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
   <!-- 6. Contact -->
   <section class="chapter" id="contato">
     <div class="wrap contact">
-      <div class="label" data-anim="up">Fale comigo</div>
-      <h2 data-anim="words">Às vezes, tudo começa com <em>uma conversa</em>.</h2>
-      <p class="lead" data-anim="up">Tem dúvidas ou quer entender melhor o processo? Fale comigo pelo WhatsApp. Vou ficar feliz em ouvir você.</p>
-      <div class="contact-actions" data-anim="up">
-        <a class="btn btn-solid" href="https://wa.me/34695864531?text=Ol%C3%A1%20Sabrina,%20gostaria%20de%20saber%20mais%20sobre%20a%20hipnoterapia." target="_blank" rel="noopener">Falar no WhatsApp</a>
-      </div>
-      <span class="phone" data-anim="up">+34 695 86 45 31</span>
+      <div class="label" data-anim="up">Agenda online</div>
+      <h2 data-anim="words">Marque uma <em>conversa gratuita</em>.</h2>
+      <p class="lead" data-anim="up">Uma primeira conversa para entender como a hipnoterapia funciona e tirar suas dúvidas. Sem custo e sem compromisso.</p>
+
+      <form class="booking glass" id="booking" data-anim="up" novalidate>
+        <div class="bk-step"><span class="bk-n">1</span><h3>Escolha o dia</h3></div>
+        <div class="bk-days" id="bkDays" role="group" aria-label="Dias disponíveis"></div>
+
+        <div class="bk-step"><span class="bk-n">2</span><h3>Escolha o horário</h3></div>
+        <div class="bk-times" id="bkTimes" role="group" aria-label="Horários disponíveis">
+          <p class="bk-empty">Escolha um dia para ver o horário.</p>
+        </div>
+        <p class="bk-tz" id="bkTz"></p>
+
+        <div class="bk-step"><span class="bk-n">3</span><h3>Seus dados</h3></div>
+        <div class="bk-fields">
+          <div class="bk-field">
+            <label for="bkName">Seu nome</label>
+            <input id="bkName" name="name" type="text" autocomplete="name" required>
+            <span class="bk-err" id="bkNameErr" hidden>Escreva seu nome para a Sabrina saber quem é você.</span>
+          </div>
+          <div class="bk-field">
+            <label for="bkNote">O que você gostaria de trabalhar? <i>(opcional)</i></label>
+            <textarea id="bkNote" name="note" rows="2"></textarea>
+          </div>
+        </div>
+
+        <div class="bk-foot">
+          <p class="bk-sum" id="bkSum" aria-live="polite">Escolha um dia e um horário.</p>
+          <a class="btn btn-solid bk-go" id="bkGo" href="#" target="_blank" rel="noopener" aria-disabled="true">Confirmar pelo WhatsApp</a>
+        </div>
+        <p class="bk-done" id="bkDone" hidden>O WhatsApp abriu com a sua mensagem pronta. Envie a mensagem para a Sabrina confirmar o seu horário.</p>
+        <p class="bk-note">Gratuito e sem compromisso · a Sabrina confirma o horário pelo WhatsApp</p>
+      </form>
+
+      <span class="phone" data-anim="up">Prefere falar direto? WhatsApp +34 695 86 45 31</span>
       <ul class="links">
-        <li data-anim="left"><a href="https://wa.me/34695864531?text=Ol%C3%A1%2C%20quero%20fazer%201%20sess%C3%A3o." target="_blank" rel="noopener"><span>Agendar uma sessão</span><i>→</i></a></li>
+        <li data-anim="left"><a href="#planos"><span>Ver as sessões</span><i>→</i></a></li>
         <li data-anim="left"><a href="https://www.youtube.com/@sabrinafentanes2982" target="_blank" rel="noopener"><span>Assistir no YouTube</span><i>→</i></a></li>
         <li data-anim="left"><a href="#hipnoterapia"><span>O que é hipnoterapia</span><i>→</i></a></li>
         <li data-anim="left"><a href="#duvidas"><span>Dúvidas frequentes</span><i>→</i></a></li>
@@ -756,6 +825,89 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
     requestAnimationFrame(draw);
   }
   requestAnimationFrame(draw);
+})();
+</script>
+
+<!-- Online agenda: free first conversation. Times are Sabrina's local time (Madrid). -->
+<script>
+(function(){
+  var TZ='Europe/Madrid', PHONE='34695864531', DAYS_AHEAD=21, LEAD_MIN=120;
+  var SLOTS={1:['17:30'],2:['17:30'],4:['17:30'],5:['17:30'],6:['08:00']}; // 1=seg … 6=sáb
+  var WD=['dom','seg','ter','qua','qui','sex','sáb'], WDL=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+  var MO=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  var daysEl=document.getElementById('bkDays'), timesEl=document.getElementById('bkTimes'), tzEl=document.getElementById('bkTz');
+  var nameEl=document.getElementById('bkName'), noteEl=document.getElementById('bkNote'), errEl=document.getElementById('bkNameErr');
+  var sumEl=document.getElementById('bkSum'), go=document.getElementById('bkGo'), done=document.getElementById('bkDone');
+  if(!daysEl) return;
+  var localTZ=''; try{ localTZ=Intl.DateTimeFormat().resolvedOptions().timeZone||''; }catch(e){}
+  function tzOffset(ms){ // minutes Madrid is ahead of UTC at instant ms
+    var f=new Intl.DateTimeFormat('en-US',{timeZone:TZ,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+    var p={}; f.formatToParts(new Date(ms)).forEach(function(x){p[x.type]=x.value});
+    return (Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute)-Math.floor(ms/60000)*60000)/60000;
+  }
+  function madridParts(ms){ var f=new Intl.DateTimeFormat('en-US',{timeZone:TZ,year:'numeric',month:'numeric',day:'numeric',weekday:'short'});
+    var p={}; f.formatToParts(new Date(ms)).forEach(function(x){p[x.type]=x.value}); return {y:+p.year,m:+p.month,d:+p.day}; }
+  function slotUTC(y,m,d,hhmm){ var h=+hhmm.slice(0,2), mi=+hhmm.slice(3); var g=Date.UTC(y,m-1,d,h,mi); var o=tzOffset(g); var t=g-o*60000; return t-(tzOffset(t)-o)*60000; }
+  function localLabel(ms){ try{ return new Intl.DateTimeFormat('pt-BR',{hour:'2-digit',minute:'2-digit'}).format(new Date(ms)); }catch(e){ return ''; } }
+  var sameTZ = localTZ===TZ || (function(){ var n=Date.now(); return -new Date(n).getTimezoneOffset()===tzOffset(n); })();
+  // build the list of upcoming days with slots
+  var days=[], now=Date.now(), base=madridParts(now);
+  for(var i=0;i<DAYS_AHEAD;i++){
+    var dt=new Date(Date.UTC(base.y,base.m-1,base.d+i)); var wd=dt.getUTCDay(); if(!SLOTS[wd]) continue;
+    var y=dt.getUTCFullYear(), m=dt.getUTCMonth()+1, d=dt.getUTCDate();
+    var slots=SLOTS[wd].map(function(t){return {t:t, at:slotUTC(y,m,d,t)}}).filter(function(s){return s.at-now>LEAD_MIN*60000});
+    if(slots.length) days.push({y:y,m:m,d:d,wd:wd,slots:slots});
+  }
+  var sel={day:null,slot:null}, touched=false;
+  days.forEach(function(day,i){
+    var b=document.createElement('button'); b.type='button'; b.className='bk-day'; b.setAttribute('aria-pressed','false');
+    b.setAttribute('aria-label',WDL[day.wd]+', '+day.d+' de '+MO[day.m-1]);
+    b.innerHTML='<span class="wd">'+WD[day.wd]+'</span><span class="dn">'+day.d+'</span><span class="mo">'+MO[day.m-1]+'</span>';
+    b.addEventListener('click',function(){ sel.day=day; sel.slot=day.slots.length===1?day.slots[0]:null;
+      [].forEach.call(daysEl.children,function(c){c.setAttribute('aria-pressed',c===b?'true':'false')}); renderTimes(); update(); });
+    daysEl.appendChild(b);
+  });
+  tzEl.textContent = sameTZ ? 'Horários de Madrid.' : 'Horários de Madrid, com a conversão para o seu fuso logo abaixo.';
+  function renderTimes(){
+    timesEl.innerHTML='';
+    sel.day.slots.forEach(function(s){
+      var b=document.createElement('button'); b.type='button'; b.className='bk-time'; b.setAttribute('aria-pressed', sel.slot===s?'true':'false');
+      b.innerHTML='<b>'+s.t.replace(':00','h').replace(':','h')+'</b>'+(sameTZ?'':'<small>'+localLabel(s.at)+' no seu horário</small>');
+      b.addEventListener('click',function(){ sel.slot=s; [].forEach.call(timesEl.children,function(c){c.setAttribute('aria-pressed',c===b?'true':'false')}); update(); });
+      timesEl.appendChild(b);
+    });
+  }
+  function nameOk(){ return nameEl.value.trim().length>1; }
+  function update(){
+    var ready = sel.day && sel.slot && nameOk();
+    if(touched){ var bad=!nameOk(); errEl.hidden=!bad; nameEl.setAttribute('aria-invalid',bad?'true':'false'); }
+    if(!sel.day) sumEl.textContent='Escolha um dia e um horário.';
+    else if(!sel.slot) sumEl.textContent='Agora escolha o horário.';
+    else { var when=WDL[sel.day.wd]+', '+sel.day.d+' de '+MO[sel.day.m-1]+' às '+sel.slot.t.replace(':00','h').replace(':','h');
+      sumEl.textContent = nameOk() ? 'Conversa gratuita: '+when+'.' : 'Conversa gratuita: '+when+'. Falta só o seu nome.'; }
+    go.setAttribute('aria-disabled', ready?'false':'true');
+    if(ready){
+      var dd=('0'+sel.day.d).slice(-2)+'/'+('0'+sel.day.m).slice(-2);
+      var msg='Olá, Sabrina! Gostaria de agendar a conversa gratuita.\n\n'+
+        'Dia: '+WDL[sel.day.wd]+', '+dd+'\n'+
+        'Horário: '+sel.slot.t+' (horário de Madrid)'+(sameTZ?'':' / '+localLabel(sel.slot.at)+' no meu horário')+'\n'+
+        'Nome: '+nameEl.value.trim()+(noteEl.value.trim()?'\nGostaria de trabalhar: '+noteEl.value.trim():'');
+      go.href='https://wa.me/'+PHONE+'?text='+encodeURIComponent(msg);
+    } else go.href='#';
+  }
+  nameEl.addEventListener('blur',function(){ if(nameEl.value) { touched=true; update(); } });
+  nameEl.addEventListener('input',function(){ if(touched||nameOk()) { update(); } });
+  noteEl.addEventListener('input',update);
+  go.addEventListener('click',function(ev){
+    if(go.getAttribute('aria-disabled')==='true'){ ev.preventDefault();
+      if(!sel.day){ var f=daysEl.querySelector('button'); f&&f.focus(); }
+      else if(!sel.slot){ var t=timesEl.querySelector('button'); t&&t.focus(); }
+      else { touched=true; update(); nameEl.focus(); }
+      return; }
+    done.hidden=false;
+  });
+  document.getElementById('booking').addEventListener('submit',function(e){ e.preventDefault(); });
+  if(!days.length){ daysEl.innerHTML='<p class="bk-empty">Sem horários nos próximos dias. Fale direto pelo WhatsApp.</p>'; }
 })();
 </script>
 
