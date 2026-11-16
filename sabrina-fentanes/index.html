@@ -372,7 +372,7 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
 .bk-field input[aria-invalid="true"]{border-color:#FFB3C1}
 .bk-err{font-size:.84rem;color:#FFC2CE}
 .bk-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:8px;padding-top:20px;border-top:1px solid var(--line)}
-.bk-sum{color:var(--ink);font-size:.98rem;min-width:0;flex:1 1 240px}
+.bk-sum{color:var(--ink);font-size:.98rem;min-width:0;flex:1 1 240px;min-height:3.2em;display:flex;align-items:center}
 .bk-go[aria-disabled="true"]{opacity:.45;cursor:not-allowed}
 .bk-done{color:#BFF3D6;font-size:.95rem}
 .bk-note{font:500 .66rem/1.5 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mist)}
@@ -811,7 +811,7 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
      activation e-mail from FormSubmit; after she clicks "Activate", every booking arrives in her inbox. -->
 <script>
 (function(){
-  var SABRINA_EMAIL = '';            // e-mail que recebe os agendamentos
+  var SABRINA_EMAIL = 'sabrinafentanes@gmail.com';   // e-mail que recebe os agendamentos
   var SLOTS = [ {name:'Segunda-feira', short:'Seg', t:'17h30'}, {name:'Terça-feira', short:'Ter', t:'17h30'},
                 {name:'Quinta-feira', short:'Qui', t:'17h30'}, {name:'Sexta-feira', short:'Sex', t:'17h30'},
                 {name:'Sábado', short:'Sáb', t:'8h'} ];
@@ -836,7 +836,7 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
   }
   Object.keys(F).forEach(function(k){
     F[k].addEventListener('blur',function(){ if(F[k].value){ touched[k]=true; update(); } });
-    F[k].addEventListener('input',function(){ if(touched[k]||tried) update(); });
+    F[k].addEventListener('input',update); // keep the summary current so nothing shifts when the field loses focus
   });
   function esc(t){ var d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
   function showResult(ok, d){
