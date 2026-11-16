@@ -499,7 +499,7 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
       <div class="hero" id="hero">
         <h1>Volte a morar<br>em <em>você</em>.</h1>
         <div class="actions">
-          <a class="btn btn-solid" href="#contato">Agendar conversa gratuita</a>
+          <a class="btn btn-solid" href="#contato">Agendar primeira conversa gratuita</a>
         </div>
       </div>
       <p class="phrase" data-from=".12" data-to=".38">Respire.<br><em>Vamos entrar.</em></p>
@@ -604,8 +604,8 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
   <section class="chapter" id="contato">
     <div class="wrap contact">
       <div class="label" data-anim="up">Agenda online</div>
-      <h2 data-anim="words">Marque uma <em>conversa gratuita</em>.</h2>
-      <p class="lead" data-anim="up">Uma primeira conversa para entender como a hipnoterapia funciona e tirar suas dúvidas. Sem custo e sem compromisso.</p>
+      <h2 data-anim="words">Agende sua <em>primeira conversa</em> gratuita.</h2>
+      <p class="lead" data-anim="up">A primeira conversa é gratuita: um momento para entender como a hipnoterapia funciona e tirar suas dúvidas, sem compromisso.</p>
 
       <form class="booking glass" id="booking" data-anim="up" novalidate>
         <div class="bk-step"><span class="bk-n">1</span><h3>Escolha o dia e o horário</h3></div>
@@ -638,9 +638,9 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
 
         <div class="bk-foot">
           <p class="bk-sum" id="bkSum" aria-live="polite">Escolha um dia e horário.</p>
-          <button type="submit" class="btn btn-solid bk-go" id="bkGo">Agendar conversa gratuita</button>
+          <button type="submit" class="btn btn-solid bk-go" id="bkGo">Agendar primeira conversa</button>
         </div>
-        <p class="bk-note">Gratuito e sem compromisso · a Sabrina entra em contato pelo seu WhatsApp</p>
+        <p class="bk-note">A primeira conversa é gratuita · a Sabrina entra em contato pelo seu WhatsApp</p>
       </form>
       <div class="booking glass bk-result" id="bkResult" hidden aria-live="polite"></div>
 
@@ -823,7 +823,7 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
   SLOTS.forEach(function(s){
     var b=document.createElement('button'); b.type='button'; b.className='bk-day'; b.setAttribute('aria-pressed','false');
     b.setAttribute('aria-label', s.name+' às '+s.t);
-    b.innerHTML='<span class="wd">'+s.short+'</span><span class="dn">'+s.t+'</span><span class="mo">grátis</span>';
+    b.innerHTML='<span class="wd">'+s.short+'</span><span class="dn">'+s.t+'</span>';
     b.addEventListener('click',function(){ sel=s; [].forEach.call(daysEl.children,function(c){c.setAttribute('aria-pressed',c===b?'true':'false')}); update(); });
     daysEl.appendChild(b);
   });
@@ -832,7 +832,7 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
   function update(){
     $('bkSlotErr').hidden = !(tried && !sel);
     var okAll = ['first','last','phone'].map(showErr).every(Boolean);
-    sumEl.textContent = !sel ? 'Escolha um dia e horário.' : 'Conversa gratuita: '+sel.name.toLowerCase()+' às '+sel.t+'.'+(okAll?'':' Falta completar seus dados.');
+    sumEl.textContent = !sel ? 'Escolha um dia e horário.' : 'Primeira conversa: '+sel.name.toLowerCase()+' às '+sel.t+'.'+(okAll?'':' Falta completar seus dados.');
   }
   Object.keys(F).forEach(function(k){
     F[k].addEventListener('blur',function(){ if(F[k].value){ touched[k]=true; update(); } });
@@ -844,7 +844,7 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
     res.innerHTML = ok
       ? '<div class="bk-step"><span class="bk-n">✓</span><h3>Pedido de agendamento enviado</h3></div>'+
         '<p>Obrigada, '+esc(d.nome)+'! A Sabrina recebeu o seu pedido para <b>'+esc(d.dia.toLowerCase())+' às '+esc(d.horario)+'</b> e vai entrar em contato pelo WhatsApp '+esc(d.whatsapp)+' para confirmar.</p>'+
-        '<p class="bk-note">Gratuito e sem compromisso</p>'
+        '<p class="bk-note">A primeira conversa é gratuita</p>'
       : '<div class="bk-step"><span class="bk-n">!</span><h3>Não foi possível enviar agora</h3></div>'+
         '<p>O seu pedido não foi enviado. Verifique a sua conexão e tente de novo. Os seus dados continuam preenchidos.</p>'+
         '<button type="button" class="btn btn-solid" id="bkRetry">Tentar de novo</button>';
@@ -861,11 +861,11 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
     go.disabled=true; go.textContent='Enviando…';
     fetch('https://formsubmit.co/ajax/'+encodeURIComponent(SABRINA_EMAIL),{ method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({ _subject:'Novo agendamento: conversa gratuita com '+d.nome+' '+d.sobrenome, _template:'table', _captcha:'false',
+      body:JSON.stringify({ _subject:'Novo agendamento: primeira conversa gratuita com '+d.nome+' '+d.sobrenome, _template:'table', _captcha:'false',
         'Nome':d.nome, 'Sobrenome':d.sobrenome, 'Dia':d.dia, 'Horário da conversa':d.horario, 'WhatsApp':d.whatsapp, 'O que gostaria de trabalhar':d.assunto })
     }).then(function(r){ return r.json().catch(function(){return {}}).then(function(j){ return r.ok && String(j.success)==='true'; }); })
       .catch(function(){ return false; })
-      .then(function(ok){ go.disabled=false; go.textContent='Agendar conversa gratuita'; showResult(ok,d); });
+      .then(function(ok){ go.disabled=false; go.textContent='Agendar primeira conversa'; showResult(ok,d); });
   });
 })();
 </script>
