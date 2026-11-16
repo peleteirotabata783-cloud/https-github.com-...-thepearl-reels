@@ -39,6 +39,7 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+[hidden]{display:none !important}
 html{scroll-behavior:auto;-webkit-text-size-adjust:100%}
 body{
   margin:0;background:var(--abyss);color:var(--ink);
@@ -344,7 +345,7 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
 .bk-step h3{font:400 clamp(1.3rem,2.2vw,1.65rem)/1.2 var(--f-display)}
 .bk-n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;font:500 .75rem/1 var(--f-mono);color:var(--abyss);background:var(--ink)}
 .bk-days{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-.bk-day{flex:none;scroll-snap-align:start;width:84px;padding:14px 8px;border-radius:16px;border:1px solid var(--line);background:rgba(5,15,46,.45);
+.bk-day{flex:none;scroll-snap-align:start;width:112px;padding:14px 8px;border-radius:16px;border:1px solid var(--line);background:rgba(5,15,46,.45);
   color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font:inherit;transition:background .25s,border-color .25s,transform .25s}
 .bk-day:hover{border-color:var(--synapse);transform:translateY(-2px)}
 .bk-day .wd{font:500 .66rem/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mist)}
@@ -376,7 +377,12 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
 .bk-done{color:#BFF3D6;font-size:.95rem}
 .bk-note{font:500 .66rem/1.5 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mist)}
 .plans-foot a{color:var(--ink)}
-@media (max-width:680px){ .bk-fields{grid-template-columns:minmax(0,1fr)} .bk-day{width:74px} .bk-go{width:100%;justify-content:center} }
+@media (max-width:680px){ .bk-fields{grid-template-columns:minmax(0,1fr)} .bk-day{width:96px} .bk-go{width:100%;justify-content:center} }
+.bk-day .dn{font-variant-numeric:tabular-nums}
+.bk-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.bk-result p{color:var(--ink);max-width:60ch}
+.bk-result .btn{align-self:flex-start}
+.bk-go:disabled{opacity:.6;cursor:progress}
 
 /* compact about */
 .about .bio h2{font-size:clamp(2.3rem,4.4vw,4rem)}
@@ -632,35 +638,42 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
       <p class="lead" data-anim="up">Uma primeira conversa para entender como a hipnoterapia funciona e tirar suas dúvidas. Sem custo e sem compromisso.</p>
 
       <form class="booking glass" id="booking" data-anim="up" novalidate>
-        <div class="bk-step"><span class="bk-n">1</span><h3>Escolha o dia</h3></div>
-        <div class="bk-days" id="bkDays" role="group" aria-label="Dias disponíveis"></div>
-
-        <div class="bk-step"><span class="bk-n">2</span><h3>Escolha o horário</h3></div>
-        <div class="bk-times" id="bkTimes" role="group" aria-label="Horários disponíveis">
-          <p class="bk-empty">Escolha um dia para ver o horário.</p>
-        </div>
+        <div class="bk-step"><span class="bk-n">1</span><h3>Escolha o dia e o horário</h3></div>
+        <div class="bk-days" id="bkDays" role="group" aria-label="Dias e horários disponíveis"></div>
         <p class="bk-tz" id="bkTz"></p>
+        <span class="bk-err" id="bkSlotErr" hidden>Escolha um dia e horário para a conversa.</span>
 
-        <div class="bk-step"><span class="bk-n">3</span><h3>Seus dados</h3></div>
+        <div class="bk-step"><span class="bk-n">2</span><h3>Seus dados</h3></div>
         <div class="bk-fields">
           <div class="bk-field">
-            <label for="bkName">Seu nome</label>
-            <input id="bkName" name="name" type="text" autocomplete="name" required>
-            <span class="bk-err" id="bkNameErr" hidden>Escreva seu nome para a Sabrina saber quem é você.</span>
+            <label for="bkFirst">Nome</label>
+            <input id="bkFirst" name="nome" type="text" autocomplete="given-name" required>
+            <span class="bk-err" id="bkFirstErr" hidden>Escreva o seu nome.</span>
+          </div>
+          <div class="bk-field">
+            <label for="bkLast">Sobrenome</label>
+            <input id="bkLast" name="sobrenome" type="text" autocomplete="family-name" required>
+            <span class="bk-err" id="bkLastErr" hidden>Escreva o seu sobrenome.</span>
+          </div>
+          <div class="bk-field">
+            <label for="bkPhone">WhatsApp com código do país</label>
+            <input id="bkPhone" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="+55 11 91234-5678" required>
+            <span class="bk-err" id="bkPhoneErr" hidden>Coloque um número com código do país, para a Sabrina confirmar com você.</span>
           </div>
           <div class="bk-field">
             <label for="bkNote">O que você gostaria de trabalhar? <i>(opcional)</i></label>
-            <textarea id="bkNote" name="note" rows="2"></textarea>
+            <textarea id="bkNote" name="assunto" rows="1"></textarea>
           </div>
         </div>
+        <input class="bk-hp" type="text" name="_honey" id="bkHoney" tabindex="-1" autocomplete="off" aria-hidden="true">
 
         <div class="bk-foot">
-          <p class="bk-sum" id="bkSum" aria-live="polite">Escolha um dia e um horário.</p>
-          <a class="btn btn-solid bk-go" id="bkGo" href="#" target="_blank" rel="noopener" aria-disabled="true">Confirmar pelo WhatsApp</a>
+          <p class="bk-sum" id="bkSum" aria-live="polite">Escolha um dia e horário.</p>
+          <button type="submit" class="btn btn-solid bk-go" id="bkGo">Agendar conversa gratuita</button>
         </div>
-        <p class="bk-done" id="bkDone" hidden>O WhatsApp abriu com a sua mensagem pronta. Envie a mensagem para a Sabrina confirmar o seu horário.</p>
-        <p class="bk-note">Gratuito e sem compromisso · a Sabrina confirma o horário pelo WhatsApp</p>
+        <p class="bk-note">Gratuito e sem compromisso · a Sabrina confirma pelo WhatsApp</p>
       </form>
+      <div class="booking glass bk-result" id="bkResult" hidden aria-live="polite"></div>
 
       <span class="phone" data-anim="up">Prefere falar direto? WhatsApp +34 695 86 45 31</span>
       <ul class="links">
@@ -828,86 +841,96 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
 })();
 </script>
 
-<!-- Online agenda: free first conversation. Times are Sabrina's local time (Madrid). -->
+<!-- Online agenda: free first conversation. Times are Sabrina's local time (Madrid).
+     To receive bookings by e-mail, set SABRINA_EMAIL below. The first booking sends Sabrina
+     an activation e-mail from FormSubmit; after she clicks "Activate", every booking arrives in her inbox. -->
 <script>
 (function(){
-  var TZ='Europe/Madrid', PHONE='34695864531', DAYS_AHEAD=21, LEAD_MIN=120;
-  var SLOTS={1:['17:30'],2:['17:30'],4:['17:30'],5:['17:30'],6:['08:00']}; // 1=seg … 6=sáb
-  var WD=['dom','seg','ter','qua','qui','sex','sáb'], WDL=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
-  var MO=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-  var daysEl=document.getElementById('bkDays'), timesEl=document.getElementById('bkTimes'), tzEl=document.getElementById('bkTz');
-  var nameEl=document.getElementById('bkName'), noteEl=document.getElementById('bkNote'), errEl=document.getElementById('bkNameErr');
-  var sumEl=document.getElementById('bkSum'), go=document.getElementById('bkGo'), done=document.getElementById('bkDone');
-  if(!daysEl) return;
+  var SABRINA_EMAIL = '';            // e-mail que recebe os agendamentos
+  var TZ = 'Europe/Madrid', PHONE = '34695864531';
+  var SLOTS = [ {wd:1, name:'Segunda-feira', short:'Seg', t:'17:30'}, {wd:2, name:'Terça-feira', short:'Ter', t:'17:30'},
+                {wd:4, name:'Quinta-feira', short:'Qui', t:'17:30'}, {wd:5, name:'Sexta-feira', short:'Sex', t:'17:30'},
+                {wd:6, name:'Sábado', short:'Sáb', t:'08:00'} ];
+  var $ = function(id){ return document.getElementById(id); };
+  var form=$('booking'); if(!form) return;
+  var daysEl=$('bkDays'), tzEl=$('bkTz'), sumEl=$('bkSum'), go=$('bkGo'), res=$('bkResult');
+  var F={first:$('bkFirst'), last:$('bkLast'), phone:$('bkPhone')}, note=$('bkNote');
   var localTZ=''; try{ localTZ=Intl.DateTimeFormat().resolvedOptions().timeZone||''; }catch(e){}
-  function tzOffset(ms){ // minutes Madrid is ahead of UTC at instant ms
-    var f=new Intl.DateTimeFormat('en-US',{timeZone:TZ,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+  function tzOffset(ms){ var f=new Intl.DateTimeFormat('en-US',{timeZone:TZ,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
     var p={}; f.formatToParts(new Date(ms)).forEach(function(x){p[x.type]=x.value});
-    return (Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute)-Math.floor(ms/60000)*60000)/60000;
-  }
-  function madridParts(ms){ var f=new Intl.DateTimeFormat('en-US',{timeZone:TZ,year:'numeric',month:'numeric',day:'numeric',weekday:'short'});
-    var p={}; f.formatToParts(new Date(ms)).forEach(function(x){p[x.type]=x.value}); return {y:+p.year,m:+p.month,d:+p.day}; }
-  function slotUTC(y,m,d,hhmm){ var h=+hhmm.slice(0,2), mi=+hhmm.slice(3); var g=Date.UTC(y,m-1,d,h,mi); var o=tzOffset(g); var t=g-o*60000; return t-(tzOffset(t)-o)*60000; }
-  function localLabel(ms){ try{ return new Intl.DateTimeFormat('pt-BR',{hour:'2-digit',minute:'2-digit'}).format(new Date(ms)); }catch(e){ return ''; } }
+    return (Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute)-Math.floor(ms/60000)*60000)/60000; }
+  // next occurrence of a weekday/time in Madrid, used only to convert the time to the visitor's zone
+  function nextAt(wd,hhmm){ var now=Date.now(), base=new Date(now+tzOffset(now)*60000);
+    for(var i=0;i<8;i++){ var d=new Date(Date.UTC(base.getUTCFullYear(),base.getUTCMonth(),base.getUTCDate()+i));
+      if(d.getUTCDay()!==wd) continue; var g=Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate(),+hhmm.slice(0,2),+hhmm.slice(3));
+      var o=tzOffset(g), t=g-o*60000; t-= (tzOffset(t)-o)*60000; if(t>now) return t; } return null; }
+  function hfmt(t){ var h=+t.slice(0,2), m=t.slice(3,5); return h+'h'+(m==='00'?'':m); }
+  function localTime(ms){ try{ return new Intl.DateTimeFormat('pt-BR',{hour:'2-digit',minute:'2-digit'}).format(new Date(ms)); }catch(e){ return ''; } }
+  function localDayDiff(ms){ try{ var a=new Intl.DateTimeFormat('en-US',{weekday:'short'}).format(new Date(ms));
+      var b=new Intl.DateTimeFormat('en-US',{weekday:'short',timeZone:TZ}).format(new Date(ms)); return a!==b; }catch(e){ return false; } }
   var sameTZ = localTZ===TZ || (function(){ var n=Date.now(); return -new Date(n).getTimezoneOffset()===tzOffset(n); })();
-  // build the list of upcoming days with slots
-  var days=[], now=Date.now(), base=madridParts(now);
-  for(var i=0;i<DAYS_AHEAD;i++){
-    var dt=new Date(Date.UTC(base.y,base.m-1,base.d+i)); var wd=dt.getUTCDay(); if(!SLOTS[wd]) continue;
-    var y=dt.getUTCFullYear(), m=dt.getUTCMonth()+1, d=dt.getUTCDate();
-    var slots=SLOTS[wd].map(function(t){return {t:t, at:slotUTC(y,m,d,t)}}).filter(function(s){return s.at-now>LEAD_MIN*60000});
-    if(slots.length) days.push({y:y,m:m,d:d,wd:wd,slots:slots});
-  }
-  var sel={day:null,slot:null}, touched=false;
-  days.forEach(function(day,i){
+  var sel=null, tried=false, touched={};
+  SLOTS.forEach(function(s){
+    var at=nextAt(s.wd,s.t); s.local = (!sameTZ && at) ? hfmt(localTime(at))+(localDayDiff(at)?' (outro dia)':'') : '';
     var b=document.createElement('button'); b.type='button'; b.className='bk-day'; b.setAttribute('aria-pressed','false');
-    b.setAttribute('aria-label',WDL[day.wd]+', '+day.d+' de '+MO[day.m-1]);
-    b.innerHTML='<span class="wd">'+WD[day.wd]+'</span><span class="dn">'+day.d+'</span><span class="mo">'+MO[day.m-1]+'</span>';
-    b.addEventListener('click',function(){ sel.day=day; sel.slot=day.slots.length===1?day.slots[0]:null;
-      [].forEach.call(daysEl.children,function(c){c.setAttribute('aria-pressed',c===b?'true':'false')}); renderTimes(); update(); });
+    b.setAttribute('aria-label', s.name+' às '+hfmt(s.t)+(s.local?', '+s.local+' no seu horário':''));
+    b.innerHTML='<span class="wd">'+s.short+'</span><span class="dn">'+hfmt(s.t)+'</span><span class="mo">'+(s.local? s.local+' aí' : 'Madrid')+'</span>';
+    b.addEventListener('click',function(){ sel=s; [].forEach.call(daysEl.children,function(c){c.setAttribute('aria-pressed',c===b?'true':'false')}); update(); });
     daysEl.appendChild(b);
   });
-  tzEl.textContent = sameTZ ? 'Horários de Madrid.' : 'Horários de Madrid, com a conversão para o seu fuso logo abaixo.';
-  function renderTimes(){
-    timesEl.innerHTML='';
-    sel.day.slots.forEach(function(s){
-      var b=document.createElement('button'); b.type='button'; b.className='bk-time'; b.setAttribute('aria-pressed', sel.slot===s?'true':'false');
-      b.innerHTML='<b>'+s.t.replace(':00','h').replace(':','h')+'</b>'+(sameTZ?'':'<small>'+localLabel(s.at)+' no seu horário</small>');
-      b.addEventListener('click',function(){ sel.slot=s; [].forEach.call(timesEl.children,function(c){c.setAttribute('aria-pressed',c===b?'true':'false')}); update(); });
-      timesEl.appendChild(b);
-    });
-  }
-  function nameOk(){ return nameEl.value.trim().length>1; }
+  tzEl.textContent = sameTZ ? 'Horários de Madrid.' : 'Horários de Madrid. Embaixo de cada um, o mesmo horário no seu fuso.';
+  var checks={ first:function(v){return v.trim().length>1}, last:function(v){return v.trim().length>1}, phone:function(v){return v.replace(/\D/g,'').length>=8} };
+  function showErr(k){ var ok=checks[k](F[k].value), show=(touched[k]||tried)&&!ok; $('bk'+k[0].toUpperCase()+k.slice(1)+'Err').hidden=!show; F[k].setAttribute('aria-invalid',show?'true':'false'); return ok; }
   function update(){
-    var ready = sel.day && sel.slot && nameOk();
-    if(touched){ var bad=!nameOk(); errEl.hidden=!bad; nameEl.setAttribute('aria-invalid',bad?'true':'false'); }
-    if(!sel.day) sumEl.textContent='Escolha um dia e um horário.';
-    else if(!sel.slot) sumEl.textContent='Agora escolha o horário.';
-    else { var when=WDL[sel.day.wd]+', '+sel.day.d+' de '+MO[sel.day.m-1]+' às '+sel.slot.t.replace(':00','h').replace(':','h');
-      sumEl.textContent = nameOk() ? 'Conversa gratuita: '+when+'.' : 'Conversa gratuita: '+when+'. Falta só o seu nome.'; }
-    go.setAttribute('aria-disabled', ready?'false':'true');
-    if(ready){
-      var dd=('0'+sel.day.d).slice(-2)+'/'+('0'+sel.day.m).slice(-2);
-      var msg='Olá, Sabrina! Gostaria de agendar a conversa gratuita.\n\n'+
-        'Dia: '+WDL[sel.day.wd]+', '+dd+'\n'+
-        'Horário: '+sel.slot.t+' (horário de Madrid)'+(sameTZ?'':' / '+localLabel(sel.slot.at)+' no meu horário')+'\n'+
-        'Nome: '+nameEl.value.trim()+(noteEl.value.trim()?'\nGostaria de trabalhar: '+noteEl.value.trim():'');
-      go.href='https://wa.me/'+PHONE+'?text='+encodeURIComponent(msg);
-    } else go.href='#';
+    $('bkSlotErr').hidden = !(tried && !sel);
+    var okAll = ['first','last','phone'].map(showErr).every(Boolean);
+    sumEl.textContent = !sel ? 'Escolha um dia e horário.' : 'Conversa gratuita: '+sel.name.toLowerCase()+' às '+hfmt(sel.t)+(sel.local?' ('+sel.local+' no seu horário)':'')+'.'+(okAll?'':' Falta completar seus dados.');
   }
-  nameEl.addEventListener('blur',function(){ if(nameEl.value) { touched=true; update(); } });
-  nameEl.addEventListener('input',function(){ if(touched||nameOk()) { update(); } });
-  noteEl.addEventListener('input',update);
-  go.addEventListener('click',function(ev){
-    if(go.getAttribute('aria-disabled')==='true'){ ev.preventDefault();
-      if(!sel.day){ var f=daysEl.querySelector('button'); f&&f.focus(); }
-      else if(!sel.slot){ var t=timesEl.querySelector('button'); t&&t.focus(); }
-      else { touched=true; update(); nameEl.focus(); }
-      return; }
-    done.hidden=false;
+  Object.keys(F).forEach(function(k){
+    F[k].addEventListener('blur',function(){ if(F[k].value){ touched[k]=true; update(); } });
+    F[k].addEventListener('input',function(){ if(touched[k]||tried) update(); });
   });
-  document.getElementById('booking').addEventListener('submit',function(e){ e.preventDefault(); });
-  if(!days.length){ daysEl.innerHTML='<p class="bk-empty">Sem horários nos próximos dias. Fale direto pelo WhatsApp.</p>'; }
+  function details(){
+    return { nome:F.first.value.trim(), sobrenome:F.last.value.trim(), whatsapp:F.phone.value.trim(),
+      dia:sel.name, horario_madrid:hfmt(sel.t), horario_da_pessoa: sel.local ? sel.local+' ('+localTZ+')' : hfmt(sel.t)+' (mesmo fuso de Madrid)',
+      assunto: note.value.trim() || '(não informado)' };
+  }
+  function waLink(d){
+    var msg='Olá, Sabrina! Gostaria de agendar a conversa gratuita.\n\nDia: '+d.dia+'\nHorário: '+d.horario_madrid+' (Madrid)'+(sel.local?' / '+sel.local+' no meu horário':'')+
+      '\nNome: '+d.nome+' '+d.sobrenome+'\nWhatsApp: '+d.whatsapp+(note.value.trim()?'\nGostaria de trabalhar: '+d.assunto:'');
+    return 'https://wa.me/'+PHONE+'?text='+encodeURIComponent(msg);
+  }
+  function esc(t){ var d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
+  function finish(ok, d){
+    form.hidden=true; res.hidden=false;
+    var when=esc(d.dia)+' às '+d.horario_madrid+' (Madrid)'+(sel.local?' · '+esc(sel.local)+' no seu horário':'');
+    res.innerHTML = ok
+      ? '<div class="bk-step"><span class="bk-n">✓</span><h3>Pedido de agendamento enviado</h3></div>'+
+        '<p>Obrigada, '+esc(d.nome)+'! A Sabrina recebeu o seu pedido para <b>'+when+'</b> e vai confirmar pelo WhatsApp '+esc(d.whatsapp)+'.</p>'+
+        '<p class="bk-note">Gratuito e sem compromisso</p>'
+      : '<div class="bk-step"><span class="bk-n">!</span><h3>Falta um passo para concluir</h3></div>'+
+        '<p>Não consegui enviar o pedido por aqui agora. Toque no botão abaixo: o WhatsApp abre com tudo preenchido para <b>'+when+'</b>. É só enviar.</p>'+
+        '<a class="btn btn-solid" href="'+waLink(d)+'" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>';
+    res.scrollIntoView({block:'center',behavior:'smooth'});
+  }
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault(); tried=true; update();
+    if(!sel){ daysEl.querySelector('button').focus(); return; }
+    for(var k in F){ if(!checks[k](F[k].value)){ F[k].focus(); return; } }
+    if($('bkHoney').value) return;
+    var d=details();
+    if(!SABRINA_EMAIL){ finish(false,d); return; }
+    go.disabled=true; go.textContent='Enviando…';
+    fetch('https://formsubmit.co/ajax/'+encodeURIComponent(SABRINA_EMAIL),{ method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(Object.assign({
+        _subject:'Novo agendamento: conversa gratuita com '+d.nome+' '+d.sobrenome, _template:'table', _captcha:'false' }, {
+        'Nome':d.nome, 'Sobrenome':d.sobrenome, 'Dia':d.dia, 'Horário (Madrid)':d.horario_madrid,
+        'Horário da pessoa':d.horario_da_pessoa, 'WhatsApp':d.whatsapp, 'O que gostaria de trabalhar':d.assunto }))
+    }).then(function(r){ return r.json().catch(function(){return {}}).then(function(j){ return r.ok && String(j.success)==='true'; }); })
+      .catch(function(){ return false; })
+      .then(function(ok){ go.disabled=false; go.textContent='Agendar conversa gratuita'; finish(ok,d); });
+  });
 })();
 </script>
 
