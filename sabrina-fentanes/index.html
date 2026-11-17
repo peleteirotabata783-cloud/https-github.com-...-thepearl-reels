@@ -122,7 +122,7 @@ main,header,footer{position:relative;z-index:2}
   padding-left:var(--gut-l);padding-right:var(--gut-r);pointer-events:none}
 .syn-copy{max-width:920px;display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center;will-change:transform,opacity}
 .syn-k{display:flex;align-items:center;gap:12px;font:500 .72rem/1 var(--f-mono);letter-spacing:.22em;text-transform:uppercase;color:var(--petal)}
-.syn-k i{display:block;width:48px;height:1px;background:linear-gradient(90deg,var(--petal),var(--synapse))}
+.syn-k i{display:none}
 .syn-t{font:400 clamp(2.5rem,6.2vw,5.6rem)/1.04 var(--f-display);letter-spacing:-.015em;text-wrap:balance;text-shadow:0 0 3px rgba(5,15,46,.9),0 2px 24px rgba(5,15,46,.95),0 0 60px rgba(5,15,46,.9)}
 .syn-t em{font-style:italic;color:var(--synapse)}
 .syn-s{max-width:44ch;font:400 clamp(1.08rem,1.5vw,1.3rem)/1.6 var(--f-body);color:var(--ink);text-wrap:balance;text-shadow:0 0 2px rgba(5,15,46,.95),0 1px 18px rgba(5,15,46,.95)}
@@ -142,7 +142,7 @@ main,header,footer{position:relative;z-index:2}
 .chapter{padding-block:var(--breath);padding-left:var(--gut-l);padding-right:var(--gut-r)}
 .wrap{max-width:1180px;margin:0 auto}
 .label{display:flex;align-items:center;gap:14px;font:500 .72rem/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--synapse);margin-bottom:22px}
-.label::before{content:"";width:28px;height:1px;background:currentColor}
+
 h2{margin:0;font:400 clamp(2.5rem,5.4vw,4.8rem)/1.02 var(--f-display);letter-spacing:-.015em;text-wrap:balance}
 h2 em{font-style:italic;color:var(--synapse)}
 h3{margin:0;font:400 clamp(1.6rem,2.4vw,2.1rem)/1.15 var(--f-display)}
@@ -384,6 +384,16 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
 .bk-result .btn{align-self:flex-start}
 .bk-go:disabled{opacity:.6;cursor:progress}
 
+/* Sabrina's CV */
+.cv{display:flex;flex-direction:column;gap:14px;margin-top:8px;padding-top:24px;border-top:1px solid var(--line)}
+.cv-title{font:400 clamp(1.4rem,2.2vw,1.8rem)/1.2 var(--f-display)}
+.cv dl{margin:0;display:flex;flex-direction:column}
+.cv dl > div{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.cv dt{font:500 .7rem/1.6 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--synapse);padding-top:3px}
+.cv dd{margin:0;color:var(--ink);font-size:1rem;line-height:1.6}
+.cv dd b{font-weight:600}
+@media (max-width:680px){ .cv dl > div{grid-template-columns:minmax(0,1fr);gap:4px} }
+
 /* compact about */
 .about .bio h2{font-size:clamp(2.3rem,4.4vw,4rem)}
 .creds{list-style:none;margin:8px 0 0;padding:20px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px;
@@ -508,7 +518,7 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
       <p class="phrase" data-from=".84" data-to="1.15">Eu sou a Sabrina.<br><em>Vou guiar você daqui.</em></p>
       <a class="orbit" id="hint" href="#sabrina" aria-label="Deslize para entrar">
         <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="orbitPath" d="M60,60 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/></defs>
-          <text><textPath href="#orbitPath">DESLIZE PARA ENTRAR · RESPIRE · DESLIZE PARA ENTRAR · RESPIRE ·</textPath></text></svg>
+          <text textLength="290" lengthAdjust="spacingAndGlyphs"><textPath href="#orbitPath" textLength="290" lengthAdjust="spacingAndGlyphs">DESLIZE PARA ENTRAR · RESPIRE · DESLIZE PARA ENTRAR · RESPIRE · </textPath></text></svg>
         <span class="orbit-core" aria-hidden="true">↓</span>
       </a>
     </div>
@@ -524,21 +534,24 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
       <div class="bio">
         <div class="label" data-anim="left">Quem vai caminhar com você</div>
         <h2 data-anim="words">Cuidar das pessoas sempre fez parte da <em>minha história</em>.</h2>
-        <p class="first" data-anim="up">Trabalhei muitos anos com alimentação saudável até perceber que o equilíbrio verdadeiro também passa pela mente e pelas emoções.</p>
-        <p data-anim="up">Hoje vivo fora do Brasil e conheço de perto a saudade, as mudanças e a busca por pertencimento. Na hipnoterapia, ofereço um espaço seguro e acolhedor para você se reconectar consigo.</p>
-        <ul class="creds" data-anim="up">
-          <li><b>Hipnose Clínica Emocional</b> Escuela Evolución Consciente, Espanha</li>
-          <li><b>Hipnose Clínica</b> Universidade Brasileira de Hipnose</li>
-          <li><b>Renascimento Bio Flow e Radiestesia</b></li>
-          <li><b>Arquitetura e Pedagogia</b></li>
-        </ul>
+        <p class="first" data-anim="up">Durante muitos anos trabalhei com alimentação saudável, movida pelo desejo de ajudar as pessoas a viverem com mais bem-estar. Com o tempo, percebi que o equilíbrio verdadeiro não envolve apenas o corpo, mas também a mente e as emoções. Foi isso que me levou a estudar o desenvolvimento emocional e a hipnose.</p>
+        <p data-anim="up">Hoje vivo fora do Brasil e conheço de perto a saudade, as mudanças e a busca por pertencimento. Por isso ofereço um espaço seguro, acolhedor e em português, para você compreender seus padrões e viver com mais leveza.</p>
+        <div class="cv" data-anim="up">
+          <h3 class="cv-title">Minha formação</h3>
+          <dl>
+            <div><dt>Graduação</dt><dd>Sou formada em <b>Arquitetura</b> e em <b>Pedagogia</b>.</dd></div>
+            <div><dt>Hipnose Clínica</dt><dd>Formação em Hipnose Clínica pela <b>Universidade Brasileira de Hipnose</b>.</dd></div>
+            <div><dt>Hipnose Clínica Emocional</dt><dd>Formação em Hipnose Clínica Emocional pela <b>Escuela Evolución Consciente</b>, na Espanha.</dd></div>
+            <div><dt>Desenvolvimento emocional</dt><dd>Especialização em <b>Renascimento Bio Flow</b> e em <b>Radiestesia</b>.</dd></div>
+          </dl>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="synapse" aria-label="Transição">
     <div class="syn-stage"><div class="syn-copy">
-      <span class="syn-k">Sinapse 01 <i></i> 03</span>
+      <span class="syn-k">Sinapse 01 de 03</span>
       <p class="syn-t">Cada pensamento é um <em>sinal</em> entre neurônios.</p>
       <p class="syn-s">Quando um sinal se repete, ele vira um caminho. É assim que nascem os padrões emocionais.</p>
     </div></div>
@@ -561,15 +574,15 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
       <div class="marquee" data-dir="-1" aria-label="Ansiedade, insegurança, medos e fobias, autossabotagem, baixa autoestima">
         <div class="track"><span>Ansiedade</span><span>Insegurança</span><span><em>Medos e fobias</em></span><span>Autossabotagem</span><span>Baixa autoestima</span><span>Ansiedade</span><span>Insegurança</span><span><em>Medos e fobias</em></span><span>Autossabotagem</span><span>Baixa autoestima</span></div>
       </div>
-      <div class="marquee alt" data-dir="1" aria-label="Bloqueios emocionais, indecisão, saudade de casa, adaptação a um novo país">
-        <div class="track"><span>Bloqueios emocionais</span><span><em>Indecisão</em></span><span>Saudade de casa</span><span>Adaptação a um novo país</span><span>Bloqueios emocionais</span><span><em>Indecisão</em></span><span>Saudade de casa</span><span>Adaptação a um novo país</span></div>
+      <div class="marquee alt" data-dir="1" aria-label="Bloqueios emocionais, luto, saudade de casa, compulsão">
+        <div class="track"><span>Bloqueios emocionais</span><span><em>Luto</em></span><span>Saudade de casa</span><span>Compulsão</span><span>Bloqueios emocionais</span><span><em>Luto</em></span><span>Saudade de casa</span><span>Compulsão</span></div>
       </div>
     </div>
   </section>
 
   <section class="synapse" aria-label="Transição">
     <div class="syn-stage"><div class="syn-copy">
-      <span class="syn-k">Sinapse 02 <i></i> 03</span>
+      <span class="syn-k">Sinapse 02 de 03</span>
       <p class="syn-t">E você continua <em>consciente</em> o tempo todo.</p>
       <p class="syn-s">Hipnose é atenção focada. Você ouve, lembra e decide.</p>
     </div></div>
@@ -595,7 +608,7 @@ h2 .wi,.syn-t .wi{color:rgb(238 242 251 / clamp(0, calc(var(--w)*2 - 1), 1));
 
   <section class="synapse" aria-label="Transição">
     <div class="syn-stage"><div class="syn-copy">
-      <span class="syn-k">Sinapse 03 <i></i> 03</span>
+      <span class="syn-k">Sinapse 03 de 03</span>
       <p class="syn-t">Todo caminho novo começa com <em>um primeiro sinal</em>.</p>
     </div></div>
   </section>
@@ -912,7 +925,7 @@ function randDir(){ const z=rnd()*2-1, a=rnd()*Math.PI*2, r=Math.sqrt(1-z*z); re
 const rv = () => { const d=randDir(); return new THREE.Vector3(d[0],d[1],d[2]); };
 
 const uniforms = {
-  uTime:{value:0}, uPR:{value:renderer.getPixelRatio()}, uSize:{value: small ? 30 : 34},
+  uTime:{value:0}, uPR:{value:renderer.getPixelRatio()}, uSize:{value: small ? 24 : 27},
   uDive:{value:0}, uDim:{value:1}, uTrack:{value:0}, uReveal:{value:0}, uFocus:{value:0}
 };
 
@@ -991,7 +1004,7 @@ const pointMat = new THREE.ShaderMaterial({
       vec3 iri = 0.5 + 0.5*cos(6.2831*(vec3(0.0,0.33,0.67) + position.y*0.35 + position.z*0.3 + uTime*0.035));
       vC = mix(vC, iri*vec3(0.8,0.7,1.0) + vec3(0.12,0.1,0.18), 0.38);
       vC += spark * vec3(0.55,0.65,1.0) * 1.6;
-      vA = (aKind>2.5 ? 0.35 : 0.85) * tw * smoothstep(0.04, 0.5, d);
+      vA = (aKind>2.5 ? 0.18 : 0.5) * tw * smoothstep(0.04, 0.5, d);
     }`,
   fragmentShader:`
     uniform float uDim,uFade;
@@ -1220,7 +1233,6 @@ function cardTexture(word, i){
   x.font = '500 22px "IBM Plex Mono", monospace'; x.globalAlpha = .75;
   x.fillText(('0'+(i+1)).slice(-2)+' / 07', 44, 60);
   x.textAlign = 'right'; x.fillText('HIPNOTERAPIA', 596, 360); x.textAlign = 'left';
-  x.fillRect(44, 352, 120, 1.5);
   x.globalAlpha = 1; x.textAlign = 'center'; x.textBaseline = 'middle';
   x.font = (i%2 ? 'italic ' : '') + '400 118px "Instrument Serif", Georgia, serif';
   x.fillText(word, 320, 205);
@@ -1327,7 +1339,7 @@ const MSC = small ? [.6,.55,.5,.55] : [1.05,1,.95,.85];
 const rt = new THREE.WebGLRenderTarget(innerWidth, innerHeight, { type: THREE.UnsignedByteType }); // clamp light like the plain canvas did
 const composer = new EffectComposer(renderer, rt);
 composer.addPass(new RenderPass(scene, camera));
-const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), small ? .5 : .6, .25, .66);
+const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), small ? .35 : .42, .25, .78);
 composer.addPass(bloom); // last pass draws straight to the screen, keeping the brand navy untouched
 
 /* ---------- motion ---------- */
